@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --white: #F8F7FF;
+    --light-purple: #DE84FB;
+    --dark-purple: #81389A;
+    --pink: #FF3594;
+    --yellow: #F58F29;
+}
+
+@font-face {
+    font-family: "Noto Sans";
+    font-style: normal;
+    src: url(./assets/fonts/Noto_Sans/NotoSans-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: "Pacifico";
+    font-style: normal;
+    src: url(./assets/fonts/Pacifico/Pacifico-Regular.ttf) format('truetype');
+}
+
+body {
+    background-image: linear-gradient(to bottom, var(--light-purple), var(--dark-purple));;
+    font-family: Noto Sans;
+    height: 100vh;
+}
