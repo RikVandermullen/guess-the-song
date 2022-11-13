@@ -1,15 +1,15 @@
 .container-fluid {
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid var(--white);
 }
 
 .nav-item {
-    font-size: 1.5em;
+    font-size: 1.55em;
     font-weight: 100;
 }
 
 .nav-link {
-    color: black;
     margin-right: 10px;
+    color: var(--white);
 }
 
 .hover-underline-animation {

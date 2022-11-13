@@ -1,7 +1,125 @@
-<app-navbar></app-navbar>
+<main id="main">
+    <app-navbar></app-navbar>
 
-<div class="container">
+    <section>
+        <div class="container mt-5">
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="main-text">
+                    <h1>Test your musical knowledge by playing games and setting new highscores!</h1>
+                    <button class="button-pink mt-2 mb-5 me-2">Play</button>
+                    <a href="#leaderboard">
+                        <button class="button-yellow mt-2 mb-5 ms-2">Leaderboard</button>
+                    </a>
+                    <div>
+                        <a href="#songs">
+                            <img class="scroll-icon mt-5" src="../assets/images/scroll-bar.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-</div>
+    <section id="songs" class="hidden">
+        <div class="container-fluid">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="main-text">
+                    <h2>Find new music!</h2>
+                    <p class="mt-2">By playing games you can <span class="fancy">discover</span> a lot of songs you might not know. You can even find new artists, genres or playlists that you might like.</p>
+                </div>
+            </div>
+    
+            <div class="row gx-0 mt-3 songs">
+                <div class="col-lg-3 col-md-6 col-sm-1 song hidden">
+                    <img src="../assets/images/song1.png" alt="">
+                </div>
+    
+                <div class="col-lg-3 col-md-6 col-sm-1 song hidden">
+                    <img src="../assets/images/song1.png" alt="">
+                </div>
+    
+                <div class="col-lg-3 col-md-6 col-sm-1 song hidden">
+                    <img src="../assets/images/song1.png" alt="">
+                </div>
 
-<app-footer></app-footer>
+                <div class="col-lg-3 col-md-6 col-sm-1 song hidden">
+                    <img src="../assets/images/song1.png" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="leaderboard">
+        <div class="container">
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="main-text">
+                    <h2>Leaderboard of all time</h2>
+                    <p><span class="fancy">Battle</span> for the top spot against people from all over the world! Scale the leaderboard by playing games and gaining scores. Show everyone who knows all the songs!</p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="row leaderboard mt-5">
+                    <div class="col-12">
+                        <table class="table" style="min-width: 500px;">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Rank</th>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Games Played</th>
+                                    <th scope="col">Total Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td>1</td>
+                                    <td>Rik</td>
+                                    <td>500</td>
+                                    <td>10000</td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td>2</td>
+                                    <td>Rik2</td>
+                                    <td>200</td>
+                                    <td>5000</td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td>3</td>
+                                    <td>Rik3</td>
+                                    <td>100</td>
+                                    <td>2500</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="main-text">
+                    <h2>About us</h2>
+                    <p>Want to know more about us and why this website was made? Check out our about page where you can find <span class="fancy">all</span> of the information!</p>
+                    <button class="button-pink mt-2 mb-5">About us</button>
+
+                    <div>
+                        <a href="#main">
+                            <img class="scroll-icon-up mt-5" src="../assets/images/scroll-bar.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <app-footer></app-footer>
+</main>
+

@@ -18,8 +18,176 @@
     src: url(./assets/fonts/Pacifico/Pacifico-Regular.ttf) format('truetype');
 }
 
-body {
-    background-image: linear-gradient(to bottom, var(--light-purple), var(--dark-purple));;
-    font-family: Noto Sans;
-    height: 100vh;
+@font-face {
+    font-family: "Passion One";
+    font-style: normal;
+    src: url(./assets/fonts/Passion_One/PassionOne-Regular.ttf) format('truetype');
 }
+
+body {
+    font-family: Passion One;
+    color: var(--white);
+    background-image: linear-gradient(to bottom, var(--light-purple), var(--dark-purple));
+}
+
+h1 {
+    font-size: 50px;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+p {
+    font-size: 24px;
+}
+
+.fancy {
+    font-family: Pacifico;
+    color: var(--yellow);
+    font-size: 28px;
+}
+
+.main-text {
+    max-width: 50%;
+    text-align: center;
+}
+
+@media only screen and (max-width: 991px) {
+    .main-text {
+        min-width: 100%;
+    }
+
+    .song {
+        max-width: 90%;
+    }
+}
+
+.button-pink {
+    border-radius: 12px;
+    background-color: var(--pink);
+    min-height: 56px;
+    min-width: 195px;
+    border: none;
+    color: white;
+    font-size: 20px;
+    box-shadow: rgb(157 33 92) 0px 5px;
+    transition: 0.3s ease-out;
+}
+
+.button-pink:hover {
+    transition: 0.3s ease-in;
+    transform: translateY(5px);
+    box-shadow: none;
+}
+
+.button-purple {
+    border-radius: 12px;
+    background-color: var(--dark-purple);
+    min-height: 56px;
+    min-width: 195px;
+    border: none;
+    color: white;
+    font-size: 20px;
+    box-shadow: #954DAC 0px 5px;
+    transition: 0.3s ease-out;
+}
+
+.button-purple:hover {
+    transition: 0.3s ease-in;
+    transform: translateY(5px);
+    box-shadow: none;
+}
+
+.button-yellow {
+    border-radius: 12px;
+    background-color: var(--yellow);
+    min-height: 56px;
+    min-width: 195px;
+    border: none;
+    color: white;
+    font-size: 20px;
+    box-shadow: #8d5722 0px 5px;
+    transition: 0.3s ease-out;
+}
+
+.button-yellow:hover {
+    transition: 0.3s ease-in;
+    transform: translateY(5px);
+    box-shadow: none;
+}
+
+.scroll-icon {
+    max-width: 64px;
+    opacity: 0.7;
+}
+
+.scroll-icon-up {
+    max-width: 64px;
+    opacity: 0.7;
+    transform: scale(-1);
+}
+
+.scroll-icon:hover {
+    opacity: 1;
+}
+
+section {
+    display: grid;
+    place-items: center;
+    align-content: center;
+    min-height: 90vh;
+}
+
+.hidden {
+    opacity: 0;
+    filter: blur(2.5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+.show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+.song:nth-child(2) {
+    transition-delay: 100ms;
+}
+
+.song:nth-child(3) {
+    transition-delay: 200ms;
+}
+
+.song:nth-child(4) {
+    transition-delay: 300ms;
+}
+
+.song img {
+    max-width: 100%;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, var(--yellow), var(--pink));
+}
+
+.table {
+    color: white;
+}
+
+table th {
+    font-size: 26px;
+    font-weight: normal;
+}
+
+table td {
+    font-size: 20px;
+}
+
