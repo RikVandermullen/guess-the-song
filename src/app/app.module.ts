@@ -6,12 +6,22 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { LoginComponent } from './core/login/login.component';
+import { SongsDisplayComponent } from './feature/songs-display/songs-display.component';
+import { LeaderboardDisplayComponent } from './feature/leaderboard-display/leaderboard-display.component';
+import { AboutDisplayComponent } from './feature/about-display/about-display.component';
+import { HeroComponent } from './feature/hero/hero.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent,
+    SongsDisplayComponent,
+    LeaderboardDisplayComponent,
+    AboutDisplayComponent,
+    HeroComponent
   ],
   imports: [
     BrowserModule,
