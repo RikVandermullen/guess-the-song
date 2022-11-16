@@ -1,1 +1,113 @@
-<p>aboutpage works!</p>
+<section class="hidden" id="about">
+    <div class="container">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="row">
+                <div class="col-12">
+                    <h1>About this website</h1>
+        
+                    <p>This website is a place where you can test your <span class="fancy">knowledge</span> for songs. We all know that one friend that thinks
+                        he knows the title of every song. Well, this is the place to prove it! As a logged in User you can play games
+                        to test your knowledge. You can also create your own games for other players or friends to play.
+                    </p>
+                    <br>
+                    <p>A game contains a chosen amount of songs which play for 30 seconds. You need to make your guess in this time frame otherwise you won't 
+                        score any points! At the end of the game you will see your score and the correct answers. You can also see the scores of other players
+                        on a <span class="fancy">leaderboard</span>. On your profile page you can find and edit your information and see some statistics about your games like your total score,
+                        averge winpercentage and more!
+                    </p>
+
+                    <p>When creating a game, you are given three options: Select your own song, Random and Recommended. With the option select your own, you can choose
+                        the songs yourself based on a chosen Genre. With the random option, you can choose a random amount of songs also based on a Genre. 
+                        With the option recommended, you can choose a random amount of songs that are recommended for you. This is based on your previous games and the songs you have
+                        played. The more you play, the more songs will be recommended for you! Other fields that need to be filled in are: a name, a description 
+                        and the genres. You can also choose to make the game public or private. If you make the game public, everyone can play it. If you make it private, only you and your friends can play it.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hidden mb-5">
+   <div class="container">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="row">
+                <h2>Entity Relationship Diagram</h2>
+                <p>Some information will be stored in a NoSQL database. The entities are shown below.</p>
+    
+                <img src="assets/images/ERD.png" alt="Entity Relationship Diagram">
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-start align-items-center mt-4 hidden">
+            <div class="row leaderboard mt-5">
+                <h2>Entities</h2>
+                <div class="col-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">User</th>
+                                <th scope="col">Song</th>
+                                <th scope="col">Game</th>
+                                <th scope="col">Score</th>
+                                <th scope="col">Artist</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Email: <span style="color: #F58F29">string</span></td>
+                                <td>Name: <span style="color: #F58F29">string</span></td>
+                                <td>Name: <span style="color: #F58F29">string</span></td>
+                                <td>AmountOfRightAnswers: <span style="color: #F58F29">number</span></td>
+                                <td>Name: <span style="color: #F58F29">string</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Name: <span style="color: #F58F29">string</span></td>
+                                <td>SongLink: <span style="color: #F58F29">string</span></td>
+                                <td>AmountOfPlays: <span style="color: #F58F29">number</span></td>
+                                <td>AmountOfTime: <span style="color: #F58F29">double</span></td>
+                                <td>Image: <span style="color: #F58F29">image</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Password: <span style="color: #F58F29">string</span></td>
+                                <td>PublishedOn: <span style="color: #F58F29">date</span></td>
+                                <td>CreatedOn: <span style="color: #F58F29">date</span></td>
+                                <td>DateScored: <span style="color: #F58F29">date</span></td>
+                                <td>Descriptioin: <span style="color: #F58F29">string</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>BirthDate: <span style="color: #F58F29">date</span></td>
+                                <td>CoverImage: <span style="color: #F58F29">image</span></td>
+                                <td>Genres: <span style="color: #F58F29">string[]</span></td>
+                                <td>FinalScore: <span style="color: #F58F29">double</span></td>
+                                <td>Genres: <span style="color: #F58F29">string[]</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>PhoneNumber: <span style="color: #F58F29">string</span></td>
+                                <td></td>
+                                <td>Description: <span style="color: #F58F29">string</span></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>Private: <span style="color: #F58F29">boolean</span></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+   </div> 
+</section>
+
+
+

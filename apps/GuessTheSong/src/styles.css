@@ -1,6 +1,6 @@
 :root {
     --white: #F8F7FF;
-    --light-purple: #DE84FB;
+    --light-purple: #d27dee;
     --dark-purple: #81389A;
     --pink: #FF3594;
     --yellow: #F58F29;
@@ -157,15 +157,15 @@ section {
 }
 
 .song:nth-child(2) {
-    transition-delay: 100ms;
-}
-
-.song:nth-child(3) {
     transition-delay: 200ms;
 }
 
+.song:nth-child(3) {
+    transition-delay: 400ms;
+}
+
 .song:nth-child(4) {
-    transition-delay: 300ms;
+    transition-delay: 600ms;
 }
 
 .song img {
