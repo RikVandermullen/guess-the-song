@@ -12,6 +12,9 @@ import { HomepageComponent } from './feature/homepage/homepage.component';
 import { UserComponent } from './core/user/user.component';
 import { UserDetailsComponent } from './core/user/user-details/user-details.component';
 import { AboutpageComponent } from './feature/aboutpage/aboutpage.component';
+import { SongComponent } from './core/song/song.component';
+import { SongListComponent } from './core/song/song-list/song-list.component';
+import { SongDetailComponent } from './core/song/song-detail/song-detail.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,9 @@ import { AboutpageComponent } from './feature/aboutpage/aboutpage.component';
     UserComponent,
     UserDetailsComponent,
     AboutpageComponent,
+    SongComponent,
+    SongListComponent,
+    SongDetailComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
   providers: [],
