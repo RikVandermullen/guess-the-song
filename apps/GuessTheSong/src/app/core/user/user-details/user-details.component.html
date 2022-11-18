@@ -10,31 +10,39 @@
 
     <hr>
 
-    <form>
+    <form #userEditForm="ngForm" name="form" (ngSubmit)="onSubmit()" novalidate>
         <div class="row mt-2 gy-5">
             <div class="col-6 input-wrap">
                 <label>Name</label><br />
-                <input type="text" class="form-input" [value]=user.name/>
+                <input type="text" class="form-input" name="name" [(ngModel)]="user!.name" #name="ngModel" minlength="3" required/>
+                <div *ngIf="name.invalid && name.touched" class="invalid-feedback">
+                    <div *ngIf="name.errors!['required']">
+                        Name is required
+                    </div>
+                    <div *ngIf="name.errors!['minlength']">
+                        Name must be 3 chars long.
+                    </div>
+                </div>
             </div>
     
             <div class="col-6 input-wrap">
                 <label>Email address</label><br />
-                <input type="email" class="form-input" [value]=user.emailAddress/>
+                <input type="email" class="form-input" name="emailAddress" [(ngModel)]="user!.emailAddress" #name="ngModel" minlength="3" required />
             </div>
     
             <div class="col-6 input-wrap">
                 <label>Phone number</label><br />
-                <input type="text" class="form-input" [value]=user.phoneNumber/>
+                <input type="text" class="form-input" name="phoneNumber" [(ngModel)]="user!.phoneNumber" #name="ngModel" minlength="3" required/>
             </div>
     
             <div class="col-6 input-wrap">
                 <label>Birthday</label><br />
-                <input type="date" id="datepicker" class="form-input"/>
+                <input type="date" id="datepicker" class="form-input" name="birthDate" [(ngModel)]="user!.birthDate" #name="ngModel" minlength="3" required/>
             </div>
     
             <div class="col-6 input-wrap">
                 <label>Password</label><br />
-                <input type="password" class="form-input" [value]=user.password/>
+                <input type="password" class="form-input" name="password" [(ngModel)]="user!.password" #name="ngModel" minlength="3" required/>
             </div>
     
             <div class="col-12 d-flex justify-content-start align-items-start mb-5">
