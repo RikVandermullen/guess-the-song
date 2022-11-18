@@ -14,6 +14,7 @@ import { AboutpageComponent } from './feature/aboutpage/aboutpage.component';
 import { SongComponent } from './core/song/song.component';
 import { SongListComponent } from './core/song/song-list/song-list.component';
 import { SongDetailComponent } from './core/song/song-detail/song-detail.component';
+import { ProfilepageComponent } from './feature/profilepage/profilepage.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SongDetailComponent } from './core/song/song-detail/song-detail.compone
     SongComponent,
     SongListComponent,
     SongDetailComponent,
+    ProfilepageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
   providers: [],

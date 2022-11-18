@@ -17,7 +17,7 @@ export class UserDetailsComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.route.paramMap.subscribe((params) => {
-		  this.userId = params.get("id");
+		  this.userId = params.get("id");			  	  
 		  if (this.userId) {
 			console.log("Bestaande component");
 			this.user = {
@@ -45,7 +45,7 @@ export class UserDetailsComponent implements OnInit {
 		} else {
 			this.userService.createUser(this.user);
 		}
-		this.router.navigate([`/users/${this.userId}`]);
+		this.router.navigate([`/profile/${this.userId}`]);
 	}
 }
 		  

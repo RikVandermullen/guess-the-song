@@ -1,79 +1,61 @@
-
-<div class="container mt-5" style="min-height: 100vh;">
-    <div class="row">
-        <div class="col-8">
-            <h1>Profile</h1>
-            <h3></h3>
-            <p>Hi, <span class="fancy">{{user.name}}!</span> Welcome to your profile page. <br> Here you can see your information and all of your stats.</p>
-        </div>
+<div class="row">
+    <div class="col-8">
+        <h1>Profile</h1>
+        <h3></h3>
+        <p>Hi, <span class="fancy">{{user.name}}!</span> Welcome to your profile page. <br> Here you can see your information and all of your stats.</p>
     </div>
-
-    <hr>
-
-    <form #userEditForm="ngForm" name="form" (ngSubmit)="onSubmit()" novalidate>
-        <div class="row mt-2 gy-5">
-            <div class="col-6 input-wrap">
-                <label>Name</label><br />
-                <input type="text" class="form-input" name="name" [(ngModel)]="user!.name" #name="ngModel" minlength="3" required [ngClass]="{'is-invalid': name.invalid && name.touched}"/>
-                <div *ngIf="name.invalid && name.touched" class="invalid-feedback">
-                    <div *ngIf="name.errors!['required']">
-                        Name is required
-                    </div>
-                    <div *ngIf="name.errors!['minlength']">
-                        Name must be 3 chars long.
-                    </div>
-                </div>
-            </div>
-    
-            <div class="col-6 input-wrap">
-                <label>Email address</label><br />
-                <input type="email" class="form-input" name="emailAddress" [(ngModel)]="user!.emailAddress" #emailAddress="ngModel" minlength="3" required [ngClass]="{'is-invalid': emailAddress.invalid && emailAddress.touched}"/>
-                <div *ngIf="emailAddress.invalid && emailAddress.touched" class="invalid-feedback">
-                    <div *ngIf="emailAddress.errors!['required']">
-                        Email Address is required
-                    </div>
-                    <div *ngIf="emailAddress.errors!['minlength']">
-                        Email Address must be 3 chars long.
-                    </div>
-                </div>
-            </div>
-    
-            <div class="col-6 input-wrap">
-                <label>Phone number</label><br />
-                <input type="text" class="form-input" name="phoneNumber" [(ngModel)]="user!.phoneNumber" #phoneNumber="ngModel" minlength="3" required [ngClass]="{'is-invalid': phoneNumber.invalid && phoneNumber.touched}"/>
-            </div>
-    
-            <div class="col-6 input-wrap">
-                <label>Birthday</label><br />
-                <input type="date" id="datepicker" class="form-input" name="birthDate" [(ngModel)]="user!.birthDate" #birthDate="ngModel" required [ngClass]="{'is-invalid': birthDate.invalid && birthDate.touched}"/>
-            </div>
-    
-            <div class="col-6 input-wrap">
-                <label>Password</label><br />
-                <input type="password" class="form-input" name="password" [(ngModel)]="user!.password" #password="ngModel" minlength="3" required [ngClass]="{'is-invalid': password.invalid && password.touched}"/>
-            </div>
-    
-            <div class="col-12 d-flex justify-content-start align-items-start mb-5">
-                <button type="submit" class="button-pink mt-2" [disabled]="!userEditForm.valid">Save</button>
-            </div>
-        </div>
-    </form>
-
-    <hr>
-
-    <div class="row mt-5">
-        <h2>Stats</h2>
-        <p>Coming soon...</p>
-    </div>
-
-    <hr>
-
-    <form #userDeleteForm="ngForm" name="form" (ngSubmit)="onSubmit()" novalidate>
-        <h2>Delete</h2>
-        <p>You can delete your account by pressing the button below. (This action can not be undone!)</p>
-        <div class="col-12 d-flex justify-content-start align-items-start mb-5">
-            <button type="submit" class="button-yellow mt-2">Delete Account</button>
-        </div>
-    </form>
 </div>
+
+<hr>
+
+<form #userEditForm="ngForm" name="form" (ngSubmit)="onSubmit()" novalidate>
+    <div class="row mt-2 gy-5">
+        <div class="col-6 input-wrap">
+            <label>Name</label><br />
+            <input type="text" class="form-input" name="name" [(ngModel)]="user!.name" #name="ngModel" minlength="3" required [ngClass]="{'is-invalid': name.invalid && name.touched}"/>
+            <div *ngIf="name.invalid && name.touched" class="invalid-feedback">
+                <div *ngIf="name.errors!['required']">
+                    Name is required
+                </div>
+                <div *ngIf="name.errors!['minlength']">
+                    Name must be 3 chars long.
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 input-wrap">
+            <label>Email address</label><br />
+            <input type="email" class="form-input" name="emailAddress" [(ngModel)]="user!.emailAddress" #emailAddress="ngModel" minlength="3" required [ngClass]="{'is-invalid': emailAddress.invalid && emailAddress.touched}"/>
+            <div *ngIf="emailAddress.invalid && emailAddress.touched" class="invalid-feedback">
+                <div *ngIf="emailAddress.errors!['required']">
+                    Email Address is required
+                </div>
+                <div *ngIf="emailAddress.errors!['minlength']">
+                    Email Address must be 3 chars long.
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 input-wrap">
+            <label>Phone number</label><br />
+            <input type="text" class="form-input" name="phoneNumber" [(ngModel)]="user!.phoneNumber" #phoneNumber="ngModel" minlength="3" required [ngClass]="{'is-invalid': phoneNumber.invalid && phoneNumber.touched}"/>
+        </div>
+
+        <div class="col-6 input-wrap">
+            <label>Birthday</label><br />
+            <input type="date" id="datepicker" class="form-input" name="birthDate" [(ngModel)]="user!.birthDate" #birthDate="ngModel" required [ngClass]="{'is-invalid': birthDate.invalid && birthDate.touched}"/>
+        </div>
+
+        <div class="col-6 input-wrap">
+            <label>Password</label><br />
+            <input type="password" class="form-input" name="password" [(ngModel)]="user!.password" #password="ngModel" minlength="3" required [ngClass]="{'is-invalid': password.invalid && password.touched}"/>
+        </div>
+
+        <div class="col-12 d-flex justify-content-start align-items-start mb-5">
+            <button type="submit" class="button-pink mt-2" [disabled]="!userEditForm.valid">Save</button>
+        </div>
+    </div>
+</form>
+
+    
 
