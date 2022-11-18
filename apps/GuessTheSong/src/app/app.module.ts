@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { LoginComponent } from './core/login/login.component';
 import { HomepageComponent } from './feature/homepage/homepage.component';
 import { UserComponent } from './core/user/user.component';
 import { UserDetailsComponent } from './core/user/user-details/user-details.component';
@@ -21,7 +20,6 @@ import { SongDetailComponent } from './core/song/song-detail/song-detail.compone
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    LoginComponent,
     HomepageComponent,
     UserComponent,
     UserDetailsComponent,
