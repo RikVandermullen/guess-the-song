@@ -229,3 +229,77 @@ table td {
     font-size: 20px;
 }
 
+/*SELECTS*/
+.select-wrap {
+    border-bottom: 2px solid var(--yellow);
+    margin-bottom: 10px;
+    padding: 0 5px 5px;
+    width: 200px;
+    background-color: rgba(128, 128, 128, 0);
+}
+
+.select-wrap label {
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #ffffff;
+    padding: 2px 8px 0;
+}
+
+select {
+    background-color: rgba(128, 128, 128, 0);
+    border: 0px;
+    font-size: 22px;
+    color: rgb(255, 255, 255);
+}
+
+select:focus {
+    outline: 0;
+}
+
+.filter {
+    border-radius: 16px;
+    padding: 15px;
+    background-color: #ab5ec5;
+    border: 2px solid var(--white);
+}
+
+.song-list-cover img {
+    max-width: 50px;
+}
+
+.song-list-info h3 {
+    font-size: 20px;
+    margin-bottom: 0px;
+}
+
+.song-list p {
+    font-size: 18px;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+.actions-icon {
+    max-width: 32px;
+    transition: 0.3s ease-out;
+}
+
+.actions-icon:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.3s ease-in;
+}
+
+.song-list td {
+    height: 100%;
+    line-height: 100%;
+}
+
+.song-row {
+    transition: 0.3s ease-out;
+}
+
+.song-row:hover {
+    background-color: var(--dark-purple);
+    transition: 0.3s ease-in;
+}
+
