@@ -75,6 +75,10 @@ p {
     transition: 0.3s ease-out;
 }
 
+.button-pink:disabled {
+    opacity: 0.7;
+}
+
 .button-pink:hover {
     transition: 0.3s ease-in;
     transform: translateY(5px);

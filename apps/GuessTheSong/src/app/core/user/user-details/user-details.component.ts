@@ -17,35 +17,35 @@ export class UserDetailsComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.route.paramMap.subscribe((params) => {
-			this.userId = params.get("id");
-			if (this.userId) {
-				console.log("User exists");
-				this.user = {
-					...this.userService.getUserById(this.userId)
-				};
-				this.userExists = true;
-			} else {
-				console.log("User does not exist");
-				this.userExists = false;
-				this.user = {
-					id: (this.userService.getLength()).toString(),
-					name: '',
-					emailAddress: '',
-					password: '',
-					birthDate: new Date(),
-					phoneNumber: '',
-				}
+		  this.userId = params.get("id");
+		  if (this.userId) {
+			console.log("Bestaande component");
+			this.user = {
+			  ...this.userService.getUserById(this.userId)
+			};
+			this.userExists = true;
+		  } else {
+			console.log("Nieuwe user");
+			this.userExists = false;
+			this.user = {
+			  id: (this.userService.getLength()).toString(),
+			  name: '',
+			  emailAddress: '',
+			  birthDate: new Date,
+			  phoneNumber: '',
+			  password: ''
 			}
+		  }
 		});
-	}
+	  }
 
 	onSubmit(): void {	
 		if (this.userExists) {
-			this.userService.updateUser(this.user);
+			this.userService.updateUser(this.user);			
 		} else {
 			this.userService.createUser(this.user);
 		}
-		this.router.navigate([`/user/${this.userId}`]);
+		this.router.navigate([`/users/${this.userId}`]);
 	}
 }
 		  

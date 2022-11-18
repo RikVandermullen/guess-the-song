@@ -48,10 +48,12 @@ export class UserService {
 
 	updateUser(user: User): void {
 		this.users.splice(parseInt(user.id!), 1, user);
+		console.log(this.users);
+		
 	}
 
-	deleteUser(user: User): void {
-		this.users = this.users.filter((u) => u.id !== user.id);
+	deleteUser(id: string): void {
+		this.users.splice(parseInt(id), 1);
 	}
 
 	getLength(): number {
