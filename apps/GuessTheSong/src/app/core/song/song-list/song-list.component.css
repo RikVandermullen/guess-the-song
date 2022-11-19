@@ -1,0 +1,16 @@
+ngb-pagination ::ng-deep ul > li:not(.active) > a {
+    color: black;
+}
+
+ngb-pagination ::ng-deep ul > li.active > a {
+    background-color: var(--yellow) !important;
+    border: 1px solid var(--yellow) !important;
+}
+
+ngb-pagination ::ng-deep .page-item.active .page-link:focus, .page-link:not(:disabled):not(.disabled):active:focus {
+    box-shadow: 0 0 0 0.01rem var(--yellow) !important;
+}
+
+ngb-pagination ::ng-deep .page-link:not(:disabled):not(.disabled):active:focus {
+    box-shadow: 0 0 0 0.01rem var(--yellow) !important;
+  }

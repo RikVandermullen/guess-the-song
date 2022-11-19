@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Song } from '../song.model';
+import { Genre, Song } from '../song.model';
 import { SongService } from '../song.service';
 
 @Component({
@@ -11,9 +11,14 @@ import { SongService } from '../song.service';
 export class SongDetailComponent implements OnInit {
 	songExists: boolean = false;
 	songId: string | null | undefined;
-	song: Song = new Song("undefined", "undefined", new Date(), "undefined", "undefined", "undefined", new File([""], "placeholder.jpg", {type: "image/jpg"}));
+	song: Song = new Song("undefined", "undefined", new Date(), "undefined", "undefined", "undefined", new File([""], "placeholder.jpg", {type: "image/jpg"}), []);
 
-	constructor(private route: ActivatedRoute, private router: Router, private songService: SongService) {}
+	Genre = Genre;
+    genreKeys : string[] = [];
+
+	constructor(private route: ActivatedRoute, private router: Router, private songService: SongService) {
+		this.genreKeys = Object.keys(this.Genre);
+	}
 
 	ngOnInit(): void {
 		this.route.paramMap.subscribe((params) => {
@@ -35,6 +40,7 @@ export class SongDetailComponent implements OnInit {
 					coverImage: new File([""], "placeholder.jpg", {type: "image/jpg"}),
 					songLink: '',
 					album: '',
+					genres: []
 				}
 			}
 			if (this.song.coverImage instanceof File) {
@@ -79,5 +85,16 @@ export class SongDetailComponent implements OnInit {
 		reader.onload = (event) => {
 			document.getElementById('cover-preview')!.setAttribute("src", event!.target!.result!.toString());
 		}
+	}
+
+	play() {
+		let audioPlayer = <HTMLVideoElement>document.getElementById('song-preview');
+		audioPlayer.play();
+		setTimeout(this.pause, 30000);
+	}
+
+	pause() {
+		let audioPlayer = <HTMLVideoElement>document.getElementById('song-preview');
+		audioPlayer.pause();
 	}
 }

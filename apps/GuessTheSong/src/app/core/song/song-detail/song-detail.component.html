@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-3">
     <div *ngIf="songExists">
         <h1>Edit</h1>
     </div>
@@ -7,7 +7,7 @@
         <h1>Create</h1>
     </div>
 
-    <div class="row mt-1 mb-3">
+    <div class="row mt-1 mb-5">
         <div class="col-6 song-form">
             <form #songEditForm="ngForm" name="form" (ngSubmit)="onSubmit()" novalidate>
                 <div class="row mb-4 gy-2">
@@ -52,7 +52,7 @@
 
                     <div class="col-12 input-wrap">
                         <label>Published On</label><br />
-                        <input type="date" class="form-input" name="publishedOn" [(ngModel)]="song!.publishedOn" #publishedOn="ngModel" required/>
+                        <input type="date" class="form-input" name="publishedOn" [ngModel]="song.publishedOn | date:'yyyy-MM-dd'" #publishedOn="ngModel" (ngModelChange)="song.publishedOn = $event" required/>
                     </div>
 
                     <div class="col-12 input-wrap">
@@ -65,6 +65,15 @@
                             <div *ngIf="songLink.errors!['minlength']">
                                 Link to the song must be 3 chars long.
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="select-wrap mt-3">
+                            <label for="genres">Genres <img class="info-icon" src="../../../../assets/images/info.png" alt="info icon" ngbPopover="Hold the Ctrl key and Click to select multiple genres!" triggers="mouseenter:mouseleave"></label>
+                            <select class="multiple" name="genres" id="genres" style="width: 100%;" multiple [(ngModel)]="song.genres" #genres="ngModel" required>
+                                <option *ngFor="let name of genreKeys;" [ngValue]="name"> {{name}} </option>
+                            </select>
                         </div>
                     </div>
 
@@ -81,33 +90,34 @@
 
         <div class="col-6 preview">
             <h3>Preview</h3>
-            <div class="row preview-song">
-                <div class="">
-                    <div class="col-12 d-flex justify-content-center align-items-center">
-                        <img class="mt-5" src="" id="cover-preview"/>
-                    </div>
-                    <div class="col-12 preview-song-info mt-3">
-                        <div class="preview-song-text">
-                            <p>Title: {{song.title}}</p>
-                            <p>Artist: {{song.artist}}</p>
-                            <p>Album: {{song.album}}</p>
-                            <p>Date Published: {{song.publishedOn |  date : 'dd-MM-yyyy' }}</p>
-                        </div>
-
-                    </div>
-                    <div class="preview-song-link mt-2 mb-3">
-                        <hr>
-                        <div class="d-flex justify-content-center align-items-center">
-                            <audio src="{{song.songLink}}" id="song-preview" preload="auto">Listen to the song</audio>
-                            <button class="icon-button" onclick="document.getElementById('song-preview').play();">
-                                <img class="play-icon" src="../../../../assets/images/play.png" alt="play icon">
-                            </button>
-                            <button class="icon-button" onclick="document.getElementById('song-preview').pause();">
-                                <img class="action-icon" src="../../../../assets/images/pause.png" alt="pause icon">
-                            </button>
-                    </div>
+            <div class="row preview-song ms-0">
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                    <img class="mt-5" src="" id="cover-preview"/>
                 </div>
-            </div>    
+                <div class="col-12 preview-song-info mt-3">
+                    <div class="preview-song-text">
+                        <p>Title: {{song.title}}</p>
+                        <p>Artist: {{song.artist}}</p>
+                        <p>Album: {{song.album}}</p>
+                        <p>Date Published: {{song.publishedOn |  date : 'dd-MM-yyyy' }}</p>
+                        <p>Genres: {{song.genres}}</p>
+                    </div>
+
+                </div>
+                <div class="preview-song-link mt-2 mb-3">
+                    <hr>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <audio src="{{song.songLink}}" id="song-preview" preload="auto">Listen to the song</audio>
+                        <button class="icon-button" (click)="play()">
+                            <img class="play-icon" src="../../../../assets/images/play.png" alt="play icon">
+                        </button>
+                        <button class="icon-button" (click)="pause()">
+                            <img class="action-icon" src="../../../../assets/images/pause.png" alt="pause icon">
+                        </button>
+                    </div>
+                </div>    
+            </div>
         </div>
+    </div>
 </div>
 
