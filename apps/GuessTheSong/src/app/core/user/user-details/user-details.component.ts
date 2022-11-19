@@ -9,25 +9,43 @@ import { UserService } from '../user.service';
 	styleUrls: ['./user-details.component.css'],
 })
 export class UserDetailsComponent implements OnInit {
-	componentId: string | null | undefined;
+	userId: string | null | undefined;
 	user: User = new User("undefined", "undefined", "undefined", "undefined", new Date(), "undefined");
+	userExists: boolean = false;
 
 	constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) {}
 
 	ngOnInit(): void {
 		this.route.paramMap.subscribe((params) => {
-			this.componentId = params.get("id");
-			if (this.componentId) {
-				console.log("User exists");
-				this.user = this.userService.getUserById(this.componentId);
-			} else {
-				console.log("User does not exist");
+		  this.userId = params.get("id");			  	  
+		  if (this.userId) {
+			console.log("Bestaande component");
+			this.user = {
+			  ...this.userService.getUserById(this.userId)
+			};
+			this.userExists = true;
+		  } else {
+			console.log("Nieuwe user");
+			this.userExists = false;
+			this.user = {
+			  id: (this.userService.getLength()).toString(),
+			  name: '',
+			  emailAddress: '',
+			  birthDate: new Date,
+			  phoneNumber: '',
+			  password: ''
 			}
+		  }
 		});
-	}
+	  }
 
 	onSubmit(): void {	
-		//this.userService.updateUser();
+		if (this.userExists) {
+			this.userService.updateUser(this.user);			
+		} else {
+			this.userService.createUser(this.user);
+		}
+		this.router.navigate([`/profile/${this.userId}`]);
 	}
 }
 		  

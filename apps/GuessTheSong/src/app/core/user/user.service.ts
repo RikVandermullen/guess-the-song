@@ -42,17 +42,23 @@ export class UserService {
         return this.users.filter((user: User) => user.id === id)[0];
     }
 
-	addUser(user: User): void {
+	createUser(user: User): void {
 		this.users.push(user);
 	}
 
-	updateUser(user: User): User {
-		this.users = this.users.filter((u) => u.id !== user.id);
-		this.users.push(user);
-		return user;
+	updateUser(user: User): void {
+		const index = this.users.indexOf(this.getUserById(user.id!));
+		this.users.splice(index, 1, user);       
 	}
 
-	deleteUser(user: User): void {
-		this.users = this.users.filter((u) => u.id !== user.id);
+	deleteUser(id: string): void {
+		const index = this.users.indexOf(this.getUserById(id));
+		this.users.splice(index, 1);
+		console.log(this.users);
+		
+	}
+
+	getLength(): number {
+		return this.users.length;
 	}
 }
