@@ -1,0 +1,35 @@
+.preview-song {
+    background-image: linear-gradient(to bottom, var(--yellow), var(--light-purple));
+    border-radius: 15px;
+    max-width: 75%;
+    min-height: 90%;
+}
+
+.preview-song img {
+    max-width: 265px;
+    border-radius: 15px;
+}
+
+.preview-song-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preview-song-text {
+    text-align: start;
+}
+
+.preview-song-text p {
+    padding: 0;
+    margin: 0;
+}
+
+.icon-button {
+    border: none;
+    background-color: transparent;
+}
+
+.icon-button img {
+    max-width: 40px;
+}

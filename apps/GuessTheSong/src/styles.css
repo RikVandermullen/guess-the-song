@@ -1,6 +1,6 @@
 :root {
     --white: #F8F7FF;
-    --light-purple: #d27dee;
+    --light-purple: #ac57c9;
     --dark-purple: #81389A;
     --pink: #FF3594;
     --yellow: #F58F29;
@@ -283,7 +283,7 @@ select:focus {
 }
 
 .actions-icon {
-    max-width: 32px;
+    max-width: 24px;
     transition: 0.3s ease-out;
 }
 

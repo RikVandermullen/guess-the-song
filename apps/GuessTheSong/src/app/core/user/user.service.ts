@@ -47,13 +47,15 @@ export class UserService {
 	}
 
 	updateUser(user: User): void {
-		this.users.splice(parseInt(user.id!), 1, user);
-		console.log(this.users);
-		
+		const index = this.users.indexOf(this.getUserById(user.id!));
+		this.users.splice(index, 1, user);       
 	}
 
 	deleteUser(id: string): void {
-		this.users.splice(parseInt(id), 1);
+		const index = this.users.indexOf(this.getUserById(id));
+		this.users.splice(index, 1);
+		console.log(this.users);
+		
 	}
 
 	getLength(): number {

@@ -10,11 +10,9 @@
 
     <hr>
 
-    <form #userDeleteForm="ngForm" name="form" (ngSubmit)="onSubmit()" novalidate>
-        <h2>Delete</h2>
-        <p>You can delete your account by pressing the button below. (This action can not be undone!)</p>
-        <div class="col-12 d-flex justify-content-start align-items-start mb-5">
-            <button type="submit" class="button-yellow mt-2">Delete Account</button>
-        </div>
-    </form>
+    <h2>Delete</h2>
+    <p>You can delete your account by pressing the button below. (This action can not be undone!)</p>
+    <div class="col-12 d-flex justify-content-start align-items-start mb-5">
+        <button type="submit" class="button-yellow mt-2" (click)="deleteUser()">Delete Account</button>
+    </div>
 </div>

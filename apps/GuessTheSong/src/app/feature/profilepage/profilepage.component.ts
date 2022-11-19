@@ -19,13 +19,9 @@ export class ProfilepageComponent implements OnInit {
 		  this.userId = params.get("id");
 		});
   }
-
-  onSubmit(): void {
-    console.log(this.userId);
-    
+  
+  deleteUser() {
     this.userService.deleteUser(this.userId!);
     this.router.navigate([`/`]);
-    console.log(this.userService.getAllUsers());
-    
   }
 }
