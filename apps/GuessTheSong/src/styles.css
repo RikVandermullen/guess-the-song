@@ -237,8 +237,12 @@ table td {
 .select-wrap {
     border-bottom: 2px solid var(--yellow);
     margin-bottom: 10px;
-    width: 250px;
+    width: 200px;
     background-color: rgba(128, 128, 128, 0);
+}
+
+.select-wrap:has(.multiple) {
+    width: 250px;
 }
 
 .select-wrap label {
