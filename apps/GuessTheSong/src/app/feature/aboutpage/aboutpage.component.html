@@ -1,26 +1,42 @@
-<section class="hidden">
-    <div class="container">
+<section>
+    <div class="container mt-5">
         <div class="d-flex justify-content-center align-items-center">
             <div class="row">
                 <div class="col-12">
                     <h1>About this website</h1>
-        
+
+                    <p>This application is made for the subject 'Clientside web frameworks' from Avans Hogeschool Breda. <br>
+                        Made by: Rik Vandermullen - 2116527
+                    </p>
+                    <hr>
+                    <h3>Guess The Song</h3>
+
                     <p>This website is a place where you can test your <span class="fancy">knowledge</span> for songs. We all know that one friend that thinks
                         he knows the title of every song. Well, this is the place to prove it! As a logged in User you can play games
-                        to test your knowledge. You can also create your own games for other players or friends to play.
+                        to test your knowledge. You can also create your own games for other players or friends to play. An User has a Name, Email Address, Password,
+                        Phone Number and a Date of Birth.
                     </p>
                     <br>
                     <p>A game contains a chosen amount of songs which play for 30 seconds. You need to make your guess in this time frame otherwise you won't 
                         score any points! At the end of the game you will see your score and the correct answers. You can also see the scores of other players
                         on a <span class="fancy">leaderboard</span>. On your profile page you can find and edit your information and see some statistics about your games like your total score,
-                        averge winpercentage and more!
+                        averge winpercentage and more! 
                     </p>
-
+                    <br>
                     <p>When creating a game, you are given three options: Select your own song, Random and Recommended. With the option select your own, you can choose
                         the songs yourself based on a chosen Genre. With the random option, you can choose a random amount of songs also based on a Genre. 
                         With the option recommended, you can choose a random amount of songs that are recommended for you. This is based on your previous games and the songs you have
                         played. The more you play, the more songs will be recommended for you! Other fields that need to be filled in are: a name, a description 
                         and the genres. You can also choose to make the game public or private. If you make the game public, everyone can play it. If you make it private, only you and your friends can play it.
+                    </p>
+                    <br>
+                    <p>You can also add songs which aren't yet on the website. You need to fill in the Title, Artist, Album, Publish date, Genres, Cover image
+                        and the link for the song preview. These links can be found on Apple Music. If an Artist is missing, you can also add them. For this you need
+                        to fill in the Name, a Description and an Image of the artist.
+                    </p>
+                    <br>
+                    <p>Scores will be generated <span class="fancy">automatically</span> by the system. A Score contains the amount of right answers, the amount of time it took for the game to complete
+                        , the date the game was played and the final score. The final score is calculated by the amount of right answers and the amount of time it took to complete the game.
                     </p>
                 </div>
             </div>
@@ -28,12 +44,15 @@
     </div>
 </section>
 
-<section class="hidden mb-5">
+<section class="hidden mb-5 mt-5">
    <div class="container">
         <div class="d-flex justify-content-center align-items-center">
             <div class="row">
                 <h2>Entity Relationship Diagram</h2>
-                <p>Some information will be stored in a NoSQL database. The entities are shown below.</p>
+                <p>Some information will be stored in a NoSQL database. The entities are shown below.
+                    A Score is a weak entity which is dependent on a Game and an User. An User scores an Score and a Game can have many Scores.
+                    A Song can be added to multiple Games and a Game can have multiple Songs. An Artist can have multiple Songs but a Song can only have one Artist.
+                </p>
     
                 <img src="assets/images/ERD.png" alt="Entity Relationship Diagram">
             </div>
@@ -75,7 +94,7 @@
                                 <td>PublishedOn: <span style="color: #F58F29">date</span></td>
                                 <td>CreatedOn: <span style="color: #F58F29">date</span></td>
                                 <td>DateScored: <span style="color: #F58F29">date</span></td>
-                                <td>Descriptioin: <span style="color: #F58F29">string</span></td>
+                                <td>Description: <span style="color: #F58F29">string</span></td>
                             </tr>
 
                             <tr>
@@ -83,12 +102,12 @@
                                 <td>CoverImage: <span style="color: #F58F29">image</span></td>
                                 <td>Genres: <span style="color: #F58F29">string[]</span></td>
                                 <td>FinalScore: <span style="color: #F58F29">double</span></td>
-                                <td>Genres: <span style="color: #F58F29">string[]</span></td>
+                                <td>BirthDate: <span style="color: #F58F29">date</span></td>
                             </tr>
 
                             <tr>
                                 <td>PhoneNumber: <span style="color: #F58F29">string</span></td>
-                                <td></td>
+                                <td>Genres: <span style="color: #F58F29">string[]</span></td>
                                 <td>Description: <span style="color: #F58F29">string</span></td>
                                 <td></td>
                                 <td></td>
@@ -96,7 +115,7 @@
 
                             <tr>
                                 <td></td>
-                                <td></td>
+                                <td>Album: <span style="color: #F58F29">string</span></td>
                                 <td>Private: <span style="color: #F58F29">boolean</span></td>
                                 <td></td>
                                 <td></td>
@@ -107,6 +126,73 @@
             </div>
         </div>
    </div> 
+</section>
+
+<section>
+    <div class="container">
+        <h2>User Stories</h2>
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="row">
+                <div class="col-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nr</th>
+                                <th scope="col">Story</th>
+                                <th scope="col">Extra</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><span>As an User which is not logged in, I can see the games, artists and songs but not do any other actions with them.</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><span>I can create an account for this website by registrating and filling in all the necessary information.</span></td>
+                                <td>A valid Email and Date of Birth must be given.</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><span>As an User which is logged in, I can play games and get scores.</span></td>
+                                <td>After the game is finished a leaderboard will be displayed.</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><span>As an User which is logged in, I can view my profile page where I can see and edit my information. I can also find statistics about my games. I also have to ability to delete my account.</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><span>As an User which is logged in, I can add songs by filling in all the necessary information. I can view in real time how to song will be
+                                    displayed on the website. I can only edit or delete songs which I added.
+                                </span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td><span>As an User which is logged in, I can add artists by filling in all the necessary information. I can view in real time how to artist will be
+                                    displayed on the website. I can only edit or delete artists which I added.
+                                </span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td><span>As an User which is logged in, I can create games by filling in all the necessary information. I can also choose to make the game private or public. I can only edit or delete games which I added.</span></td>
+                                <td>Public games can be played by other players, private can't.</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td><span>A leaderboard is displayed on the home page with users which have the highest scores.</span></td>
+                                <td>The leaderboard will update once a new user needs to be displayed.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 
