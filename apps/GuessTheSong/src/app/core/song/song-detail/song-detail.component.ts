@@ -63,13 +63,6 @@ export class SongDetailComponent implements OnInit {
 		this.router.navigate([`/songs`]);
 	}
 
-	parseDate(dateString: string): Date {
-		if (dateString) {
-				return new Date(dateString);
-		}
-		return new Date();
-	}
-
 	uploadFile(event: Event) {
 		const element = event.currentTarget as HTMLInputElement;
 		let fileList: FileList | null = element.files;

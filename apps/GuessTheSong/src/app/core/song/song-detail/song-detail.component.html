@@ -1,6 +1,8 @@
 <div class="container mt-3">
-    <div *ngIf="songExists">
-        <h1>Edit</h1>
+    <div *ngIf="songExists" class="row">
+        <div class="col-9">
+            <h1>Edit</h1>
+        </div>
     </div>
     
     <div *ngIf="!songExists">
@@ -82,9 +84,9 @@
                         <input type="file" class="form-input" name="coverImage" (change)="uploadFile($event)" required/>
                     </div> 
                 </div>
-                <button type="submit" class="button-pink mt-2" [disabled]="!songEditForm.valid">Save</button>
+                <button type="submit" class="button-pink mt-2 me-3" [disabled]="!songEditForm.valid">Save</button>
+                <button type="button" class="button-yellow mt-2" routerLink="/songs" routerLinkActive="true">Cancel</button>
             </form>
-            <div class="vl"></div>
         </div>
 
 
