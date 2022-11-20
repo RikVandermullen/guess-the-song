@@ -1,3 +1,20 @@
+export enum Genre {
+    Pop = 'Pop',
+    Rock = 'Rock',
+    HipHop = 'HipHop',
+    RnB = 'RnB',
+    Jazz = 'Jazz',
+    Blues = 'Blues',
+    Country = 'Country',
+    Metal = 'Metal',
+    Electronic = 'Electronic',
+    Classical = 'Classical',
+    Rap = 'Rap',
+    Reggae = 'Reggae',
+    Soul = 'Soul',
+    Punk = 'Punk',
+}
+
 export class Song {
     id: string | undefined;
     title: string | undefined;
@@ -6,8 +23,9 @@ export class Song {
     artist: string | undefined; //string for now
     album: string | undefined;
     coverImage: File | undefined;
+    genres: Genre[] = [];
 
-    constructor(id: string, title: string, publishedOn: Date, songLink: string, artist: string, album: string, coverImage: File) {
+    constructor(id: string, title: string, publishedOn: Date, songLink: string, artist: string, album: string, coverImage: File, genres: Genre[]) {
         this.id = id;
         this.title = title;
         this.publishedOn = publishedOn;
@@ -15,5 +33,6 @@ export class Song {
         this.artist = artist;
         this.album = album;
         this.coverImage = coverImage;
+        this.genres = genres;
     }
 }

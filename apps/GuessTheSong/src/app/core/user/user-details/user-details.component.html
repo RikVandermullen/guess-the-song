@@ -43,7 +43,7 @@
 
         <div class="col-6 input-wrap">
             <label>Birthday</label><br />
-            <input type="date" id="datepicker" class="form-input" name="birthDate" [(ngModel)]="user!.birthDate" #birthDate="ngModel" required [ngClass]="{'is-invalid': birthDate.invalid && birthDate.touched}"/>
+            <input type="date" id="datepicker" class="form-input" name="birthDate" [ngModel]="user.birthDate | date:'yyyy-MM-dd'" #birthDate="ngModel" (ngModelChange)="user.birthDate = $event" required [ngClass]="{'is-invalid': birthDate.invalid && birthDate.touched}"/>
         </div>
 
         <div class="col-6 input-wrap">
