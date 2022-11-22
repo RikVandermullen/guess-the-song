@@ -86,9 +86,7 @@
           "apps/GuessTheSong/src/favicon.ico",
           "apps/GuessTheSong/src/assets"
         ],
-        "styles": [
-          "apps/GuessTheSong/src/styles.css"
-        ],
+        "styles": ["apps/GuessTheSong/src/styles.css"],
         "scripts": []
       }
     }
