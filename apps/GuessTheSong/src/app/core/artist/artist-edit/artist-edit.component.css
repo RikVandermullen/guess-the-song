@@ -1,0 +1,8 @@
+.input-wrap textarea {
+    min-width: 100%;
+    min-height: 100px;
+}
+
+.artist-form .form-input {
+    min-width: 100% !important;
+}

@@ -6,6 +6,9 @@ import { AboutpageComponent } from './feature/aboutpage/aboutpage.component';
 import { SongListComponent } from './core/song/song-list/song-list.component';
 import { ProfilepageComponent } from './feature/profilepage/profilepage.component';
 import { SongDetailComponent } from './core/song/song-detail/song-detail.component';
+import { ArtistListComponent } from './core/artist/artist-list/artist-list.component';
+import { ArtistDetailComponent } from './core/artist/artist-detail/artist-detail.component';
+import { ArtistEditComponent } from './core/artist/artist-edit/artist-edit.component';
 
 const routes: Routes = [
   {path: "", pathMatch: "full", component: HomepageComponent},
@@ -18,6 +21,10 @@ const routes: Routes = [
   {path: "profile/:id", pathMatch: "full", component: ProfilepageComponent, children: [
     {path: "", component: UserDetailsComponent}
   ]},
+  {path: "artists", pathMatch: "full", component: ArtistListComponent},
+  {path: "artists/new", pathMatch: "full", component: ArtistEditComponent},
+  {path: "artists/:id/details", pathMatch: "full", component: ArtistDetailComponent},
+  {path: "artists/:id/edit", pathMatch: "full", component: ArtistEditComponent}
 ];
 
 @NgModule({

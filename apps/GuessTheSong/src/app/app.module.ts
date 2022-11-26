@@ -15,6 +15,10 @@ import { SongComponent } from './core/song/song.component';
 import { SongListComponent } from './core/song/song-list/song-list.component';
 import { SongDetailComponent } from './core/song/song-detail/song-detail.component';
 import { ProfilepageComponent } from './feature/profilepage/profilepage.component';
+import { ArtistComponent } from './core/artist/artist.component';
+import { ArtistListComponent } from './core/artist/artist-list/artist-list.component';
+import { ArtistDetailComponent } from './core/artist/artist-detail/artist-detail.component';
+import { ArtistEditComponent } from './core/artist/artist-edit/artist-edit.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,10 @@ import { ProfilepageComponent } from './feature/profilepage/profilepage.componen
     SongListComponent,
     SongDetailComponent,
     ProfilepageComponent,
+    ArtistComponent,
+    ArtistListComponent,
+    ArtistDetailComponent,
+    ArtistEditComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
   providers: [],
