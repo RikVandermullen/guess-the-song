@@ -1,0 +1,54 @@
+<div class="container artist-detail mt-5" style="min-height: 75vh">
+    <div class="row gx-5">
+        <div class="col-6">
+            <img id="artist-image" src="" alt="">
+            
+            <div class="row mt-3">
+                <div class="col-12">
+                    <h1>{{artist.name}}</h1>
+                    <p>Birthday: {{artist.birthDate | date : 'dd-MM-yyyy' }}</p>
+                    <p>{{artist.description}}</p>
+
+                    <button type="button" class="button-pink mt-2 me-3" routerLink="../edit" routerLinkActive="true">Edit</button>
+                    <button type="button" class="button-yellow mt-2" (click)="deleteArtist(artist)">Delete</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="artist-songs song-list">
+                <h2>Songs</h2>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Album</th>
+                            <th scope="col">Released</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let song of artist.songs; let i = index;" class="song-row">
+                            <td><p class="pt-3">{{ i }}</p></td>
+                            <td>
+                                <div class="d-flex justify-content-start align-items-center">
+                                    <div class="song-list-cover">
+                                        <img *ngIf="song.coverImage == undefined" src="../../../../assets/images/song{{song.id}}.webp" alt="" id="{{song.id}}-cover">
+                                        <img *ngIf="song.coverImage !== undefined" src="" alt="" id="{{song.id}}-cover">
+                                    </div>
+                                    <div class="song-list-info mt-3 ms-2">
+                                        <h3>{{song.title}}</h3>
+                                        <p>{{song.artist}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><p class="pt-3">{{song.album}}</p></td>
+                            <td><p class="pt-3">{{song.publishedOn |  date : 'dd-MM-yyyy' }}</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

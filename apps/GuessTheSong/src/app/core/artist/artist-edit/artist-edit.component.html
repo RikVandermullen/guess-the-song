@@ -1,0 +1,107 @@
+<div class="container mt-3">
+    <div *ngIf="artistExists" class="row">
+        <div class="col-9">
+            <h1>Edit</h1>
+        </div>
+    </div>
+    
+    <div *ngIf="!artistExists">
+        <h1>Create</h1>
+    </div>
+
+    <div class="row mt-1 mb-5">
+        <div class="col-12 artist-form">
+            <form #artistEditForm="ngForm" name="form" (ngSubmit)="onSubmit()" novalidate>
+                <div class="row mb-4 gy-5">
+                    <div class="col-6 input-wrap">
+                        <label>Name</label><br />
+                        <input type="text" class="form-input" name="name" [(ngModel)]="artist!.name" #name="ngModel" minlength="3" required [ngClass]="{'is-invalid': name.invalid && name.touched}"/>
+                        <div *ngIf="name.invalid && name.touched" class="invalid-feedback">
+                            <div *ngIf="name.errors!['required']">
+                                Name is required
+                            </div>
+                            <div *ngIf="name.errors!['minlength']">
+                                Name must be 3 chars long.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 input-wrap">
+                        <label>Birthday</label><br />
+                        <input type="date" class="form-input" name="birthDate" [ngModel]="artist.birthDate | date:'yyyy-MM-dd'" #birthDate="ngModel" (ngModelChange)="artist.birthDate = $event" required/>
+                    </div>
+
+                    <div class="col-12 input-wrap">
+                        <label>Description</label><br />
+                        <textarea type="text" class="form-input" name="description" [(ngModel)]="artist!.description" #description="ngModel" minlength="3" required [ngClass]="{'is-invalid': description.invalid && description.touched}"></textarea>
+                        <div *ngIf="description.invalid && description.touched" class="invalid-feedback">
+                            <div *ngIf="description.errors!['required']">
+                                Description is required
+                            </div>
+                            <div *ngIf="description.errors!['minlength']">
+                                Description must be 3 chars long.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4 input-wrap">
+                        <label>Image</label><br />
+                        <input type="file" class="form-input" name="image" (change)="uploadFile($event)" required/>
+                    </div>
+
+                    <div class="col-12 artist-songs song-list">
+                        <h2>Songs</h2>
+        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Album</th>
+                                    <th scope="col">Released</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let song of songs; let i = index;" class="song-row">
+                                    <td><p class="pt-3">{{ i }}</p></td>
+                                    <td>
+                                        <div class="d-flex justify-content-start align-items-center">
+                                            <div class="song-list-cover">
+                                                <img *ngIf="song.coverImage == undefined" src="../../../../assets/images/song{{song.id}}.webp" alt="" id="{{song.id}}-cover">
+                                                <img *ngIf="song.coverImage !== undefined" src="" alt="" id="{{song.id}}-cover">
+                                            </div>
+                                            <div class="song-list-info mt-1 ms-2">
+                                                <h3>{{song.title}}</h3>
+                                                <p>{{song.artist}}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><p class="pt-3">{{song.album}}</p></td>
+                                    <td><p class="pt-3">{{song.publishedOn |  date : 'dd-MM-yyyy' }}</p></td>
+                                    <td *ngIf="songIsFromArtist(song.id!)">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <a role="button" (click)="removeSong(song.id!)">
+                                                <img src="../../../../assets/images/remove.png" alt="" class="actions-icon mt-3">
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td *ngIf="!songIsFromArtist(song.id!)">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <a role="button" (click)="addSong(song)">
+                                                <img src="../../../../assets/images/add.png" alt="" class="actions-icon mt-3">
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <button type="submit" class="button-pink mt-2 me-3" [disabled]="!artistEditForm.valid">Save</button>
+                <button type="button" class="button-yellow mt-2" routerLink="/artists" routerLinkActive="true">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>
