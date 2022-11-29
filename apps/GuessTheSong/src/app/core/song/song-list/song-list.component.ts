@@ -17,7 +17,7 @@ export class SongListComponent implements OnInit {
   genreKeys : string[] = [];
 
   constructor(private songService: SongService) {
-	this.genreKeys = Object.keys(this.Genre);
+	  this.genreKeys = Object.keys(this.Genre);
   }
 
   ngOnInit(): void {
