@@ -87,20 +87,20 @@
                                     </td>
                                     <td><p class="pt-3">{{song.album}}</p></td>
                                     <td><p class="pt-3">{{song.publishedOn |  date : 'dd-MM-yyyy' }}</p></td>
-                                    <!-- <td *ngIf="songIsFromArtist(song.id!)">
+                                    <td *ngIf="songIsInGame(song.id!)">
                                         <div class="d-flex justify-content-center align-items-center">
                                             <a role="button" (click)="removeSong(song.id!)">
                                                 <img src="../../../../assets/images/remove.png" alt="" class="actions-icon mt-3">
                                             </a>
                                         </div>
                                     </td>
-                                    <td *ngIf="!songIsFromArtist(song.id!)">
+                                    <td *ngIf="!songIsInGame(song.id!)">
                                         <div class="d-flex justify-content-center align-items-center">
                                             <a role="button" (click)="addSong(song)">
                                                 <img src="../../../../assets/images/add.png" alt="" class="actions-icon mt-3">
                                             </a>
                                         </div>
-                                    </td> -->
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

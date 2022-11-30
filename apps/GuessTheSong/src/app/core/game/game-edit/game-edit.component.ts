@@ -58,4 +58,20 @@ export class GameEditComponent implements OnInit {
 		}
 		this.router.navigate([`/games`]);
   }
+
+  songIsInGame(id: string) {
+		const songs = this.game.songs.filter((song: Song) => song.id === id);
+		if (songs.length > 0) return true;
+		return false;
+	}
+
+  addSong(song: Song) {
+		this.game.songs.push(song);
+	}
+
+	removeSong(id: string) {
+		const song = this.game.songs.filter((song: Song) => song.id === id)[0]
+		const index = this.game.songs.indexOf(song);
+    	this.game.songs.splice(index, 1);
+	}
 }

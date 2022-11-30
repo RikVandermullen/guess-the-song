@@ -11,6 +11,7 @@ import { ArtistDetailComponent } from './core/artist/artist-detail/artist-detail
 import { ArtistEditComponent } from './core/artist/artist-edit/artist-edit.component';
 import { GameListComponent } from './core/game/game-list/game-list.component';
 import { GameEditComponent } from './core/game/game-edit/game-edit.component';
+import { GamePlayComponent } from './core/game/game-play/game-play.component';
 
 const routes: Routes = [
   {path: "", pathMatch: "full", component: HomepageComponent},
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path: "games", pathMatch: "full", component: GameListComponent},
   {path: "games/new", pathMatch: "full", component: GameEditComponent},
   {path: "games/:id/edit", pathMatch: "full", component: GameEditComponent},
+  {path: "games/:id/play", pathMatch: "full", component: GamePlayComponent},
 ];
 
 @NgModule({

@@ -10,7 +10,6 @@ import { GameService } from '../game.service';
 })
 export class GameListComponent implements OnInit {
   games: Game[] | undefined;
-  disabled = true;
 
   Genre = Genre;
   genreKeys : string[] = [];

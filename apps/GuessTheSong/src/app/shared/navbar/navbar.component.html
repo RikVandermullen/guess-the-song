@@ -16,9 +16,15 @@
 
 		<div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
 			<ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link hover-underline-animation" href="#" routerLink="games" routerLinkActive="true">Games</a>
-                </li>
+				<li ngbDropdown class="nav-item custom-dropdown mt-2 me-3">
+					<button type="button" class="" id="dropdownBasic1" ngbDropdownToggle>
+						Games
+					</button>
+					<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+						<button ngbDropdownItem class="nav-link hover-underline-animation" routerLink="games" routerLinkActive="true">All Games</button>
+						<button ngbDropdownItem class="nav-link hover-underline-animation" routerLink="games/me" routerLinkActive="true">My Games</button>
+					</div>	
+				</li>
 				<li class="nav-item">
                     <a class="nav-link hover-underline-animation" href="#" routerLink="songs" routerLinkActive="true">Songs</a>
                 </li>

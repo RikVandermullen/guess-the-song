@@ -35,3 +35,23 @@
     transform: scaleX(1);
     transform-origin: bottom left;
 }
+
+.custom-dropdown button {
+    border: none;
+    background-color: transparent;
+    color: white;
+}
+
+.dropdown-menu {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+}
+
+.dropdown-menu button {
+    max-width: fit-content;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
