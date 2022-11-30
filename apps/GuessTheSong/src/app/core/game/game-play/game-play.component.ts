@@ -80,12 +80,12 @@ export class GamePlayComponent implements OnInit {
 
   guessSong() {
     const title = <HTMLInputElement>document.getElementById("song-input")!;
-	document.getElementById("overlay")!.style.display = "block";
+	    document.getElementById("overlay")!.style.display = "block";
     if (title!.value.toLowerCase() == this.currentSong.title!.toLowerCase()) {
-		this.correctGuess = true;
+		  this.correctGuess = true;
     } else {
-		this.correctGuess = false;
-		document.getElementById("guess")!.textContent = "You guessed: " + title.value;
+      this.correctGuess = false;
+      document.getElementById("guess")!.textContent = "You guessed: " + title.value;
     }
 	document.getElementById('cover-answer')!.setAttribute("src", `../../../../../assets/images/song${this.currentSong.id}.webp`);   
     let audioPlayer = <HTMLVideoElement>document.getElementById('song-preview');
@@ -97,8 +97,8 @@ export class GamePlayComponent implements OnInit {
     this.currentSong = this.game.songs[this.getIndex(this.currentSong) + 1];
     const title = <HTMLInputElement>document.getElementById("song-input")!;
     title.value = "";
-	this.timeLeft = 30;
-	document.getElementById("timer-seconds")!.textContent = this.timeLeft.toString() + "s";
+    this.timeLeft = 30;
+    document.getElementById("timer-seconds")!.textContent = this.timeLeft.toString() + "s";
     document.getElementById("overlay")!.style.display = "none";
     document.getElementById('cover-preview')!.setAttribute("src", `../../../../../assets/images/song${this.currentSong.id}.webp`);
     this.interval = this.updateProgressBar();

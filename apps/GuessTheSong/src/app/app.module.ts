@@ -24,6 +24,7 @@ import { GameListComponent } from './core/game/game-list/game-list.component';
 import { GameEditComponent } from './core/game/game-edit/game-edit.component';
 import { GameDetailComponent } from './core/game/game-detail/game-detail.component';
 import { GamePlayComponent } from './core/game/game-play/game-play.component';
+import { GameScoreComponent } from './core/game/game-score/game-score.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { GamePlayComponent } from './core/game/game-play/game-play.component';
     GameEditComponent,
     GameDetailComponent,
     GamePlayComponent,
+    GameScoreComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
   providers: [],

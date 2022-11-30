@@ -12,6 +12,7 @@ import { ArtistEditComponent } from './core/artist/artist-edit/artist-edit.compo
 import { GameListComponent } from './core/game/game-list/game-list.component';
 import { GameEditComponent } from './core/game/game-edit/game-edit.component';
 import { GamePlayComponent } from './core/game/game-play/game-play.component';
+import { GameScoreComponent } from './core/game/game-score/game-score.component';
 
 const routes: Routes = [
   {path: "", pathMatch: "full", component: HomepageComponent},
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path: "games/new", pathMatch: "full", component: GameEditComponent},
   {path: "games/:id/edit", pathMatch: "full", component: GameEditComponent},
   {path: "games/:id/play", pathMatch: "full", component: GamePlayComponent},
+  {path: "games/:id/scores/:userId", pathMatch: "full", component: GameScoreComponent},
 ];
 
 @NgModule({

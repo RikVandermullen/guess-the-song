@@ -31,13 +31,14 @@
             </div>
             <div class="col-12">
                 <div class="d-flex justify-content-center align-items-center mt-2">
+                    <div id="emitter"></div>
                     <p id="guess"></p>
                 </div>
             </div>
             <div class="col-12">
                 <div class="d-flex justify-content-center align-items-center">
                     <button *ngIf="getIndex(currentSong) + 1 != getLength()" type="button" class="button-yellow mt-3" (click)="nextSong()">Next</button>
-                    <button *ngIf="getIndex(currentSong) + 1 == getLength()" type="button" class="button-yellow mt-3" (click)="nextSong()">Show Score</button>
+                    <button *ngIf="getIndex(currentSong) + 1 == getLength()" type="button" class="button-yellow mt-3" routerLink="../scores/0" routerLinkActive="true">Show Score</button>
                 </div>
             </div>
         </div>
@@ -77,7 +78,7 @@
         </div>
         <div class="col-12 input-wrap mt-2">
             <div class="d-flex justify-content-center align-items-center">
-                <input id="song-input" type="text" class="form-input" style="max-width: 350px;"/>
+                <input id="song-input" type="text" class="form-input" autocomplete="false" autocomplete="off" style="max-width: 350px;"/>
             </div>
         </div>
         <div class="col-12">
