@@ -25,6 +25,7 @@ import { GameEditComponent } from './core/game/game-edit/game-edit.component';
 import { GameDetailComponent } from './core/game/game-detail/game-detail.component';
 import { GamePlayComponent } from './core/game/game-play/game-play.component';
 import { GameScoreComponent } from './core/game/game-score/game-score.component';
+import { SongEditComponent } from './core/song/song-edit/song-edit.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { GameScoreComponent } from './core/game/game-score/game-score.component'
     GameDetailComponent,
     GamePlayComponent,
     GameScoreComponent,
+    SongEditComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
   providers: [],
