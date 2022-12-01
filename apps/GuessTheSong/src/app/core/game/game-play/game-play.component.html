@@ -1,0 +1,90 @@
+<div class="" id="overlay">
+    <div class="mt-5 container">
+        <div class="row">
+            <div class="col-12 mt-5">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="mt-5" *ngIf="!correctGuess">
+                        <h2>You didn't get it. The correct answer was:</h2>
+                    </div>
+                    <div class="mt-5" *ngIf="correctGuess">
+                        <h2>You got it! Well done</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="answer-song ms-0">
+                        <div class="col-12 d-flex justify-content-center align-items-center">
+                            <img class="mt-5" src="" id="cover-answer"/>
+                        </div>
+                        <div class="col-12 preview-song-info mt-3 mb-3">
+                            <div class="preview-song-text">
+                                <p>Title: {{currentSong.title}}</p>
+                                <p>Artist: {{currentSong.artist}}</p>
+                                <p>Album: {{currentSong.album}}</p>
+                                <p>Date Published: {{currentSong.publishedOn |  date : 'dd-MM-yyyy' }}</p>
+                                <p>Genres: {{currentSong.genres}}</p>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="d-flex justify-content-center align-items-center mt-2">
+                    <div id="emitter"></div>
+                    <p id="guess"></p>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="d-flex justify-content-center align-items-center">
+                    <button *ngIf="getIndex(currentSong) + 1 != getLength()" type="button" class="button-yellow mt-3" (click)="nextSong()">Next</button>
+                    <button *ngIf="getIndex(currentSong) + 1 == getLength()" type="button" class="button-yellow mt-3" routerLink="../scores/0" routerLinkActive="true">Show Score</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-2" style="min-height: 80vh;">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-center align-items-center">
+                <h2>{{game.name}}</h2>
+            </div>
+
+            <div class="d-flex justify-content-end align-items-start">
+                <h4>{{getIndex(currentSong) + 1}} / {{getLength()}}</h4>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <audio src="{{currentSong.songLink}}" id="song-preview" preload="auto" autoplay></audio>
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="row preview-song">
+                    <div class="col-12 d-flex justify-content-center align-items-start">
+                        <img class="mt-5" src="" id="cover-preview"/>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center align-items-start">
+                        <p id="song-title" class="song-title">{{titleToUnderScores(currentSong.title!)}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="progress-bar-container mt-3">
+                    <ngb-progressbar id="song-timer" [value]="((timeLeft / 30) * 100)" [striped]="true" [animated]="true" height="20px"><i id="timer-seconds">30s</i></ngb-progressbar>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 input-wrap mt-2">
+            <div class="d-flex justify-content-center align-items-center">
+                <input id="song-input" type="text" class="form-input" autocomplete="false" autocomplete="off" style="max-width: 350px;"/>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="d-flex justify-content-center align-items-center">
+                <button type="button" class="button-pink mt-5" (click)="guessSong()">Guess</button>
+            </div>
+        </div>
+    </div>
+</div>

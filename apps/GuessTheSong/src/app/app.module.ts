@@ -19,6 +19,13 @@ import { ArtistComponent } from './core/artist/artist.component';
 import { ArtistListComponent } from './core/artist/artist-list/artist-list.component';
 import { ArtistDetailComponent } from './core/artist/artist-detail/artist-detail.component';
 import { ArtistEditComponent } from './core/artist/artist-edit/artist-edit.component';
+import { GameComponent } from './core/game/game.component';
+import { GameListComponent } from './core/game/game-list/game-list.component';
+import { GameEditComponent } from './core/game/game-edit/game-edit.component';
+import { GameDetailComponent } from './core/game/game-detail/game-detail.component';
+import { GamePlayComponent } from './core/game/game-play/game-play.component';
+import { GameScoreComponent } from './core/game/game-score/game-score.component';
+import { SongEditComponent } from './core/song/song-edit/song-edit.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +44,13 @@ import { ArtistEditComponent } from './core/artist/artist-edit/artist-edit.compo
     ArtistListComponent,
     ArtistDetailComponent,
     ArtistEditComponent,
+    GameComponent,
+    GameListComponent,
+    GameEditComponent,
+    GameDetailComponent,
+    GamePlayComponent,
+    GameScoreComponent,
+    SongEditComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
   providers: [],

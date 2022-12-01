@@ -1,0 +1,49 @@
+.preview-song {
+    background-image: linear-gradient(to bottom, var(--yellow), var(--light-purple));
+    border-radius: 15px;
+    max-width: 90%;
+    min-height: 85%;
+}
+
+.preview-song img {
+    max-width: 315px;
+    border-radius: 15px;
+}
+
+.preview-song-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preview-song-text {
+    text-align: start;
+    max-width: 315px;
+}
+
+.preview-song-text p {
+    padding: 0;
+    margin: 0;
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+}
+
+.icon-button {
+    border: none;
+    background-color: transparent;
+}
+
+.icon-button img {
+    max-width: 40px;
+    border-radius: 0px;
+}
+
+option:checked {
+    color: var(--pink);
+    background-color: rgba(255, 255, 255, 0);
+}
+
+option::selection {
+    background-color: rgba(255, 255, 255, 0);
+}

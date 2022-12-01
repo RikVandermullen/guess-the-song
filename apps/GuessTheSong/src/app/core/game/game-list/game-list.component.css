@@ -1,0 +1,62 @@
+.game-title {
+    display: flex;
+    width: 100%;
+    color: white;
+}
+
+.game-title-section {
+    display: flex;
+    align-items: center;
+    flex-basis: calc(100%/3);
+}
+
+.game-title-section h3,p {
+    margin: 0;
+}
+
+.game-info p {
+    font-size: 22px;
+}
+
+::ng-deep .accordion-item {
+    background-color: transparent;
+    color: white;
+}
+
+::ng-deep .accordion-button {
+    background-color: transparent !important;
+}
+
+::ng-deep .accordion-item:has(.accordion-button:disabled) {
+    background-color: var(--dark-purple);
+}
+
+::ng-deep .accordion-button:disabled {
+    max-width: 98%;
+}
+
+::ng-deep .accordion-button:disabled::after {
+    display: none;
+}
+
+::ng-deep .accordion-button:focus {
+    box-shadow: none;
+    border-bottom: 1px solid white;
+    color: white;
+}
+
+::ng-deep .accordion-button:is(.collapsed):focus {
+    border-bottom: none;
+}
+
+::ng-deep .accordion-button:not(.collapsed)::after {
+    background-image: url("../../../../assets/images/down-arrow.png");
+}
+
+::ng-deep .accordion-button::after {
+    background-image: url("../../../../assets/images/down-arrow.png");
+}
+
+::ng-deep .accordion-header {
+    color: white;
+}

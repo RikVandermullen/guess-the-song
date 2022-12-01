@@ -1,0 +1,106 @@
+<div class="container mt-5" style="min-height: 75vh;">
+    <div class="row">
+        <div class="col-10">
+            <h1>Games</h1>
+        </div>
+    </div>
+
+    <div class="filter shadow mb-5">
+        <div class="row gx-5">
+            <div class="col-4 input-wrap">
+                <label>Search</label><br />
+                <input type="text" class="form-input" placeholder="Start typing to look up games..."/>
+            </div>
+            <div class="col-2">
+                <div class="select-wrap mt-3">
+                    <label for="genres">Genres</label>
+                    <select name="genres" id="genres" style="width: 100%;">
+                        <option></option>
+                        <option *ngFor="let name of genreKeys;" [ngValue]="name"> {{name}} </option>
+                    </select>
+                </div>
+            </div>
+    
+            <div class="col-2">
+                <div class="select-wrap mt-3">
+                    <label for="periods">Period</label>
+                    <select name="periods" id="periods" style="width: 100%;">
+                        <option></option>
+                        <option>1980-1989</option>
+                        <option>1990-1999</option>
+                        <option>2000-2010</option>
+                        <option>2020+</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="button-pink mt-3" routerLink="new" routerLinkActive="true">New Game</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row gy-4 mb-5">
+        <div class="col-12">
+            <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+                <ngb-panel [disabled]="true">
+                    <ng-template ngbPanelTitle>
+                        <div class="game-title">
+                            <div class="game-title-section">
+                                <h3>Name</h3>
+                            </div>
+                            <div class="game-title-section">
+                                <h3>Made By</h3>
+                            </div>
+                            <div class="game-title-section">
+                                <h3>Made On</h3>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-panel>
+                <ngb-panel *ngFor="let game of games; let i = index;">
+                    <ng-template ngbPanelTitle>
+                        <div class="game-title">
+                            <div class="game-title-section">
+                                <h3>{{game.name}}</h3>
+                            </div>
+                            <div class="game-title-section">
+                                <p>Rik Vandermullen</p>
+                            </div>
+                            <div class="game-title-section">
+                                <p>{{game.createdOn |  date : 'dd-MM-yyyy' }}</p>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <div class="game-info">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4>Description</h4>
+                                    <p>{{game.description}}</p>
+                                    <hr>
+                                </div>
+
+                                <div class="col-6">
+                                    <p>Songs: {{getLength(game)}}</p>
+                                    <p>Genres: {{game.genres}}</p>
+                                    <p>Times Played: {{game.amountOfPlays}}</p>
+                                    <p>Private: {{game.isPrivate}}</p>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="d-flex justify-content-end align-items-end" style="min-height: 100%;">
+                                        <button type="submit" class="button-pink mb-2 me-3" routerLink="{{game._id}}/play" routerLinkActive="true">Play</button>
+                                        <button type="submit" class="button-yellow mb-2" routerLink="{{game._id}}/leaderboard" routerLinkActive="true">Leaderboard</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-panel>
+            </ngb-accordion>
+        </div>
+    </div>
+</div>

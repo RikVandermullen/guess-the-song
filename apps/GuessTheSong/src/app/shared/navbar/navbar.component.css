@@ -35,3 +35,25 @@
     transform: scaleX(1);
     transform-origin: bottom left;
 }
+
+.custom-dropdown button {
+    border: none;
+    background-color: transparent;
+    color: white;
+}
+
+.dropdown-menu {
+    background-color: var(--dark-purple);
+    border: none;
+    font-size: 24px;
+    min-width: 5rem;
+}
+
+.dropdown-menu button {
+    max-width: fit-content;
+    margin-left: 5px;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}

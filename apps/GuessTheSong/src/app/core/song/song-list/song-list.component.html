@@ -70,6 +70,7 @@
                             <td><p class="pt-3">{{song.publishedOn |  date : 'dd-MM-yyyy' }}</p></td>
                             <td>
                                 <div class="d-flex justify-content-center align-items-center">
+                                    <img src="../../../../assets/images/show.png" class="actions-icon pt-3 me-2" alt="edit song" routerLink="{{song.id}}" routerLinkActive="true">
                                     <img src="../../../../assets/images/edit.png" class="actions-icon pt-3 me-2" alt="edit song" routerLink="{{song.id}}/edit" routerLinkActive="true">
                                     <a role="button" (click)="deleteSong(i)">
                                         <img src="../../../../assets/images/trash.png" class="actions-icon pt-3" alt="delete song">
