@@ -1,7 +1,7 @@
 <div class="" id="overlay">
-    <div class="mt-5 container">
+    <div class="container">
         <div class="row">
-            <div class="col-12 mt-5">
+            <div class="col-12">
                 <div class="d-flex justify-content-center align-items-center">
                     <div class="mt-5" *ngIf="!correctGuess">
                         <h2>You didn't get it. The correct answer was:</h2>
@@ -35,7 +35,7 @@
                     <p id="guess"></p>
                 </div>
             </div>
-            <div class="col-12">
+            <div class="col-12 mb-5">
                 <div class="d-flex justify-content-center align-items-center">
                     <button *ngIf="getIndex(currentSong) + 1 != getLength()" type="button" class="button-yellow mt-3" (click)="nextSong()">Next</button>
                     <button *ngIf="getIndex(currentSong) + 1 == getLength()" type="button" class="button-yellow mt-3" routerLink="../scores/0" routerLinkActive="true">Show Score</button>
@@ -81,7 +81,7 @@
                 <input id="song-input" type="text" class="form-input" autocomplete="false" autocomplete="off" style="max-width: 350px;"/>
             </div>
         </div>
-        <div class="col-12">
+        <div class="col-12 mb-3">
             <div class="d-flex justify-content-center align-items-center">
                 <button type="button" class="button-pink mt-5" (click)="guessSong()">Guess</button>
             </div>
