@@ -26,7 +26,6 @@ import { GameDetailComponent } from './core/game/game-detail/game-detail.compone
 import { GamePlayComponent } from './core/game/game-play/game-play.component';
 import { GameScoreComponent } from './core/game/game-score/game-score.component';
 import { SongEditComponent } from './core/song/song-edit/song-edit.component';
-import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -53,7 +52,7 @@ import { HttpClientModule } from '@angular/common/http';
     GameScoreComponent,
     SongEditComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

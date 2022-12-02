@@ -11,7 +11,6 @@ export class HomepageComponent implements OnInit {
   ngOnInit(): void {}
 
   ngAfterViewInit() {
-    //Checks if element is visible
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
           if (entry.isIntersecting) {
