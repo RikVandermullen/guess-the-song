@@ -12,7 +12,7 @@ import { ArtistService } from '../artist.service';
 })
 export class ArtistDetailComponent implements OnInit {
   artistId: string | null | undefined;
-  artist: Artist = new Artist("undefined", "undefined", new Date(), "undefined", new File([""], "placeholder.jpg", {type: "image/jpg"}), []);
+  artist: Artist = new Artist("", "", new Date(), "", new File([""], "placeholder.jpg", {type: "image/jpg"}), []);
   subscription: Subscription | undefined;
   songSubscription: Subscription | undefined;
 
