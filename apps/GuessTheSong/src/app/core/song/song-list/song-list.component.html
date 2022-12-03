@@ -57,8 +57,8 @@
                             <td>
                                 <div class="d-flex justify-content-start align-items-center">
                                     <div class="song-list-cover">
-                                        <img *ngIf="song.coverImage == undefined" src="../../../../assets/images/song{{song.id}}.webp" alt="" id="{{song.id}}-cover">
-                                        <img *ngIf="song.coverImage !== undefined" src="" alt="" id="{{song.id}}-cover">
+                                        <img *ngIf="song.coverImage == undefined" src="" alt="" id="{{song._id}}-cover">
+                                        <img *ngIf="song.coverImage !== undefined" src="" alt="" id="{{song._id}}-cover">
                                     </div>
                                     <div class="song-list-info ms-2 mt-2">
                                         <h3>{{song.title}}</h3>
@@ -70,9 +70,9 @@
                             <td><p class="pt-3">{{song.publishedOn |  date : 'dd-MM-yyyy' }}</p></td>
                             <td>
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <img src="../../../../assets/images/show.png" class="actions-icon pt-3 me-2" alt="edit song" routerLink="{{song.id}}" routerLinkActive="true">
-                                    <img src="../../../../assets/images/edit.png" class="actions-icon pt-3 me-2" alt="edit song" routerLink="{{song.id}}/edit" routerLinkActive="true">
-                                    <a role="button" (click)="deleteSong(i)">
+                                    <img src="../../../../assets/images/show.png" class="actions-icon pt-3 me-2" alt="edit song" routerLink="{{song._id}}" routerLinkActive="true">
+                                    <img src="../../../../assets/images/edit.png" class="actions-icon pt-3 me-2" alt="edit song" routerLink="{{song._id}}/edit" routerLinkActive="true">
+                                    <a role="button" (click)="deleteSong(song._id!)">
                                         <img src="../../../../assets/images/trash.png" class="actions-icon pt-3" alt="delete song">
                                     </a>
                                 </div>

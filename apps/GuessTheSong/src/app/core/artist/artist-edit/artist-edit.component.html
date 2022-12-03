@@ -68,8 +68,8 @@
                                     <td>
                                         <div class="d-flex justify-content-start align-items-center">
                                             <div class="song-list-cover">
-                                                <img *ngIf="song.coverImage == undefined" src="../../../../assets/images/song{{song.id}}.webp" alt="" id="{{song.id}}-cover">
-                                                <img *ngIf="song.coverImage !== undefined" src="" alt="" id="{{song.id}}-cover">
+                                                <img *ngIf="song.coverImage == undefined" src="../../../../assets/images/song{{song._id}}.webp" alt="" id="{{song._id}}-cover">
+                                                <img *ngIf="song.coverImage !== undefined" src="" alt="" id="{{song._id}}-cover">
                                             </div>
                                             <div class="song-list-info mt-1 ms-2">
                                                 <h3>{{song.title}}</h3>
@@ -79,14 +79,14 @@
                                     </td>
                                     <td><p class="pt-3">{{song.album}}</p></td>
                                     <td><p class="pt-3">{{song.publishedOn |  date : 'dd-MM-yyyy' }}</p></td>
-                                    <td *ngIf="songIsFromArtist(song.id!)">
+                                    <td *ngIf="songIsFromArtist(song._id!)">
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <a role="button" (click)="removeSong(song.id!)">
+                                            <a role="button" (click)="removeSong(song._id!)">
                                                 <img src="../../../../assets/images/remove.png" alt="" class="actions-icon mt-3">
                                             </a>
                                         </div>
                                     </td>
-                                    <td *ngIf="!songIsFromArtist(song.id!)">
+                                    <td *ngIf="!songIsFromArtist(song._id!)">
                                         <div class="d-flex justify-content-center align-items-center">
                                             <a role="button" (click)="addSong(song)">
                                                 <img src="../../../../assets/images/add.png" alt="" class="actions-icon mt-3">

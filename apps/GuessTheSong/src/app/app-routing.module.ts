@@ -27,7 +27,7 @@ const routes: Routes = [
   ]},
   {path: "artists", pathMatch: "full", component: ArtistListComponent},
   {path: "artists/new", pathMatch: "full", component: ArtistEditComponent},
-  {path: "artists/:id/details", pathMatch: "full", component: ArtistDetailComponent},
+  {path: "artists/:id", pathMatch: "full", component: ArtistDetailComponent},
   {path: "artists/:id/edit", pathMatch: "full", component: ArtistEditComponent},
   {path: "games", pathMatch: "full", component: GameListComponent},
   {path: "games/new", pathMatch: "full", component: GameEditComponent},

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Song } from '../../song/song.model';
 import { Artist } from '../artist.model';
 import { ArtistService } from '../artist.service';
 
@@ -9,23 +11,56 @@ import { ArtistService } from '../artist.service';
 })
 export class ArtistListComponent implements OnInit {
   artists: Artist[] | undefined;
+  subscription: Subscription | undefined;
 
   constructor(private artistService: ArtistService) {}
 
   ngOnInit(): void {
-    this.artists = this.artistService.getAllArtists();
-    this.artists.forEach(artist => {
-      if(artist.image !== undefined) {
-        this.setSongUrl(artist);
-      }
+    // this.artists = this.artistService.getAllArtists();
+    // this.artists.forEach(artist => {
+    //   if(artist.image !== undefined) {
+    //     this.setSongUrl(artist);
+    //   }
+    // });
+    let foundArtists: Artist[] = [];
+    this.subscription = this.artistService.getAllArtists().subscribe((artists) => {
+      artists.forEach(artist => {        
+        let image = this.dataURLtoFile(artist.image!, `${artist._id}.jpg`);
+        // artist.songs.forEach(song => {
+        //   let image = this.dataURLtoFile(song.coverImage!, `${song._id}.jpg`);
+        //   let newSong: Song = new Song(song._id, song.title, song.publishedOn, song.songLink, song.artist, song.album, image, song.genres)     
+        //   songs.push(newSong);
+        // });
+        let foundArtist: Artist = new Artist(artist._id, artist.name, artist.birthDate, artist.description, image, []);
+        foundArtists.push(foundArtist);
+        console.log(foundArtist);
+        
+        this.setSongUrl(foundArtist);
+      });
     });
+    this.artists = foundArtists;
   }
 
   setSongUrl(artist: Artist) {
     var reader = new FileReader();
     reader.readAsDataURL(artist.image!);
     reader.onload = (event) => {
-      document.getElementById(`${artist.id}-cover`)!.setAttribute("src", event!.target!.result!.toString());
+      document.getElementById(`${artist._id}-cover`)!.setAttribute("src", event!.target!.result!.toString());
     }
   }
+
+  dataURLtoFile(dataurl: string, filename: string) {
+		var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)![1], bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+		while(n--){
+			u8arr[n] = bstr.charCodeAt(n);
+		}
+		return new File([u8arr], filename, {type:mime});
+	}
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+        console.log("unsubscribing");
+        this.subscription.unsubscribe();
+    }
+}
 }

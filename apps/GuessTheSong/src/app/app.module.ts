@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -52,7 +53,7 @@ import { SongEditComponent } from './core/song/song-edit/song-edit.component';
     GameScoreComponent,
     SongEditComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })

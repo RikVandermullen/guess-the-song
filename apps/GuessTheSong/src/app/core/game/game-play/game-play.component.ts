@@ -41,7 +41,7 @@ export class GamePlayComponent implements OnInit {
     if (this.currentSong.coverImage instanceof File) {
       this.setSongUrl(this.currentSong);
     } else {        
-      document.getElementById('cover-preview')!.setAttribute("src", `../../../../../assets/images/song${this.currentSong.id}.webp`);
+      document.getElementById('cover-preview')!.setAttribute("src", `../../../../../assets/images/song${this.currentSong._id}.webp`);
     }
   }
 
@@ -87,7 +87,7 @@ export class GamePlayComponent implements OnInit {
       this.correctGuess = false;
       document.getElementById("guess")!.textContent = "You guessed: " + title.value;
     }
-	document.getElementById('cover-answer')!.setAttribute("src", `../../../../../assets/images/song${this.currentSong.id}.webp`);   
+	document.getElementById('cover-answer')!.setAttribute("src", `../../../../../assets/images/song${this.currentSong._id}.webp`);   
     let audioPlayer = <HTMLVideoElement>document.getElementById('song-preview');
     audioPlayer.pause();
     clearInterval(this.interval);
@@ -100,7 +100,7 @@ export class GamePlayComponent implements OnInit {
     this.timeLeft = 30;
     document.getElementById("timer-seconds")!.textContent = this.timeLeft.toString() + "s";
     document.getElementById("overlay")!.style.display = "none";
-    document.getElementById('cover-preview')!.setAttribute("src", `../../../../../assets/images/song${this.currentSong.id}.webp`);
+    document.getElementById('cover-preview')!.setAttribute("src", `../../../../../assets/images/song${this.currentSong._id}.webp`);
     this.interval = this.updateProgressBar();
   }
 

@@ -47,7 +47,7 @@ export class GameEditComponent implements OnInit {
         }
       }
     });
-    this.songs = this.songService.getAllSongs();
+    // this.songs = this.songService.getAllSongs();
   }
 
   onSubmit() {
@@ -60,7 +60,7 @@ export class GameEditComponent implements OnInit {
   }
 
   songIsInGame(id: string) {
-		const songs = this.game.songs.filter((song: Song) => song.id === id);
+		const songs = this.game.songs.filter((song: Song) => song._id === id);
 		if (songs.length > 0) return true;
 		return false;
 	}
@@ -70,7 +70,7 @@ export class GameEditComponent implements OnInit {
 	}
 
 	removeSong(id: string) {
-		const song = this.game.songs.filter((song: Song) => song.id === id)[0]
+		const song = this.game.songs.filter((song: Song) => song._id === id)[0]
 		const index = this.game.songs.indexOf(song);
     	this.game.songs.splice(index, 1);
 	}

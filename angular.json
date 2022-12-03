@@ -2,6 +2,8 @@
   "version": 2,
   "projects": {
     "GuessTheSong": "apps/GuessTheSong",
+    "data": "libs/data",
+    "data-api": "apps/data-api",
     "guess-the-song-e2e": "apps/GuessTheSong-e2e"
   }
 }
