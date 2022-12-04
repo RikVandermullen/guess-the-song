@@ -89,6 +89,7 @@ export class GamePlayComponent implements OnInit {
 			document.getElementById("overlay")!.style.display = "block";
 		if (title!.value.toLowerCase() == this.currentSong.title!.toLowerCase()) {
 			this.correctGuess = true;
+			document.getElementById("guess")!.style.display = "none";
 		} else {
 		this.correctGuess = false;
 		document.getElementById("guess")!.textContent = "You guessed: " + title.value;

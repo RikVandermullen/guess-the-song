@@ -16,25 +16,12 @@ export class ArtistListComponent implements OnInit {
   constructor(private artistService: ArtistService) {}
 
   ngOnInit(): void {
-    // this.artists = this.artistService.getAllArtists();
-    // this.artists.forEach(artist => {
-    //   if(artist.image !== undefined) {
-    //     this.setSongUrl(artist);
-    //   }
-    // });
     let foundArtists: Artist[] = [];
     this.subscription = this.artistService.getAllArtists().subscribe((artists) => {
       artists.forEach(artist => {        
         let image = this.dataURLtoFile(artist.image!, `${artist._id}.jpg`);
-        // artist.songs.forEach(song => {
-        //   let image = this.dataURLtoFile(song.coverImage!, `${song._id}.jpg`);
-        //   let newSong: Song = new Song(song._id, song.title, song.publishedOn, song.songLink, song.artist, song.album, image, song.genres)     
-        //   songs.push(newSong);
-        // });
         let foundArtist: Artist = new Artist(artist._id, artist.name, artist.birthDate, artist.description, image, []);
-        foundArtists.push(foundArtist);
-        console.log(foundArtist);
-        
+        foundArtists.push(foundArtist);        
         this.setSongUrl(foundArtist);
       });
     });
