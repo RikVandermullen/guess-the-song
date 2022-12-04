@@ -1,141 +1,84 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Genre } from '../song/song.model';
-import { Game } from './game.model';
+import { map, Observable, tap } from 'rxjs';
+import { Genre, Song } from '../song/song.model';
+import { Game } from '../../../../../../libs/data/src/lib/game.model';
+import { ISong } from '../../../../../../libs/data/src/lib/song.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  games: Game[] = [
-    {
-      _id: "0",
-      name: "Guess the songs 1",
-      description: "Guess the game by the lyrics",
-      amountOfPlays: 0,
-      isPrivate: false,
-      createdOn: new Date(),
-      genres: [Genre.HipHop, Genre.Rap],
-      songs: [
-        {
-          _id: "0",
-          title: "No Heart",
-          publishedOn: new Date(2016, 7, 15),
-          songLink: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/04/64/83/04648318-74e5-da16-a61d-91f40bf9a388/mzaf_17315947898076562646.plus.aac.ep.m4a",
-          artist: "21 Savage",
-          album: "Savage Mode",
-          coverImage: undefined,
-          genres: [Genre.HipHop, Genre.Rap]
-        },
-        {
-          _id: "1",
-          title: "Money Trees",
-          publishedOn: new Date(2012, 10, 22),
-          songLink: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/ea/0c/2e/ea0c2e08-8e20-07f8-8184-c20699da5e2d/mzaf_8749001506776919871.plus.aac.ep.m4a",
-          artist: "Kendrick Lamar",
-          album: "good kid, m.A.A.d city",
-          coverImage: undefined,
-          genres: [Genre.HipHop, Genre.Rap]
-        },
-        {
-          _id: "3",
-          title: "Too Comfortable",
-          publishedOn: new Date(2020, 5, 15),
-          songLink: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/da/ca/0a/daca0a77-7d70-044f-fc28-bbe248e8ef49/mzaf_4514784333551546968.plus.aac.ep.m4a",
-          artist: "Future",
-          album: "High Of Life",
-          coverImage: undefined,
-          genres: [Genre.HipHop, Genre.Rap]
-        },
-        {
-          _id: "4",
-          title: "Final Fantasy",
-          publishedOn: new Date(2022, 7, 26),
-          songLink: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/a0/0e/26/a00e262a-b5ad-e8c2-1300-2dfda89b6aa3/mzaf_16490126249266029880.plus.aac.ep.m4a",
-          artist: "Lil Uzi Vert",
-          album: "RED & WHITE",
-          coverImage: undefined,
-          genres: [Genre.HipHop, Genre.Rap]
-        },
-        {
-          _id: "5",
-          title: "love.",
-          publishedOn: new Date(2022, 7, 8),
-          songLink: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/f1/35/af/f135afe2-27ca-d3a6-05c3-4a3b584bb7ae/mzaf_8556672041066805377.plus.aac.ep.m4a",
-          artist: "Kid Cudi",
-          album: "The Boy Who Flew To The Moon, Vol. 1",
-          coverImage: undefined,
-          genres: [Genre.HipHop, Genre.Rap]
-        }
-      ]
-    },
-    {
-      _id: "1",
-      name: "Guess the songs 2",
-      description: "Guess the game by the lyrics",
-      amountOfPlays: 10,
-      isPrivate: false,
-      createdOn: new Date(),
-      genres: [Genre.HipHop, Genre.Rap],
-      songs: [
-        {
-          _id: "3",
-          title: "Too Comfortable",
-          publishedOn: new Date(2020, 5, 15),
-          songLink: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/da/ca/0a/daca0a77-7d70-044f-fc28-bbe248e8ef49/mzaf_4514784333551546968.plus.aac.ep.m4a",
-          artist: "Future",
-          album: "High Of Life",
-          coverImage: undefined,
-          genres: [Genre.HipHop, Genre.Rap]
-        },
-        {
-          _id: "4",
-          title: "Final Fantasy",
-          publishedOn: new Date(2022, 7, 26),
-          songLink: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/a0/0e/26/a00e262a-b5ad-e8c2-1300-2dfda89b6aa3/mzaf_16490126249266029880.plus.aac.ep.m4a",
-          artist: "Lil Uzi Vert",
-          album: "RED & WHITE",
-          coverImage: undefined,
-          genres: [Genre.HipHop, Genre.Rap]
-        },
-        {
-          _id: "5",
-          title: "love.",
-          publishedOn: new Date(2022, 7, 8),
-          songLink: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/f1/35/af/f135afe2-27ca-d3a6-05c3-4a3b584bb7ae/mzaf_8556672041066805377.plus.aac.ep.m4a",
-          artist: "Kid Cudi",
-          album: "The Boy Who Flew To The Moon, Vol. 1",
-          coverImage: undefined,
-          genres: [Genre.HipHop, Genre.Rap]
-        }
-      ]
-    }
-  ]
+  
+  constructor(private http: HttpClient) { }
 
-  constructor() { }
-
-  getAllGames() {
-    return this.games;
+  getAllGames(): Observable<Game[]> {
+    const url = "/api/games";
+		console.log("get: " + url);
+	
+		return this.http.get<Game[]>(url).pipe(
+        map((response: Game[]) => response),
+        tap((games: Game[]) => {
+            return games;
+        })
+    );
   }
 
-  getGameById(id: string) {
-    return this.games.filter((game: Game) => game._id === id)[0];
+  getGameById(id: string) : Observable<Game> {
+    const url = "/api/games/" + id;
+		console.log("get: " + url);
+  
+    return this.http.get<Game>(url).pipe(
+      map((response: Game) => response),
+      tap((game: Game) => {
+          return game;
+      })
+    );
   }
 
-  getLength(): number {
-    return this.games.length;
+  createGame(name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: ISong[], isPrivate: boolean, madeBy: string): Observable<Game> {
+    const url = "/api/games";
+		console.log("post: " + url);
+
+    let iSongs: ISong[] = [];
+    songs.forEach(song => {
+      iSongs.push(new ISong(song._id!, song.title!, song.publishedOn!, song.songLink!, song.artist!, song.album!, song.coverImage, song.genres!));
+    });
+
+    let newGame = new Game("", name, amountOfPlays, createdOn, description, genres, iSongs, isPrivate, madeBy);
+    
+		return this.http.post<Game>(url, newGame).pipe(
+        map((response: Game) => response),
+        tap((game: Game) => {
+            return game;
+        })
+    );
   }
 
-  createGame(game: Game) {
-    this.games.push(game);
+  updateGame(id: string, name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: ISong[], isPrivate: boolean, madeBy: string): Observable<Game> {
+    const url = "/api/games/" + id;
+		console.log("put: " + url);
+
+    let iSongs: ISong[] = [];
+    songs.forEach(song => {
+      iSongs.push(new ISong(song._id!, song.title!, song.publishedOn!, song.songLink!, song.artist!, song.album!, song.coverImage, song.genres!));
+    });
+
+    let updateGame = new Game(id, name, amountOfPlays, createdOn, description, genres, iSongs, isPrivate, madeBy);
+    
+		return this.http.put<Game>(url, updateGame).pipe(
+        map((response: Game) => response),
+        tap((game: Game) => {
+            return game;
+        })
+    );
   }
 
-  updateGame(game: Game): void {
-    const index = this.games.indexOf(this.getGameById(game._id!));
-    this.games.splice(index, 1, game);       
-    console.log(this.games);
-  }
+  deletegame(game: Game): void {
+    const url = "/api/games/" + game._id!;
+		console.log("delete: " + url);
 
-  deletegame(index: number): void {
-    this.games.splice(index, 1);    
+		this.http.delete<Game>(url).subscribe();   
+   
   }
 }

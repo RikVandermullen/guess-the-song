@@ -13,23 +13,30 @@ import { ArtistService } from './artist/artist.service';
 import { ArtistController } from './artist/artist.controller';
 import { Artist, ArtistSchema } from './artist/artist.schema';
 
+import { GameService } from './game/game.service';
+import { GameController } from './game/game.controller';
+import { Game, GameSchema } from './game/game.schema';
+
 @Module({
     imports: [
         MongooseModule.forFeature([
             { name: User.name, schema: UserSchema},
             { name: Song.name, schema: SongSchema},
             { name: Artist.name, schema: ArtistSchema},
+            { name: Game.name, schema: GameSchema},
         ])
     ],
     controllers: [
         UserController,
         SongController,
         ArtistController,
+        GameController,
     ],
     providers: [
         UserService,
         SongService,
         ArtistService,
+        GameService,
     ]
 })
 

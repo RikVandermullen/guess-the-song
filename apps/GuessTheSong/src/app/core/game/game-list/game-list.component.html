@@ -11,7 +11,7 @@
                 <label>Search</label><br />
                 <input type="text" class="form-input" placeholder="Start typing to look up games..."/>
             </div>
-            <div class="col-2">
+            <div class="col-3">
                 <div class="select-wrap mt-3">
                     <label for="genres">Genres</label>
                     <select name="genres" id="genres" style="width: 100%;">
@@ -34,8 +34,8 @@
                 </div>
             </div>
 
-            <div class="col-4">
-                <div class="d-flex justify-content-end">
+            <div class="col-3">
+                <div class="d-flex justify-content-end align-items-start">
                     <button type="submit" class="button-pink mt-3" routerLink="new" routerLinkActive="true">New Game</button>
                 </div>
             </div>
@@ -92,6 +92,7 @@
 
                                 <div class="col-6">
                                     <div class="d-flex justify-content-end align-items-end" style="min-height: 100%;">
+                                        <button type="submit" class="button-purple mb-2 me-3" routerLink="{{game._id}}/edit" routerLinkActive="true">Edit</button>
                                         <button type="submit" class="button-pink mb-2 me-3" routerLink="{{game._id}}/play" routerLinkActive="true">Play</button>
                                         <button type="submit" class="button-yellow mb-2" routerLink="{{game._id}}/leaderboard" routerLinkActive="true">Leaderboard</button>
                                     </div>

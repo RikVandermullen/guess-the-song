@@ -1,4 +1,4 @@
-import { Genre, Song } from "../song/song.model";
+import { Genre, ISong } from "./song.interface";
 
 export class Game {
     _id: string | undefined;
@@ -7,11 +7,11 @@ export class Game {
     createdOn: Date | undefined;
     description: string | undefined;
     genres: Genre[] = [];
-    songs: Song[] = [];
+    songs: ISong[] = [];
     isPrivate: boolean | undefined;
     madeBy: string | undefined;
 
-    constructor(_id: string, name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: Song[], isPrivate: boolean, madeBy: string) {
+    constructor(_id: string, name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: ISong[], isPrivate: boolean, madeBy: string) {
         this._id = _id;
         this.name = name;
         this.amountOfPlays = amountOfPlays;

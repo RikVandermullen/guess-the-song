@@ -7,7 +7,7 @@
                 <label>Search</label><br />
                 <input type="text" class="form-input" placeholder="Start typing to look up songs..."/>
             </div>
-            <div class="col-2">
+            <div class="col-3">
                 <div class="select-wrap mt-3">
                     <label for="genres">Genres</label>
                     <select name="genres" id="genres" style="width: 100%;">
@@ -30,8 +30,8 @@
                 </div>
             </div>
 
-            <div *ngIf="loggedIn" class="col-4">
-                <div class="d-flex justify-content-end">
+            <div *ngIf="loggedIn" class="col-3">
+                <div class="d-flex justify-content-end align-items-start">
                     <button type="submit" class="button-pink mt-3" routerLink="new" routerLinkActive="true">New Song</button>
                 </div>
             </div>

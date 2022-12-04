@@ -87,13 +87,13 @@ p {
 
 .button-purple {
     border-radius: 12px;
-    background-color: var(--dark-purple);
+    background-color: var(--light-purple);
     min-height: 56px;
     min-width: 195px;
     border: none;
     color: white;
     font-size: 20px;
-    box-shadow: #954DAC 0px 5px;
+    box-shadow: #793c8d 0px 5px;
     transition: 0.3s ease-out;
 }
 
