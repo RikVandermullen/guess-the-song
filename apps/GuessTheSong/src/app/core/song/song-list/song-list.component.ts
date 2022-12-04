@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../auth/auth.service';
 import { Genre, Song } from '../song.model';
 import { SongService } from '../song.service';
 
@@ -11,29 +12,29 @@ import { SongService } from '../song.service';
 })
 export class SongListComponent implements OnInit {
 	songs: Song[] | undefined;
-	page = 0;
-	pageSize = 10;
-	collectionSize = 0;
 	subscription: Subscription | undefined;
+	loggedIn: boolean = true;
 
 	Genre = Genre;
 	genreKeys : string[] = [];
 
-	constructor(private route: ActivatedRoute, private router: Router, private songService: SongService) {
+	constructor(private route: ActivatedRoute, private router: Router, private songService: SongService, private authService: AuthService) {
 		this.genreKeys = Object.keys(this.Genre);
 	}
 
 	ngOnInit(): void {
-		this.subscription = this.songService.getAllSongs().subscribe((songs) => {     
-		this.collectionSize = songs.length;
-		let songsToEdit: Song[] = [];
-		songs.forEach((song) => {
-			let image = this.dataURLtoFile(song.coverImage!, `${song._id}.jpg`);
-			let newSong: Song = new Song(song._id, song.title, song.publishedOn, song.songLink, song.artist, song.album, image, song.genres)     
-			songsToEdit.push(newSong);
-			this.setSongUrl(newSong);
-		}); 
-		this.songs = songsToEdit;
+			this.subscription = this.songService.getAllSongs().subscribe((songs) => {     
+			let songsToEdit: Song[] = [];
+			songs.forEach((song) => {
+				let image = this.dataURLtoFile(song.coverImage!, `${song._id}.jpg`);
+				let newSong: Song = new Song(song._id, song.title, song.publishedOn, song.songLink, song.artist, song.album, image, song.genres)     
+				songsToEdit.push(newSong);
+				this.setSongUrl(newSong);
+			}); 
+			this.songs = songsToEdit;
+			if (this.authService.currentUser$.value === undefined) {
+				this.loggedIn = false;
+			}		
 		});   
 	}
 

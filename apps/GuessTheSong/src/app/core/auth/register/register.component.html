@@ -1,0 +1,51 @@
+<form #userCreateForm="ngForm" name="form" (ngSubmit)="onSubmit()" novalidate>
+    <div class="container" style="min-height: 80vh;">
+        <div class="row mt-2 gy-5">
+            <div class="col-6 input-wrap">
+                <label>Name</label><br />
+                <input type="text" class="form-input" name="name" [(ngModel)]="user!.name" #name="ngModel" minlength="3" required [ngClass]="{'is-invalid': name.invalid && name.touched}"/>
+                <div *ngIf="name.invalid && name.touched" class="invalid-feedback">
+                    <div *ngIf="name.errors!['required']">
+                        Name is required
+                    </div>
+                    <div *ngIf="name.errors!['minlength']">
+                        Name must be 3 chars long.
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-6 input-wrap">
+                <label>Email address</label><br />
+                <input type="email" class="form-input" name="emailAddress" [(ngModel)]="user!.emailAddress" #emailAddress="ngModel" minlength="3" required [ngClass]="{'is-invalid': emailAddress.invalid && emailAddress.touched}"/>
+                <div *ngIf="emailAddress.invalid && emailAddress.touched" class="invalid-feedback">
+                    <div *ngIf="emailAddress.errors!['required']">
+                        Email Address is required
+                    </div>
+                    <div *ngIf="emailAddress.errors!['minlength']">
+                        Email Address must be 3 chars long.
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-6 input-wrap">
+                <label>Phone number</label><br />
+                <input type="text" class="form-input" name="phoneNumber" [(ngModel)]="user!.phoneNumber" #phoneNumber="ngModel" minlength="3" required [ngClass]="{'is-invalid': phoneNumber.invalid && phoneNumber.touched}"/>
+            </div>
+    
+            <div class="col-6 input-wrap">
+                <label>Birthday</label><br />
+                <input type="date" id="datepicker" class="form-input" name="birthDate" [ngModel]="user.birthDate | date:'yyyy-MM-dd'" #birthDate="ngModel" (ngModelChange)="user.birthDate = $event" required [ngClass]="{'is-invalid': birthDate.invalid && birthDate.touched}"/>
+            </div>
+    
+            <div class="col-6 input-wrap">
+                <label>Password</label><br />
+                <input type="password" class="form-input" name="password" [(ngModel)]="user!.password" #password="ngModel" minlength="3" required [ngClass]="{'is-invalid': password.invalid && password.touched}"/>
+            </div>
+    
+            <div class="col-12 d-flex justify-content-start align-items-start mb-5">
+                <button type="submit" class="button-pink mt-2 me-3" [disabled]="!userCreateForm.valid">Create</button>
+                <button type="button" class="button-yellow mt-2" routerLink="../login" routerLinkActive="true">Login</button>
+            </div>
+        </div>
+    </div>
+</form>

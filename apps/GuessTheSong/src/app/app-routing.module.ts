@@ -14,16 +14,21 @@ import { GameListComponent } from './core/game/game-list/game-list.component';
 import { GameEditComponent } from './core/game/game-edit/game-edit.component';
 import { GamePlayComponent } from './core/game/game-play/game-play.component';
 import { GameScoreComponent } from './core/game/game-score/game-score.component';
+import { LoginComponent } from './core/auth/login/login.component';
+import { RegisterComponent } from './core/auth/register/register.component';
+import { AuthGuard } from './core/auth/auth.guard';
 
 const routes: Routes = [
   {path: "", pathMatch: "full", component: HomepageComponent},
+  {path: "login", pathMatch: "full", component: LoginComponent},
+  {path: "register", pathMatch: "full", component: RegisterComponent},
   {path: "about", pathMatch: "full", component: AboutpageComponent},
-  {path: "songs/new", pathMatch: "full", component: SongEditComponent},
+  {path: "songs/new", pathMatch: "full", component: SongEditComponent, canActivate: [AuthGuard]},
   {path: "songs", pathMatch: "full", component: SongListComponent},
   {path: "songs/:id", pathMatch: "full", component: SongDetailComponent},
-  {path: "songs/:id/edit", pathMatch: "full", component: SongEditComponent},
-  {path: "profile/:id", pathMatch: "full", component: ProfilepageComponent, children: [
-    {path: "", component: UserDetailsComponent}
+  {path: "songs/:id/edit", pathMatch: "full", component: SongEditComponent, canActivate: [AuthGuard]},
+  {path: "profile", pathMatch: "full", component: ProfilepageComponent, canActivate: [AuthGuard], children: [
+    {path: "", component: UserDetailsComponent, canActivate: [AuthGuard]}
   ]},
   {path: "artists", pathMatch: "full", component: ArtistListComponent},
   {path: "artists/new", pathMatch: "full", component: ArtistEditComponent},

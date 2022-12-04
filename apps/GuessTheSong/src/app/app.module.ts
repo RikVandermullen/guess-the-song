@@ -27,6 +27,9 @@ import { GameDetailComponent } from './core/game/game-detail/game-detail.compone
 import { GamePlayComponent } from './core/game/game-play/game-play.component';
 import { GameScoreComponent } from './core/game/game-score/game-score.component';
 import { SongEditComponent } from './core/song/song-edit/song-edit.component';
+import { LoginComponent } from './core/auth/login/login.component';
+import { RegisterComponent } from './core/auth/register/register.component';
+import { httpInterceptorProviders } from './core/auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -52,9 +55,19 @@ import { SongEditComponent } from './core/song/song-edit/song-edit.component';
     GamePlayComponent,
     GameScoreComponent,
     SongEditComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule, HttpClientModule],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgbModule,
+    FormsModule,
+    HttpClientModule,
+  ],
+  providers: [
+    httpInterceptorProviders
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
