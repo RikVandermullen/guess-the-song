@@ -17,7 +17,7 @@ export class UserDetailsComponent implements OnInit {
 	userExists: boolean = false;
 	subscription: Subscription | undefined;
 
-	constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) {}
+	constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private authService: AuthService) {}
 
 	ngOnInit(): void {		
 		const currentUser = localStorage.getItem('currentuser');
@@ -37,6 +37,10 @@ export class UserDetailsComponent implements OnInit {
 			this.subscription = this.userService.updateUser(this.user!).subscribe();		
 		} 
 		this.router.navigate([`/profile`]);
+	}
+
+	logout(): void {
+		this.authService.logout();
 	}
 
 	ngOnDestroy(): void {

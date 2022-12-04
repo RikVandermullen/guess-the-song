@@ -34,13 +34,13 @@
                 <li class="nav-item">
                     <a class="nav-link hover-underline-animation" href="#" routerLink="about" routerLinkActive="true">About</a>
                 </li>
-                <li class="nav-item active">
+                <li *ngIf="loggedIn" class="nav-item active">
                     <a class="nav-link hover-underline-animation" href="#" routerLink="profile" routerLinkActive="true">Profile</a>
                 </li>
-				<li class="nav-item active">
+				<li *ngIf="!loggedIn" class="nav-item active">
                     <a class="nav-link hover-underline-animation" href="#" routerLink="login" routerLinkActive="true">Login</a>
                 </li>
-				<li class="nav-item active">
+				<li *ngIf="!loggedIn" class="nav-item active">
                     <a class="nav-link hover-underline-animation" href="#" routerLink="register" routerLinkActive="true">Register</a>
                 </li>
 			</ul>

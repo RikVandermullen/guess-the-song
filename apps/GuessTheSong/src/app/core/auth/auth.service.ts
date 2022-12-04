@@ -46,7 +46,7 @@ export class AuthService {
         map((token: Token) => {
           this.saveUserToLocalStorage(token);
           this.currentUser$.next(token); 
-          this.router.navigate(['/']);         
+          this.router.navigate(['/profile']);         
           return token;
         }),
         catchError((error) => {
@@ -56,6 +56,12 @@ export class AuthService {
           return of(undefined);
         })
       );
+  }
+
+  logout(): void {
+      localStorage.removeItem(this.CURRENT_USER);
+      this.currentUser$.next(undefined);
+      this.router.navigate(['/'])
   }
 
   register(userData: UserRegistration): Observable<string | undefined> {
