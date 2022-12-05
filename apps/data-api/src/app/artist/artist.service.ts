@@ -23,8 +23,8 @@ export class ArtistService {
     }
 
     async getArtistSongs(artistId: string) : Promise<ISong[]> {
-        let artist = await this.getArtistById(artistId);
-        let foundSongs: ISong[] = await this.songModel.find({_id: {$in: artist!.songs}});
+        const artist = await this.getArtistById(artistId);
+        const foundSongs: ISong[] = await this.songModel.find({_id: {$in: artist!.songs}});
         return foundSongs;
     }
 
@@ -32,7 +32,7 @@ export class ArtistService {
         const artist = new this.artistModel({name, birthDate, description, image, songs});
         await artist.save();
 
-        let foundSongs: ISong[] = await this.songModel.find({_id: {$in: artist.songs}});
+        const foundSongs: ISong[] = await this.songModel.find({_id: {$in: artist.songs}});
         const artistToReturn = new IArtist(artist._id, artist.name!, artist.birthDate!, artist.description!, artist.image!, foundSongs);
         return artistToReturn;
     }
@@ -49,8 +49,8 @@ export class ArtistService {
         if (result.modifiedCount == 0) {
             throw new Error('not accepted');
         } else {
-            let artist = await this.getArtistById(id);
-            let foundSongs: ISong[] = await this.songModel.find({_id: {$in: artist!.songs}});
+            const artist = await this.getArtistById(id);
+            const foundSongs: ISong[] = await this.songModel.find({_id: {$in: artist!.songs}});
             const artistToReturn = new IArtist(artist!._id, artist!.name!, artist!.birthDate!, artist!.description!, artist!.image!, foundSongs);
             return artistToReturn;
         }

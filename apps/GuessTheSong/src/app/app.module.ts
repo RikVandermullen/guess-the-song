@@ -65,9 +65,7 @@ import { httpInterceptorProviders } from './core/auth/auth.interceptor';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [
-    httpInterceptorProviders
-  ],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
