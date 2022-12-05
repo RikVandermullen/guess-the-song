@@ -51,4 +51,15 @@ export class GameService {
             return <Game>game;
         }
     }
+
+    async updatePlays(id: string, amountOfPlays: number) : Promise<boolean> { 
+             
+        const result = await this.gameModel.updateOne({_id: id}, {$set: {amountOfPlays: amountOfPlays}});
+        
+        if (result.modifiedCount == 0) {
+            throw new Error('not accepted');
+        } else {
+            return true;
+        }
+    }
 }

@@ -81,4 +81,12 @@ export class GameService {
 		this.http.delete<Game>(url).subscribe();   
    
   }
+
+  addPlayToGame(gameId: string, amountOfPlays: number): void {
+    const url = "/api/games/" + gameId! + "/plays";
+    console.log("put: " + url);
+    let body = JSON.parse(`{"result": "${amountOfPlays}"}`);
+    
+    this.http.put<Game>(url, body).subscribe();
+  }
 }

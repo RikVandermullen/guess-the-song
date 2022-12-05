@@ -16,7 +16,7 @@ export class GameController {
     }
 
     @Get(':id')
-    async getGameById(@Param('id') id: string): Promise<Game | null> {
+    async getGameById(@Param('id') id: string): Promise<Game | null> {       
         return this.gameService.getGameById(id);
     }
 
@@ -38,6 +38,11 @@ export class GameController {
     @Put(':id')
     async updateGame(@Param('id') id: string, @Body() game: Game) : Promise<Game> {
         return this.gameService.updateGame(id, game.name!, game.amountOfPlays!, game.createdOn!, game.description!, game.genres!, game.songs!, game.isPrivate!, game.madeBy!);
+    }
+
+    @Put(':id/plays')
+    async updatePlays(@Param('id') id: string, @Body() amountOfPlays: any) : Promise<boolean> {
+        return this.gameService.updatePlays(id, parseInt(amountOfPlays['result']));
     }
 
 }

@@ -3,16 +3,16 @@
         <div class="col-12">
             <div class="d-flex justify-content-center align-items-center">
                 <div class="score-text">
-                    <h3>Well done <span class="fancy">Rik Vandermullen!</span></h3>
+                    <h3>Well done <span class="fancy">{{user.name!}}!</span></h3>
                     <div class="row mt-5">
                         <div class="col-4">
                             <h3>Your final score is:</h3>
-                            <h1>500</h1>
+                            <h1>{{score.finalScore!}}</h1>
                         </div>
                         <div class="col-4" id="confetti"></div>
                         <div class="col-4">
                             <h3 class="mt-2">Leaderboard place:</h3>
-                            <h1>50</h1>
+                            <h1>{{leaderboardPlace!}}</h1>
                         </div>
                     </div>
 
@@ -30,35 +30,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr *ngFor="let score of scores; let i = index;">
                                             <th scope="row"></th>
-                                            <td style="color: #F58F29">1</td>
-                                            <td>Rik1</td>
-                                            <td>10000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td style="color: #C0C0C0">2</td>
-                                            <td>Rik2</td>
-                                            <td>5000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td style="color: #CD7F32">3</td>
-                                            <td>Rik3</td>
-                                            <td>2500</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td>4</td>
-                                            <td>Rik4</td>
-                                            <td>2000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td>5</td>
-                                            <td>Rik5</td>
-                                            <td>1000</td>
+                                            <td style="color: #F58F29">{{i + 1}}</td>
+                                            <td>{{score.user!.name!}}</td>
+                                            <td>{{score.finalScore!}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -67,7 +43,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center align-items-center">
-                        <button type="button" class="button-pink mt-4 me-3" routerLink="../../../../games" routerLinkActive="true">Other Games</button>
+                        <button type="button" class="button-pink mt-4 me-3" (click)="routeToGames()">Other Games</button>
                         <button type="button" class="button-yellow mt-4">Full Leaderboard</button>
                     </div>
                 </div>

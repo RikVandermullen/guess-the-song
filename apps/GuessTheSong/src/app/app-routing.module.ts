@@ -38,7 +38,7 @@ const routes: Routes = [
   {path: "games/new", pathMatch: "full", component: GameEditComponent},
   {path: "games/:id/edit", pathMatch: "full", component: GameEditComponent},
   {path: "games/:id/play", pathMatch: "full", component: GamePlayComponent},
-  {path: "games/:id/scores/:userId", pathMatch: "full", component: GameScoreComponent},
+  {path: "games/:id/score", pathMatch: "full", component: GameScoreComponent},
 ];
 
 @NgModule({

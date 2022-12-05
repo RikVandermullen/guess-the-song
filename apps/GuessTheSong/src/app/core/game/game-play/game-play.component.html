@@ -17,13 +17,13 @@
                         <div class="col-12 d-flex justify-content-center align-items-center">
                             <img class="mt-5" src="" id="answer-preview"/>
                         </div>
-                        <div class="col-12 preview-song-info mt-3 mb-3">
+                        <div *ngIf="currentSong" class="col-12 preview-song-info mt-3 mb-3">
                             <div class="preview-song-text">
-                                <p>Title: {{currentSong.title}}</p>
-                                <p>Artist: {{currentSong.artist}}</p>
-                                <p>Album: {{currentSong.album}}</p>
-                                <p>Date Published: {{currentSong.publishedOn |  date : 'dd-MM-yyyy' }}</p>
-                                <p>Genres: {{currentSong.genres}}</p>
+                                <p>Title: {{currentSong.title!}}</p>
+                                <p>Artist: {{currentSong.artist!}}</p>
+                                <p>Album: {{currentSong.album!}}</p>
+                                <p>Date Published: {{currentSong.publishedOn! |  date : 'dd-MM-yyyy' }}</p>
+                                <p>Genres: {{currentSong.genres!}}</p>
                             </div>
                         </div>
                     </div> 
@@ -38,7 +38,7 @@
             <div class="col-12 mb-5">
                 <div class="d-flex justify-content-center align-items-center">
                     <button *ngIf="getIndex(currentSong) + 1 != getLength()" type="button" class="button-yellow mt-3" (click)="nextSong()">Next</button>
-                    <button *ngIf="getIndex(currentSong) + 1 == getLength()" type="button" class="button-yellow mt-3" routerLink="../scores/0" routerLinkActive="true">Show Score</button>
+                    <button *ngIf="getIndex(currentSong) + 1 == getLength()" type="button" class="button-yellow mt-3" (click)="showScore()">Show Score</button>
                 </div>
             </div>
         </div>

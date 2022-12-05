@@ -17,6 +17,10 @@ import { GameService } from './game/game.service';
 import { GameController } from './game/game.controller';
 import { Game, GameSchema } from './game/game.schema';
 
+import { ScoreService } from './score/score.service';
+import { ScoreController } from './score/score.controller';
+import { Score, ScoreSchema } from './score/score.schema';
+
 @Module({
     imports: [
         MongooseModule.forFeature([
@@ -24,6 +28,7 @@ import { Game, GameSchema } from './game/game.schema';
             { name: Song.name, schema: SongSchema},
             { name: Artist.name, schema: ArtistSchema},
             { name: Game.name, schema: GameSchema},
+            { name: Score.name, schema: ScoreSchema},
         ])
     ],
     controllers: [
@@ -31,12 +36,14 @@ import { Game, GameSchema } from './game/game.schema';
         SongController,
         ArtistController,
         GameController,
+        ScoreController
     ],
     providers: [
         UserService,
         SongService,
         ArtistService,
         GameService,
+        ScoreService
     ]
 })
 

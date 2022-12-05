@@ -1,7 +1,11 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Score } from '../../score/score.model';
+import { ScoreService } from '../../score/score.service';
 import { Song } from '../../song/song.model';
+import { User } from '../../user/user.model';
+import { UserService } from '../../user/user.service';
 import { Game } from '../game.model';
 import { GameService } from '../game.service';
 
@@ -15,13 +19,28 @@ export class GamePlayComponent implements OnInit {
 	game: Game = new Game("undefined", "undefined", 0, new Date(), "undefined", [], [], false, "");
 	timeLeft: number = 30;
 	correctGuess: boolean = false;
-	currentSong: Song = this.game.songs[0];
+	currentSong: Song = new Song("undefined", "undefined", new Date(), "undefined", "undefined", "undefined", new File([""], "undefined"), []);
 	interval = this.updateProgressBar();
 	subscription: Subscription | undefined;
 
-	constructor(private route: ActivatedRoute, private router: Router, private gameService: GameService) {}
+	correctGuesses: number = 0;
+	timePlayed: number = 0;
+	timer = this.startTimer();
+	userId: string | undefined;
+	user: User = new User("", "", "", "", new Date(), "");
+	finalScore: number = 0;
+	score: Score = new Score("", this.user, 0, 0, new Date(), 0);
+
+	constructor(private route: ActivatedRoute, private router: Router, private gameService: GameService, private scoreService: ScoreService, private userService: UserService) {
+	}
 
 	ngOnInit(): void {
+		const currentUser = localStorage.getItem('currentuser');
+		this.userId = currentUser?.substring(currentUser.length - 27, currentUser.length-3)
+		this.subscription = this.userService.getUserById(this.userId!).subscribe((user) => {
+			this.user = user;
+		});
+
 		this.route.paramMap.subscribe((params) => {
 		this.gameId = params.get("id");			  	  
 		if (this.gameId) {
@@ -33,7 +52,7 @@ export class GamePlayComponent implements OnInit {
 					let newSong: Song = new Song(song._id, song.title, song.publishedOn, song.songLink, song.artist, song.album, image, song.genres)
 					foundSongs.push(newSong);
 				});
-				let foundGame: Game = new Game(game._id!, game.name!, game.amountOfPlays!, game.createdOn!, game.description!, game.genres!, foundSongs, game.isPrivate!, game.madeBy!);
+				let foundGame: Game = new Game(game._id!, game.name!, game.amountOfPlays! + 1, game.createdOn!, game.description!, game.genres!, foundSongs, game.isPrivate!, game.madeBy!);
 				this.game = foundGame;
 				this.currentSong = this.game.songs[0];
 				this.setSongUrl(this.currentSong, "cover");			
@@ -65,11 +84,11 @@ export class GamePlayComponent implements OnInit {
 	updateProgressBar() {
 		const interval = setInterval(() => {
 			if (this.timeLeft > 0) {
-			this.timeLeft -= 1;		  
-			document.getElementById("timer-seconds")!.textContent = this.timeLeft.toString() + "s";
-			document.getElementById("cover-preview")!.style.filter = "blur("+(this.timeLeft/3) + "px)";
+				this.timeLeft -= 1;		  
+				document.getElementById("timer-seconds")!.textContent = this.timeLeft.toString() + "s";
+				document.getElementById("cover-preview")!.style.filter = "blur("+(this.timeLeft / 3) + "px)";
 			} else if (this.timeLeft == 0) {
-			this.guessSong();
+				this.guessSong();
 			}
 		}, 1000);
 		return interval;
@@ -83,23 +102,37 @@ export class GamePlayComponent implements OnInit {
 		return this.game.songs.length;
 	}
 
+	startTimer() {
+		const timer = setInterval(() => {
+			this.timePlayed++;
+			}, 1000);
+		return timer;
+	}
+
 	guessSong() {
+		clearInterval(this.timer);
 		this.setSongUrl(this.currentSong, "answer");
 		const title = <HTMLInputElement>document.getElementById("song-input")!;
-			document.getElementById("overlay")!.style.display = "block";
+		document.getElementById("overlay")!.style.display = "block";
 		if (title!.value.toLowerCase() == this.currentSong.title!.toLowerCase()) {
 			this.correctGuess = true;
+			this.correctGuesses++;
 			document.getElementById("guess")!.style.display = "none";
 		} else {
-		this.correctGuess = false;
-		document.getElementById("guess")!.textContent = "You guessed: " + title.value;
+			this.correctGuess = false;
+			document.getElementById("guess")!.textContent = "You guessed: " + title.value;
 		}
 		let audioPlayer = <HTMLVideoElement>document.getElementById('song-preview');
 		audioPlayer.pause();
 		clearInterval(this.interval);
+
+		if (this.getIndex(this.currentSong) == this.getLength() - 1) {
+			this.createScore();
+		}
 	}
 
 	nextSong() {
+		this.timer = this.startTimer();
 		this.currentSong = this.game.songs[this.getIndex(this.currentSong) + 1];
 		const title = <HTMLInputElement>document.getElementById("song-input")!;
 		title.value = "";
@@ -126,8 +159,31 @@ export class GamePlayComponent implements OnInit {
 		return new File([u8arr], filename, {type:mime});
 	}
 
+	createScore() {
+		this.finalScore = Math.floor(((this.correctGuesses * 1000) / this.timePlayed));
+		let previousScore : Score | null | undefined;
+		this.subscription = this.scoreService.getScoreByGameIdAndUserId(this.gameId!, this.userId!).subscribe((score) => {
+			if (score) {
+				previousScore = score;
+			} else {
+				previousScore = null;
+			}
+		});
+
+		this.score = new Score(this.gameId!, this.user, this.correctGuesses, this.timePlayed, new Date() ,this.finalScore);
+		if (!previousScore) {
+			this.subscription = this.scoreService.createScore(this.score).subscribe();
+		} 
+		this.gameService.addPlayToGame(this.gameId!, this.game.amountOfPlays!);
+	}
+
+	showScore() {
+		this.router.navigateByUrl(`/games/${this.gameId}/score`, {state: {data: this.score}});
+	}
+
 	ngOnDestroy() {
 		clearInterval(this.interval);
+		clearInterval(this.timer);
 		if (this.subscription) {
             console.log("unsubscribing");
             this.subscription.unsubscribe();
