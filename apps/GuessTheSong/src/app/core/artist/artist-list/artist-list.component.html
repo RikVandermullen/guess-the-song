@@ -12,7 +12,6 @@
         <div *ngFor="let artist of artists" class="col-4">
             <a routerLink="{{artist._id}}" routerLinkActive="true">
                 <div class="artist-preview">
-                    <img *ngIf="artist.image == undefined" src="../../../../assets/images/artist{{artist._id}}.jpg" alt="" id="{{artist._id}}-artist">
                     <img *ngIf="artist.image !== undefined" src="" alt="" id="{{artist._id}}-cover">
                     <h3>{{artist.name}}</h3>
                 </div>
