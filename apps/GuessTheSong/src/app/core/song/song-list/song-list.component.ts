@@ -14,6 +14,7 @@ export class SongListComponent implements OnInit {
 	songs: Song[] | undefined;
 	subscription: Subscription | undefined;
 	loggedIn: boolean = true;
+	isLoggedInUserAdmin: boolean = false;
 
 	Genre = Genre;
 	genreKeys : string[] = [];
@@ -23,7 +24,10 @@ export class SongListComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-			this.subscription = this.songService.getAllSongs().subscribe((songs) => {     
+		const currentUser = JSON.parse(localStorage.getItem('currentuser')!);
+		this.isLoggedInUserAdmin = currentUser?.user.roles.includes("ADMIN");
+
+		this.subscription = this.songService.getAllSongs().subscribe((songs) => {     
 			let songsToEdit: Song[] = [];
 			songs.forEach((song) => {
 				let image = this.dataURLtoFile(song.coverImage!, `${song._id}.jpg`);

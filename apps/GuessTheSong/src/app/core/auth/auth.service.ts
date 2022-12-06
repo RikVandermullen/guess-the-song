@@ -19,19 +19,16 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { 
     this.getUserFromLocalStorage()
       .pipe(
-        // switchMap is overbodig als we validateToken() niet gebruiken...
         switchMap((token: Token | undefined) => {
           if (token) {
-            console.log('Token found in local storage');
             this.currentUser$.next(token);
             return of(token);
           } else {
-            console.log(`No current user found`);
             return of(undefined);
           }
         })
       )
-      .subscribe(() => console.log('Startup auth done'));
+      .subscribe(() => {});
   }
 
   login(formData: UserCredentials): Observable<Token | undefined> {
@@ -50,9 +47,6 @@ export class AuthService {
           return token;
         }),
         catchError((error) => {
-          console.log('error:', error);
-          console.log('error.message:', error.message);
-          console.log('error.error.message:', error.error.message);
           return of(undefined);
         })
       );
@@ -65,7 +59,6 @@ export class AuthService {
   }
 
   register(userData: UserRegistration): Observable<string | undefined> {
-    console.log(userData);
     return this.http
       .post<string>(
         "api/auth/register", userData,
@@ -79,9 +72,6 @@ export class AuthService {
           return user;
         }),
         catchError((error) => {
-          console.log('error:', error);
-          console.log('error.message:', error.message);
-          console.log('error.error.message:', error.error.message);
           return of(undefined);
         })
       );

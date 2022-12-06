@@ -15,7 +15,6 @@ export class ArtistService {
 
   getAllArtists(): Observable<IArtist[]> {
 		const url = "/api/artists";
-		console.log("get: " + url);
 	
 		return this.http.get<IArtist[]>(url).pipe(
         map((response: IArtist[]) => response),
@@ -27,7 +26,6 @@ export class ArtistService {
 
   getArtistById(id: string): Observable<IArtist> {
     const url = "/api/artists/" + id;
-		console.log("get: " + url);
   
     return this.http.get<IArtist>(url).pipe(
       map((response: IArtist) => response),
@@ -39,7 +37,6 @@ export class ArtistService {
 
   getArtistSongs(id: string): Observable<ISong[]> {
     const url = "/api/artists/" + id + "/songs";
-		console.log("get: " + url);
 
     return this.http.get<ISong[]>(url).pipe(
       map((response: ISong[]) => response),
@@ -51,7 +48,6 @@ export class ArtistService {
 
   createArtist(artist: Artist, base64image: string): Observable<Artist> {
     const url = "/api/artists";
-		console.log("get: " + url);
 
     let iSongs: ISong[] = [];
     artist.songs.forEach(song => {
@@ -72,7 +68,6 @@ export class ArtistService {
 		console.log(artist);
 		
 		const url = "/api/artists/" + artist._id;
-		console.log("put: " + url);
 
     let iSongs: ISong[] = [];
     artist.songs.forEach(song => {
@@ -91,7 +86,6 @@ export class ArtistService {
 
   deleteArtist(artist: Artist): void {
     const url = "/api/artists/" + artist._id!;
-		console.log("delete: " + url);
 
 		this.http.delete<Artist>(url).subscribe();   
   }

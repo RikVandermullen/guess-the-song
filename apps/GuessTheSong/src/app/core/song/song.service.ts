@@ -13,7 +13,6 @@ export class SongService {
 
   getAllSongs(): Observable<ISong[]> {
 		const url = "/api/songs";
-		console.log("get: " + url);
 	
 		return this.http.get<ISong[]>(url).pipe(
         map((response: ISong[]) => response),
@@ -25,7 +24,6 @@ export class SongService {
 
   getSongById(id: string): Observable<ISong> {
 		const url = "/api/songs/" + id;
-		console.log("get: " + url);
 	
 		return this.http.get<ISong>(url).pipe(
         map((response: ISong) => response),
@@ -37,7 +35,6 @@ export class SongService {
 
   createSong(song: Song, base64image: string): Observable<Song> {
     const url = "/api/songs";
-		console.log("get: " + url);
 
     const iSong = new ISong("", song.title!, song.publishedOn!, song.songLink!, song.artist!, song.album!, base64image, song.genres!);
     
@@ -53,7 +50,6 @@ export class SongService {
 		console.log(song);
 		
 		const url = "/api/songs/" + song._id;
-		console.log("put: " + url);
 
     const iSong = new ISong("", song.title!, song.publishedOn!, song.songLink!, song.artist!, song.album!, base64image, song.genres!);
 
@@ -67,7 +63,6 @@ export class SongService {
 
   deleteSong(id: string): void {
     const url = "/api/songs/" + id;
-		console.log("delete: " + url);
 
 		this.http.delete<Song>(url).subscribe();   
   }

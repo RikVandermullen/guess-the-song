@@ -14,7 +14,6 @@ export class GameService {
 
   getAllGames(): Observable<Game[]> {
     const url = "/api/games";
-		console.log("get: " + url);
 	
 		return this.http.get<Game[]>(url).pipe(
         map((response: Game[]) => response),
@@ -26,7 +25,6 @@ export class GameService {
 
   getGameById(id: string) : Observable<Game> {
     const url = "/api/games/" + id;
-		console.log("get: " + url);
   
     return this.http.get<Game>(url).pipe(
       map((response: Game) => response),
@@ -38,7 +36,6 @@ export class GameService {
 
   createGame(name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: ISong[], isPrivate: boolean, madeBy: string): Observable<Game> {
     const url = "/api/games";
-		console.log("post: " + url);
 
     let iSongs: ISong[] = [];
     songs.forEach(song => {
@@ -57,7 +54,6 @@ export class GameService {
 
   createRandomGame(name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: ISong[], isPrivate: boolean, madeBy: string, amount: number): Observable<Game> {
     const url = "/api/games/random?amount=" + amount;
-		console.log("post: " + url);
 
     let newGame = new Game("", name, amountOfPlays, createdOn, description, genres, songs, isPrivate, madeBy);
     
@@ -71,7 +67,6 @@ export class GameService {
 
   updateGame(id: string, name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: ISong[], isPrivate: boolean, madeBy: string): Observable<Game> {
     const url = "/api/games/" + id;
-		console.log("put: " + url);
 
     let iSongs: ISong[] = [];
     songs.forEach(song => {
@@ -90,7 +85,6 @@ export class GameService {
 
   deletegame(game: Game): void {
     const url = "/api/games/" + game._id!;
-		console.log("delete: " + url);
 
 		this.http.delete<Game>(url).subscribe();   
    
@@ -98,7 +92,6 @@ export class GameService {
 
   addPlayToGame(gameId: string, amountOfPlays: number): void {
     const url = "/api/games/" + gameId! + "/plays";
-    console.log("put: " + url);
     let body = JSON.parse(`{"result": "${amountOfPlays}"}`);
     
     this.http.put<Game>(url, body).subscribe();

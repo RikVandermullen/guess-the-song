@@ -12,10 +12,14 @@ import { ArtistService } from '../artist.service';
 export class ArtistListComponent implements OnInit {
   artists: Artist[] | undefined;
   subscription: Subscription | undefined;
+  isLoggedInUserAdmin: boolean = false;
 
   constructor(private artistService: ArtistService) {}
 
   ngOnInit(): void {
+    const currentUser = JSON.parse(localStorage.getItem('currentuser')!);
+		this.isLoggedInUserAdmin = currentUser?.user.roles.includes("ADMIN");   
+
     let foundArtists: Artist[] = [];
     this.subscription = this.artistService.getAllArtists().subscribe((artists) => {
       artists.forEach(artist => {        

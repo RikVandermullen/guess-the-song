@@ -12,7 +12,6 @@ export class ScoreService {
 
   getScoreByGameIdAndUserId(gameId: string, userId: string): Observable<Score> {
     const url = "/api/scores/games/" + gameId + "/users/" + userId;    
-    console.log("get: " + url);
 
     return this.http.get<Score[]>(url).pipe(
       map((response: Score[]) => response[0]),
@@ -24,7 +23,6 @@ export class ScoreService {
 
   getScoresByGameId(gameId: string, limit: number): Observable<Score[]> {
     const url = "/api/scores/games/" + gameId + "?limit=" + limit;
-    console.log("get: " + url);
 
     return this.http.get<Score[]>(url).pipe(
       map((response: Score[]) => response),
@@ -36,7 +34,6 @@ export class ScoreService {
 
   getScoresByUserId(userId: string): Observable<Score[]> {
     const url = "/api/scores/user/" + userId;
-    console.log("get: " + url);
 
     return this.http.get<Score[]>(url).pipe(
       map((response: Score[]) => response),
@@ -48,7 +45,6 @@ export class ScoreService {
 
   createScore(score: Score): Observable<Score> {
     const url = "/api/scores";
-    console.log("post: " + url);
 
     return this.http.post<Score>(url, score).pipe(
       map((response: Score) => response),
@@ -60,7 +56,6 @@ export class ScoreService {
 
   getLeaderboardPlace(gameId: string, score: number): Observable<number> {
     const url = "/api/scores/games/" + gameId + "/leaderboard?score=" + score;
-    console.log("get: " + url);
 
     return this.http.get<number>(url).pipe(
       map((response: number) => response),
@@ -72,7 +67,6 @@ export class ScoreService {
 
   getTopLeaderboard(): Observable<Score[]> {
     const url = "/api/scores/leaderboard";
-    console.log("get: " + url);
 
     return this.http.get<Score[]>(url).pipe(
       map((response: Score[]) => response),
@@ -83,7 +77,6 @@ export class ScoreService {
   }
   getUserStats(userId: string): Observable<Score> {
     const url = "/api/scores/" + userId + "/stats";
-    console.log("get: " + url);
 
     return this.http.get<Score[]>(url).pipe(
       map((response: Score[]) => response[0]),

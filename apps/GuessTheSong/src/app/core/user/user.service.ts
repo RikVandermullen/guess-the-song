@@ -12,7 +12,6 @@ export class UserService {
 
 	getAllUsers(): Observable<User[]> {
 		const url = "/api/users";
-		console.log("get: " + url);
 	
 		return this.http.get<User[]>(url).pipe(
             map((response: User[]) => response),
@@ -24,8 +23,7 @@ export class UserService {
 
 	getUserById(id: string): Observable<User> {
 		const url = "/api/users/" + id;
-		console.log("get: " + url);
-	
+
 		return this.http.get<User>(url).pipe(
             map((response: User) => response),
             tap((user: User) => {
@@ -34,11 +32,8 @@ export class UserService {
         );
 	}
 
-	updateUser(user: User): Observable<User> {
-		console.log(user);
-		
+	updateUser(user: User): Observable<User> {		
 		const url = "/api/users/" + user._id;
-		console.log("put: " + url);
 
 		return this.http.put<User>(url, user).pipe(
             map((response: User) => response),
@@ -50,7 +45,6 @@ export class UserService {
 
 	deleteUser(id: string): void {
 		const url = "/api/users/" + id;
-		console.log("delete: " + url);
 
 		this.http.delete<User>(url).subscribe();
 	}

@@ -15,10 +15,14 @@ export class ArtistDetailComponent implements OnInit {
   artist: Artist = new Artist("", "", new Date(), "", new File([""], "placeholder.jpg", {type: "image/jpg"}), []);
   subscription: Subscription | undefined;
   songSubscription: Subscription | undefined;
+  isLoggedInUserAdmin: boolean = false;
 
   constructor(private route: ActivatedRoute, private router: Router, private artistService: ArtistService) {}
 
   ngOnInit(): void {
+	const currentUser = JSON.parse(localStorage.getItem('currentuser')!);
+	this.isLoggedInUserAdmin = currentUser?.user.roles.includes("ADMIN");
+
     this.route.paramMap.subscribe((params) => {
 		this.artistId = params.get("id");			  	  
 		if (this.artistId) {
