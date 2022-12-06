@@ -46,7 +46,7 @@ export class AuthService {
         map((token: Token) => {
           this.saveUserToLocalStorage(token);
           this.currentUser$.next(token); 
-          this.router.navigate(['/profile']);         
+          this.router.navigate(['/games']);         
           return token;
         }),
         catchError((error) => {

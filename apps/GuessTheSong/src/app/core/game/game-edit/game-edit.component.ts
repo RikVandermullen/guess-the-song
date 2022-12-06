@@ -33,8 +33,8 @@ export class GameEditComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		const currentUser = localStorage.getItem('currentuser');
-		this.userId = currentUser?.substring(currentUser.length - 27, currentUser.length-3)
+		const currentUser = JSON.parse(localStorage.getItem('currentuser')!);
+		this.userId = currentUser?.user._id;
 
 		this.route.paramMap.subscribe((params) => {
 		this.gameId = params.get("id");			  	  
@@ -91,8 +91,8 @@ export class GameEditComponent implements OnInit {
 			} else if (this.gameMode === 3) {
 				this.subscription = this.gameService.createGame(this.game.name!, this.game.amountOfPlays!, this.game.createdOn!, this.game.description!, this.game.genres!, this.base64ImageSongs!, this.game.isPrivate!, this.game.madeBy!).subscribe();
 			}
-		}		
-		this.router.navigate([`/games`]);
+		}
+		this.router.navigateByUrl(`/games`);
 	}
 
   	songIsInGame(id: string) {

@@ -25,16 +25,16 @@ export class AuthService {
         })
     }
 
-    async createUser(name: string, emailAddress: string, password: string, birthDate: Date, phoneNumber: string) : Promise<string> {
-        const user = new this.userModel({ name: name, emailAddress: emailAddress, password: password, birthDate: birthDate, phoneNumber: phoneNumber });
+    async createUser(name: string, emailAddress: string, password: string, birthDate: Date, phoneNumber: string, roles: string[]) : Promise<string> {
+        const user = new this.userModel({ name: name, emailAddress: emailAddress, password: password, birthDate: birthDate, phoneNumber: phoneNumber, roles: roles });
         console.log(user);
         
         await user.save();
         return user.id;
     }
 
-    async getUserIdByEmailAddress(emailAddress: string) : Promise<string | null> {
-        return this.userModel.findOne({emailAddress: emailAddress}, {_id: 1});
+    async getUserByEmailAddress(emailAddress: string) : Promise<string | null> {
+        return this.userModel.findOne({emailAddress: emailAddress});
     }
 
     async registerUser(emailAddress: string, password: string) {

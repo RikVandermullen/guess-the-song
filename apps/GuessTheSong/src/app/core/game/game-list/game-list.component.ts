@@ -13,15 +13,19 @@ import { GameService } from '../game.service';
 export class GameListComponent implements OnInit {
 	games: Game[] | undefined;
 	subscription: Subscription | undefined;
+	userId: string | null | undefined;
 
 	Genre = Genre;
 	genreKeys : string[] = [];
 
-	constructor(private gameService: GameService) {
+	constructor(private gameService: GameService, private userService: UserService) {
 		this.genreKeys = Object.keys(this.Genre);
 	}
 
 	ngOnInit(): void {
+		const currentUser = JSON.parse(localStorage.getItem('currentuser')!);
+		this.userId = currentUser?.user._id;
+
 		let foundGames: Game[] = [];
 		this.subscription = this.gameService.getAllGames().subscribe((games) => {
 			games.forEach((game) => {

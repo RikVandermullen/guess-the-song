@@ -21,6 +21,9 @@ export class User {
 
     @Prop({ type: Date })
     birthDate?: Date;
+
+    @Prop({ type: [String] })
+    roles?: string[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

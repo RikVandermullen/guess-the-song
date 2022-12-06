@@ -13,15 +13,15 @@ import { UserService } from '../user.service';
 })
 export class UserDetailsComponent implements OnInit {
 	userId: string | null | undefined;
-	user: User = new User("undefined", "undefined", "undefined", "undefined", new Date(), "undefined");
+	user: User = new User("undefined", "undefined", "undefined", "undefined", new Date(), "undefined", []);
 	userExists: boolean = false;
 	subscription: Subscription | undefined;
 
 	constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private authService: AuthService) {}
 
 	ngOnInit(): void {		
-		const currentUser = localStorage.getItem('currentuser');
-		this.userId = currentUser?.substring(currentUser.length - 27, currentUser.length-3)
+		const currentUser = JSON.parse(localStorage.getItem('currentuser')!);
+		this.userId = currentUser?.user._id;
 		  	  
 		if (this.userId) {
 			console.log("User exists");

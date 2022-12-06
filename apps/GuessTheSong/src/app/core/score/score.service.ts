@@ -81,4 +81,15 @@ export class ScoreService {
       })
     );
   }
+  getUserStats(userId: string): Observable<Score> {
+    const url = "/api/scores/" + userId + "/stats";
+    console.log("get: " + url);
+
+    return this.http.get<Score[]>(url).pipe(
+      map((response: Score[]) => response[0]),
+      tap((score: Score) => {
+        return score;
+      })
+    );
+  }
 }

@@ -14,7 +14,7 @@ export class AuthController {
             await this.authService.registerUser(credentials.emailAddress, credentials.password);
             
             return {
-                id: await this.authService.createUser(credentials.name, credentials.emailAddress, credentials.password, credentials.birthDate, credentials.phoneNumber),
+                id: await this.authService.createUser(credentials.name, credentials.emailAddress, credentials.password, credentials.birthDate, credentials.phoneNumber, credentials.roles),
             };
         } catch (e) {     
             console.log(e);
@@ -27,7 +27,7 @@ export class AuthController {
         try {            
             return {
                 token: await this.authService.generateToken(credentials.emailAddress, credentials.password),
-                id: await this.authService.getUserIdByEmailAddress(credentials.emailAddress),
+                user: await this.authService.getUserByEmailAddress(credentials.emailAddress),
             };
         } catch (e) {                    
             throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);

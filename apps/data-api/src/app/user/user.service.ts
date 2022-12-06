@@ -20,8 +20,8 @@ export class UserService {
         return this.userModel.findById(userId);
     }
 
-    async addUser(name: string, emailAddress: string, password: string, birthDate: Date, phoneNumber: string) : Promise<User> {
-        const user = new this.userModel({ name, emailAddress, password, birthDate, phoneNumber });
+    async addUser(name: string, emailAddress: string, password: string, birthDate: Date, phoneNumber: string, roles: string[]) : Promise<User> {
+        const user = new this.userModel({ name, emailAddress, password, birthDate, phoneNumber, roles });
         await user.save();
 
         return <User>user;
@@ -32,9 +32,9 @@ export class UserService {
         return true;
     }
 
-    async updateUser(id: string, name: string, emailAddress: string, password: string, birthDate: Date, phoneNumber: string) : Promise<User> {
+    async updateUser(id: string, name: string, emailAddress: string, password: string, birthDate: Date, phoneNumber: string, roles: string[]) : Promise<User> {
        
-        const result = await this.userModel.updateOne({_id: id}, {$set: {name: name, emailAddress: emailAddress, password: password, birthDate: birthDate, phoneNumber: phoneNumber}});
+        const result = await this.userModel.updateOne({_id: id}, {$set: {name: name, emailAddress: emailAddress, password: password, birthDate: birthDate, phoneNumber: phoneNumber, roles: roles}});
         
         if (result.modifiedCount == 0) {
             throw new Error('not accepted');

@@ -27,7 +27,7 @@ export class GamePlayComponent implements OnInit {
 	timePlayed: number = 0;
 	timer = this.startTimer();
 	userId: string | undefined;
-	user: User = new User("", "", "", "", new Date(), "");
+	user: User = new User("", "", "", "", new Date(), "", []);
 	finalScore: number = 0;
 	score: Score = new Score("", this.user, 0, 0, new Date(), 0);
 
@@ -35,11 +35,9 @@ export class GamePlayComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		const currentUser = localStorage.getItem('currentuser');
-		this.userId = currentUser?.substring(currentUser.length - 27, currentUser.length-3)
-		this.subscription = this.userService.getUserById(this.userId!).subscribe((user) => {
-			this.user = user;
-		});
+		const currentUser = JSON.parse(localStorage.getItem('currentuser')!);
+		this.userId = currentUser?.user._id;
+		this.user = currentUser?.user;
 
 		this.route.paramMap.subscribe((params) => {
 		this.gameId = params.get("id");			  	  
@@ -120,6 +118,7 @@ export class GamePlayComponent implements OnInit {
 			document.getElementById("guess")!.style.display = "none";
 		} else {
 			this.correctGuess = false;
+			document.getElementById("guess")!.style.display = "block";
 			document.getElementById("guess")!.textContent = "You guessed: " + title.value;
 		}
 		let audioPlayer = <HTMLVideoElement>document.getElementById('song-preview');
@@ -139,6 +138,7 @@ export class GamePlayComponent implements OnInit {
 		this.timeLeft = 30;
 		document.getElementById("timer-seconds")!.textContent = this.timeLeft.toString() + "s";
 		document.getElementById("overlay")!.style.display = "none";
+		document.getElementById("song-input")!.focus();
 		this.setSongUrl(this.currentSong, "cover")
 		this.interval = this.updateProgressBar();
 	}

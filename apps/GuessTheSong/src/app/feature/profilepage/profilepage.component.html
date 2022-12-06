@@ -5,7 +5,20 @@
 
     <div class="row mt-5">
         <h2>Stats</h2>
-        <p>Coming soon...</p>
+        <div class="col-6 mt-2">
+            <h4>Totals</h4>
+            <div class="line-yellow"></div>
+            <p>Score: {{stats!.totalScore!}}</p>
+            <p>Games Played: {{stats!.totalGames!}}</p>
+            <p>Time Played: {{stats!.totalTime!}}</p>
+        </div>
+
+        <div class="col-6 mt-2">
+            <h4>Averages per Game</h4>
+            <div class="line-yellow"></div>
+            <p>Score: {{stats!.averageScorePerGame! | number : '1.2-2'}}</p>
+            <p>Time Played: {{stats!.averageTimePerGame! * 1000 | date:'H:mm:ss':'UTC'}}</p>
+        </div>
     </div>
 
     <hr>

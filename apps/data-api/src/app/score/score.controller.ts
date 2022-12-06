@@ -28,6 +28,11 @@ export class ScoreController {
         return this.scoreService.getTopLeaderboard();
     }
 
+    @Get(":userId/stats")
+    async getUserStats(@Param('userId') userId: string) : Promise<IScore[]> {
+        return this.scoreService.getUserStats(userId);
+    }
+
     @Post()
     async addScore(@Body() score: IScore) : Promise<IScore> {
         return this.scoreService.addScore(score.gameId, score.user, score.dateScored, score.amountOfRightAnswers, score.amountOfTimePlayed, score.finalScore);

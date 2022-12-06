@@ -20,7 +20,7 @@ export class UserController {
 
     @Post()
     async addUser(@Body() user: User) : Promise<User> {
-        return this.userService.addUser(user.name, user.emailAddress, user.password, user.birthDate, user.phoneNumber);
+        return this.userService.addUser(user.name, user.emailAddress, user.password, user.birthDate, user.phoneNumber, user.roles);
     }
 
     @Delete(':id')
@@ -30,7 +30,7 @@ export class UserController {
 
     @Put(':id')
     async updateUser(@Param('id') id: string, @Body() user: User) : Promise<User> {
-        return this.userService.updateUser(id, user.name, user.emailAddress, user.password, user.birthDate, user.phoneNumber);
+        return this.userService.updateUser(id, user.name, user.emailAddress, user.password, user.birthDate, user.phoneNumber, user.roles);
     }
 
 }

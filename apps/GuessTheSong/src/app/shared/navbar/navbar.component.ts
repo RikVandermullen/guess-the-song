@@ -14,12 +14,16 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {   
     if (localStorage.getItem('currentuser') !== null) {
       this.loggedIn = true;
+    } else {
+      this.loggedIn = false;
     }
   }
 
   ngOnChanges(): void {
     if (localStorage.getItem('currentuser') !== null) {
       this.loggedIn = true;
+    } else {
+      this.loggedIn = false;
     }
   }
 

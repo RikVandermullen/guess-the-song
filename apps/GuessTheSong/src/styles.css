@@ -341,3 +341,9 @@ select:not(.multiple) option {
     max-width: 16px;
     margin-bottom: 10px;
 }
+
+.line-yellow {
+    border-bottom: 2px solid var(--yellow);
+    width: 75%;
+    margin-bottom: 10px;
+}

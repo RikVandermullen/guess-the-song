@@ -49,4 +49,9 @@ export class ScoreService {
                                                         { $lookup: { from: 'users', localField: '_id', foreignField: '_id', as: 'user' } }, { $unwind: "$user" }]);
         return scores;
     }
+
+    async getUserStats(userId: string) : Promise<IScore[]> {
+        const scores = this.scoreModel.aggregate([{$match: { 'user._id': { $eq: new mongoose.Types.ObjectId(userId) } } }, { $group: { "_id": "$user._id", totalScore: { $sum: "$finalScore" }, totalGames: { $count: {} }, totalTime: { $sum: "$amountOfTimePlayed" } } }, { $project : {totalScore: 1, totalGames: 1, totalTime: 1, averageTimePerGame: { $avg: { $divide: ["$totalTime", "$totalGames"] } }, averageScorePerGame: { $avg: { $divide: ["$totalScore", "$totalGames"] } } } }]);
+        return scores;
+    }
 }

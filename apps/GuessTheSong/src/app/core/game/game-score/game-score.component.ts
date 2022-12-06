@@ -13,7 +13,7 @@ const confetti = require('canvas-confetti');
   styleUrls: ['./game-score.component.css'],
 })
 export class GameScoreComponent implements OnInit {
-	user: User = new User("", "", "", "", new Date, "");
+	user: User = new User("", "", "", "", new Date, "", []);
 	userId : string | undefined;
 	gameId: string | null | undefined;
 	subscription: Subscription | undefined;
@@ -26,23 +26,9 @@ export class GameScoreComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		const currentUser = localStorage.getItem('currentuser');
-		this.userId = currentUser?.substring(currentUser.length - 27, currentUser.length-3)
-		this.subscription = this.userService.getUserById(this.userId!).subscribe((user) => {
-			this.user = user;
-			this.subscription = this.scoreService.getScoreByGameIdAndUserId(this.gameId!, this.userId!).subscribe((score) => {
-				if(score) {
-					this.score = score;				
-					this.scoreService.getLeaderboardPlace(this.gameId!, score!.finalScore!).subscribe((place) => {
-						this.leaderboardPlace = place + 1;					
-					});
-				}
-			});
-
-			this.subscription = this.scoreService.getScoresByGameId(this.gameId!, 5).subscribe((scores) => {
-				this.scores = scores;
-			});
-		});
+		const currentUser = JSON.parse(localStorage.getItem('currentuser')!);
+		this.userId = currentUser?.user._id;
+		this.user = currentUser?.user;
 
 		this.route.paramMap.subscribe((params) => {
 			this.gameId = params.get("id");
@@ -50,6 +36,15 @@ export class GameScoreComponent implements OnInit {
 				this.subscription = this.scoreService.getScoresByGameId(this.gameId, 5).subscribe((scores) => {
 					this.scores = scores;
 				});				
+			}
+		});
+
+		this.subscription = this.scoreService.getScoreByGameIdAndUserId(this.gameId!, this.userId!).subscribe((score) => {
+			if(score) {
+				this.score = score;				
+				this.scoreService.getLeaderboardPlace(this.gameId!, score!.finalScore!).subscribe((place) => {
+					this.leaderboardPlace = place + 1;					
+				});
 			}
 		});
 
