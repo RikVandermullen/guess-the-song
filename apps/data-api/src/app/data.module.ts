@@ -21,6 +21,10 @@ import { ScoreService } from './score/score.service';
 import { ScoreController } from './score/score.controller';
 import { Score, ScoreSchema } from './score/score.schema';
 
+import { AuthService } from './auth/auth.service';
+import { AuthController } from './auth/auth.controller';
+import { Identity, IdentitySchema } from './auth/identity.schema';
+
 @Module({
     imports: [
         MongooseModule.forFeature([
@@ -29,6 +33,7 @@ import { Score, ScoreSchema } from './score/score.schema';
             { name: Artist.name, schema: ArtistSchema},
             { name: Game.name, schema: GameSchema},
             { name: Score.name, schema: ScoreSchema},
+            { name: Identity.name, schema: IdentitySchema},
         ])
     ],
     controllers: [

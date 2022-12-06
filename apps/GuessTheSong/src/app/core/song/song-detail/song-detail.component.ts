@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { IArtist } from '../../../../../../../libs/data/src/lib/artist.interface';
 import { Song } from '../song.model';
 import { SongService } from '../song.service';
 
@@ -12,7 +13,7 @@ import { SongService } from '../song.service';
 export class SongDetailComponent implements OnInit {
 	songExists: boolean = false;
 	songId: string | null | undefined;
-	song: Song = new Song("undefined", "undefined", new Date(), "undefined", "undefined", "undefined", new File([""], "placeholder.jpg", {type: "image/jpg"}), []);
+	song: Song = new Song("undefined", "undefined", new Date(), "undefined", new IArtist("", "", new Date(), "", "",[]), "undefined", new File([""], "placeholder.jpg", {type: "image/jpg"}), []);
 	subscription: Subscription | undefined;
 
 	constructor(private route: ActivatedRoute, private router: Router, private songService: SongService) {

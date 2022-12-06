@@ -13,7 +13,8 @@ export class SongService {
 
   getAllSongs(): Observable<ISong[]> {
 		const url = "/api/songs";
-	
+		console.log("getAllSongs");
+		
 		return this.http.get<ISong[]>(url).pipe(
         map((response: ISong[]) => response),
         tap((songs: ISong[]) => {
@@ -25,9 +26,9 @@ export class SongService {
   getSongById(id: string): Observable<ISong> {
 		const url = "/api/songs/" + id;
 	
-		return this.http.get<ISong>(url).pipe(
-        map((response: ISong) => response),
-        tap((song: ISong) => {
+		return this.http.get<ISong[]>(url).pipe(
+        map((response: ISong[]) => response[0]),
+        tap((song: ISong) => {            
             return song;
         })
     );

@@ -14,12 +14,12 @@ export class SongController {
     }
 
     @Get(':id')
-    async getSongById(@Param('id') id: string): Promise<ISong | null> {
+    async getSongById(@Param('id') id: string): Promise<ISong[]> {
         return this.songService.getSongById(id);
     }
 
     @Post()
-    async addSong(@Body() song: ISong) : Promise<ISong> {       
+    async addSong(@Body() song: ISong) : Promise<ISong[]> {       
         return this.songService.addSong(song.title, song.publishedOn, song.songLink, song.artist, song.album, song.coverImage, song.genres);
     }
 
@@ -29,7 +29,7 @@ export class SongController {
     }
 
     @Put(':id')
-    async updateSong(@Param('id') id: string, @Body() song: ISong) : Promise<ISong> {
+    async updateSong(@Param('id') id: string, @Body() song: ISong) : Promise<ISong[]> {
         return this.songService.updateSong(id, song.title, song.publishedOn, song.songLink, song.artist, song.album, song.coverImage, song.genres);
     }
 

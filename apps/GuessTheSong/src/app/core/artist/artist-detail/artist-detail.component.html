@@ -34,12 +34,11 @@
                             <td>
                                 <div class="d-flex justify-content-start align-items-center">
                                     <div class="song-list-cover">
-                                        <img *ngIf="song.coverImage == undefined" src="../../../../assets/images/song{{song._id}}.webp" alt="" id="{{song._id}}-cover">
                                         <img *ngIf="song.coverImage !== undefined" src="" alt="" id="{{song._id}}-cover">
                                     </div>
                                     <div class="song-list-info mt-3 ms-2">
                                         <h3>{{song.title}}</h3>
-                                        <p>{{song.artist}}</p>
+                                        <p></p>
                                     </div>
                                 </div>
                             </td>

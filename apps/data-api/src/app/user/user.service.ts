@@ -4,11 +4,12 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { User as UserModel, UserDocument } from './user.schema';
+import { Identity, IdentityDocument } from '../auth/identity.schema';
 import { User } from '../../../../../libs/data/src/lib/user.interface'
 
 @Injectable()
 export class UserService {
-    constructor(@InjectModel(UserModel.name) private userModel: Model<UserDocument>) {
+    constructor(@InjectModel(UserModel.name) private userModel: Model<UserDocument>, @InjectModel(Identity.name) private identityModel: Model<IdentityDocument>) {
 
     }
 
@@ -27,7 +28,7 @@ export class UserService {
         return <User>user;
     }
 
-    async deleteUser(userId: string) : Promise<boolean> {       
+    async deleteUser(userId: string) : Promise<boolean> {
         await this.userModel.findById(userId).deleteOne();
         return true;
     }

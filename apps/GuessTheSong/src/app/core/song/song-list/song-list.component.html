@@ -40,7 +40,7 @@
 
     <div class="row">
         <div class="col-12">
-            <div class="table-responsive song-list">
+            <div class="table-responsive song-list" style="overflow-y: scroll; max-height: 70vh">
                 <table class="table">
                     <thead>
                         <tr>
@@ -57,12 +57,11 @@
                             <td>
                                 <div class="d-flex justify-content-start align-items-center">
                                     <div class="song-list-cover">
-                                        <img *ngIf="song.coverImage == undefined" src="" alt="" id="{{song._id}}-cover">
                                         <img *ngIf="song.coverImage !== undefined" src="" alt="" id="{{song._id}}-cover">
                                     </div>
                                     <div class="song-list-info ms-2 mt-2">
                                         <h3>{{song.title}}</h3>
-                                        <p>{{song.artist}}</p>
+                                        <p>{{song.artist!.name!}}</p>
                                     </div>
                                 </div>
                             </td>

@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Schema as MongooseSchema } from 'mongoose';
+import { Document, ObjectId, Schema as MongooseSchema } from 'mongoose';
 import { Genre } from '../../../../../libs/data/src/lib/song.interface'
 
 export type SongDocument = Song & Document;
@@ -18,7 +18,7 @@ export class Song {
     songLink?: string;
 
     @Prop({required: true})
-    artist?: string;
+    artist?: ObjectId;
 
     @Prop({required: true})
     album?: string;

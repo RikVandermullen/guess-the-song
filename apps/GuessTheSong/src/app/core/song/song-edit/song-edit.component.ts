@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { IArtist } from '../../../../../../../libs/data/src/lib/artist.interface';
+import { Artist } from '../../artist/artist.model';
+import { ArtistService } from '../../artist/artist.service';
 import { Genre, Song } from '../song.model';
 import { SongService } from '../song.service';
 
@@ -12,14 +15,16 @@ import { SongService } from '../song.service';
 export class SongEditComponent implements OnInit {
 	songExists: boolean = false;
 	songId: string | null | undefined;
-	song: Song = new Song("undefined", "undefined", new Date(), "undefined", "undefined", "undefined", new File([""], "placeholder.jpg", {type: "image/jpg"}), []);
+	song: Song = new Song("", "", new Date(), "", new IArtist("", "", new Date(), "", "",[]), "", new File([""], "placeholder.jpg", {type: "image/jpg"}), []);
 	subscription: Subscription | undefined;
 	base64Image: string = "";
+	artists: IArtist[] = [];
+	artist: IArtist = new IArtist("", "", new Date(), "", "",[]);
 
 	Genre = Genre;
     genreKeys : string[] = [];
 
-	constructor(private route: ActivatedRoute, private router: Router, private songService: SongService) {
+	constructor(private route: ActivatedRoute, private router: Router, private songService: SongService, private artistService: ArtistService) {
 		this.genreKeys = Object.keys(this.Genre);
 	}
 
@@ -28,12 +33,13 @@ export class SongEditComponent implements OnInit {
 			this.songId = params.get("id");			  	  
 			if (this.songId) {
 				console.log("Existing song");
-				this.subscription = this.songService.getSongById(this.songId).subscribe((response) => {
+				this.subscription = this.songService.getSongById(this.songId).subscribe((response) => {					
 					let image = this.dataURLtoFile(response.coverImage!, `${response._id}.jpg`);
 					let newSong: Song = new Song(response._id, response.title, response.publishedOn, response.songLink, response.artist, response.album, image, response.genres)
 					this.setSongUrl(newSong);
 					this.song = newSong;
 					this.base64Image = response.coverImage!;
+					this.artist = response.artist;
 				});
 				this.songExists = true;
 			} else {
@@ -42,7 +48,7 @@ export class SongEditComponent implements OnInit {
 				this.song = {
 					_id: '',
 					title: '',
-					artist: '',
+					artist: new IArtist("", "", new Date(), "", "",[]),
 					publishedOn: new Date,
 					coverImage: new File([""], "placeholder.jpg", {type: "image/jpg"}),
 					songLink: '',
@@ -52,6 +58,13 @@ export class SongEditComponent implements OnInit {
 			}
 			let audioPlayer = <HTMLVideoElement>document.getElementById('song-preview');
 			audioPlayer.volume = 0.25;
+
+			this.subscription = this.artistService.getAllArtists().subscribe((artists) => {
+				this.artists = artists;
+				if (this.song._id !== "") {
+					this.song.artist = this.artists.filter((artist) => artist._id === this.song.artist!._id)[0];
+				}
+			});
 		});
 	}
 
@@ -80,6 +93,10 @@ export class SongEditComponent implements OnInit {
 		reader.onload = (event) => {
 			document.getElementById('cover-preview')!.setAttribute("src", event!.target!.result!.toString());
 		}
+	}
+
+	setArtist(artist: IArtist) {
+		this.song.artist = artist;
 	}
 
 	imageToBase64(file: File) {

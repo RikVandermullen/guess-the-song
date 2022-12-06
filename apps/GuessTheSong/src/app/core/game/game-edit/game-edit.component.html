@@ -70,50 +70,51 @@
 
                     <div class="col-6 artist-songs song-list" id="song-list">
                         <h2>Songs</h2>
-        
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Album</th>
-                                    <th scope="col">Released</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let song of songs; let i = index;" class="song-row">
-                                    <td><p class="pt-3">{{ i }}</p></td>
-                                    <td>
-                                        <div class="d-flex justify-content-start align-items-center">
-                                            <div class="song-list-cover">
-                                                <img *ngIf="song.coverImage !== undefined" src="" alt="" id="{{song._id}}-cover">
+                        <div style="overflow-y: scroll; max-height: 75vh">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Album</th>
+                                        <th scope="col">Released</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let song of songs; let i = index;" class="song-row">
+                                        <td><p class="pt-3">{{ i }}</p></td>
+                                        <td>
+                                            <div class="d-flex justify-content-start align-items-center">
+                                                <div class="song-list-cover">
+                                                    <img *ngIf="song.coverImage !== undefined" src="" alt="" id="{{song._id}}-cover">
+                                                </div>
+                                                <div class="song-list-info mt-1 ms-2">
+                                                    <h3>{{song.title}}</h3>
+                                                    <p>{{song.artist!.name!}}</p>
+                                                </div>
                                             </div>
-                                            <div class="song-list-info mt-1 ms-2">
-                                                <h3>{{song.title}}</h3>
-                                                <p>{{song.artist}}</p>
+                                        </td>
+                                        <td><p class="pt-3">{{song.album}}</p></td>
+                                        <td><p class="pt-3">{{song.publishedOn |  date : 'dd-MM-yyyy' }}</p></td>
+                                        <td *ngIf="songIsInGame(song._id!)">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <a role="button" (click)="removeSong(song._id!)">
+                                                    <img src="../../../../assets/images/remove.png" alt="" class="actions-icon mt-3">
+                                                </a>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td><p class="pt-3">{{song.album}}</p></td>
-                                    <td><p class="pt-3">{{song.publishedOn |  date : 'dd-MM-yyyy' }}</p></td>
-                                    <td *ngIf="songIsInGame(song._id!)">
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <a role="button" (click)="removeSong(song._id!)">
-                                                <img src="../../../../assets/images/remove.png" alt="" class="actions-icon mt-3">
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td *ngIf="!songIsInGame(song._id!)">
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <a role="button" (click)="addSong(song)">
-                                                <img src="../../../../assets/images/add.png" alt="" class="actions-icon mt-3">
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                        </td>
+                                        <td *ngIf="!songIsInGame(song._id!)">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <a role="button" (click)="addSong(song)">
+                                                    <img src="../../../../assets/images/add.png" alt="" class="actions-icon mt-3">
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 

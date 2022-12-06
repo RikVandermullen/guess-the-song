@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { IArtist } from '../../../../../../../libs/data/src/lib/artist.interface';
 import { Score } from '../../score/score.model';
 import { ScoreService } from '../../score/score.service';
 import { Song } from '../../song/song.model';
@@ -19,7 +20,7 @@ export class GamePlayComponent implements OnInit {
 	game: Game = new Game("undefined", "undefined", 0, new Date(), "undefined", [], [], false, "");
 	timeLeft: number = 30;
 	correctGuess: boolean = false;
-	currentSong: Song = new Song("undefined", "undefined", new Date(), "undefined", "undefined", "undefined", new File([""], "undefined"), []);
+	currentSong: Song = new Song("undefined", "undefined", new Date(), "undefined", new IArtist("", "", new Date(), "", "",[]), "undefined", new File([""], "undefined"), []);
 	interval = this.updateProgressBar();
 	subscription: Subscription | undefined;
 
@@ -160,7 +161,7 @@ export class GamePlayComponent implements OnInit {
 	}
 
 	createScore() {
-		this.finalScore = Math.floor(((this.correctGuesses * 1000) / this.timePlayed));
+		this.finalScore = Math.floor(((this.correctGuesses * 100) + (this.getLength() / this.timePlayed)));
 		let previousScore : Score | null | undefined;
 		this.subscription = this.scoreService.getScoreByGameIdAndUserId(this.gameId!, this.userId!).subscribe((score) => {
 			if (score) {

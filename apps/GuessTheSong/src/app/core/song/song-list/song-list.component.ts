@@ -29,12 +29,12 @@ export class SongListComponent implements OnInit {
 
 		this.subscription = this.songService.getAllSongs().subscribe((songs) => {     
 			let songsToEdit: Song[] = [];
-			songs.forEach((song) => {
+			songs.forEach((song) => {				
 				let image = this.dataURLtoFile(song.coverImage!, `${song._id}.jpg`);
 				let newSong: Song = new Song(song._id, song.title, song.publishedOn, song.songLink, song.artist, song.album, image, song.genres)     
 				songsToEdit.push(newSong);
 				this.setSongUrl(newSong);
-			}); 
+			});
 			this.songs = songsToEdit;
 			if (this.authService.currentUser$.value === undefined) {
 				this.loggedIn = false;

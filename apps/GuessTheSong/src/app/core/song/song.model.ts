@@ -1,3 +1,5 @@
+import { IArtist } from "../../../../../../libs/data/src/lib/artist.interface";
+
 export enum Genre {
     Pop = 'Pop',
     Rock = 'Rock',
@@ -20,12 +22,12 @@ export class Song {
     title: string | undefined;
     publishedOn: Date | undefined;
     songLink: string | undefined;
-    artist: string | undefined; //string for now
+    artist: IArtist | undefined;
     album: string | undefined;
     coverImage: File | undefined;
     genres: Genre[] = [];
 
-    constructor(_id: string, title: string, publishedOn: Date, songLink: string, artist: string, album: string, coverImage: File, genres: Genre[]) {
+    constructor(_id: string, title: string, publishedOn: Date, songLink: string, artist: IArtist, album: string, coverImage: File, genres: Genre[]) {
         this._id = _id;
         this.title = title;
         this.publishedOn = publishedOn;

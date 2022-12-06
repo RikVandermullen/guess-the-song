@@ -20,7 +20,7 @@
                         <div *ngIf="currentSong" class="col-12 preview-song-info mt-3 mb-3">
                             <div class="preview-song-text">
                                 <p>Title: {{currentSong.title!}}</p>
-                                <p>Artist: {{currentSong.artist!}}</p>
+                                <p>Artist: {{currentSong.artist!.name!}}</p>
                                 <p>Album: {{currentSong.album!}}</p>
                                 <p>Date Published: {{currentSong.publishedOn! |  date : 'dd-MM-yyyy' }}</p>
                                 <p>Genres: {{currentSong.genres!}}</p>
