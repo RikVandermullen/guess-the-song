@@ -35,6 +35,14 @@ export class GameService {
         return <Game>game;
     }
 
+    async addGameWithRandomSongs(name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: ISong[], isPrivate: boolean, madeBy: string, amount: number) : Promise<Game> {
+        const game = new this.gameModel({name, amountOfPlays, createdOn, description, genres, songs, isPrivate, madeBy});
+        await game.save();
+        return this.songModel.aggregate([{ $match: { genres: {$in : genres} } } , { $sample: { size: amount } }]).then((result: ISong[]) => {
+            return this.updateGame(game.id, name, amountOfPlays, createdOn, description, genres, result, isPrivate, madeBy);            
+        });        
+    }
+
     async deleteGame(gameId: string) : Promise<boolean> {       
         await this.gameModel.findById(gameId).deleteOne();
         return true;

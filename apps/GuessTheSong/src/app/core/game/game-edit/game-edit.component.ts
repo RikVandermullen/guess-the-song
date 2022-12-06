@@ -22,6 +22,8 @@ export class GameEditComponent implements OnInit {
 	userId: string | undefined;
 	base64Image: string | undefined;
 	amountOfPlays: number | undefined;
+	gameMode: number = 1;
+	songAmount: number = 0;
 
 	Genre = Genre;
 	genreKeys : string[] = [];
@@ -84,8 +86,12 @@ export class GameEditComponent implements OnInit {
 		if (this.gameExists) {
 			this.subscription = this.gameService.updateGame(this.game._id!, this.game.name!, this.game.amountOfPlays!, this.game.createdOn!, this.game.description!, this.game.genres!, this.base64ImageSongs!, this.game.isPrivate!, this.game.madeBy!).subscribe();		
 		} else {
-			this.subscription = this.gameService.createGame(this.game.name!, this.game.amountOfPlays!, this.game.createdOn!, this.game.description!, this.game.genres!, this.base64ImageSongs!, this.game.isPrivate!, this.game.madeBy!).subscribe();
-		}
+			if (this.gameMode === 2) {
+				this.subscription = this.gameService.createRandomGame(this.game.name!, this.game.amountOfPlays!, this.game.createdOn!, this.game.description!, this.game.genres!, [], this.game.isPrivate!, this.game.madeBy!, this.songAmount).subscribe();
+			} else if (this.gameMode === 3) {
+				this.subscription = this.gameService.createGame(this.game.name!, this.game.amountOfPlays!, this.game.createdOn!, this.game.description!, this.game.genres!, this.base64ImageSongs!, this.game.isPrivate!, this.game.madeBy!).subscribe();
+			}
+		}		
 		this.router.navigate([`/games`]);
 	}
 
@@ -134,5 +140,23 @@ export class GameEditComponent implements OnInit {
 			let newSong = new ISong(song._id!, song.title!, song.publishedOn!, song.songLink!, song.artist!, song.album!, this.base64Image!, song.genres!);
 			this.base64ImageSongs.push(newSong);
 		}
+	}
+
+	setGameMode(event:any, gameMode: number) {
+		this.gameMode = gameMode;
+		event.target.classList.toggle("selected");
+		if (gameMode === 1) {
+			document.getElementById("gamemode-2")?.classList.remove("selected");
+			document.getElementById("gamemode-3")?.classList.remove("selected");
+			document.getElementById("song-list")?.setAttribute("style", "pointer-events: none; opacity:0.5")
+		} else if (gameMode === 2) {
+			document.getElementById("gamemode-1")?.classList.remove("selected");
+			document.getElementById("gamemode-3")?.classList.remove("selected");
+			document.getElementById("song-list")?.setAttribute("style", "pointer-events: none; opacity:0.5")
+		} else {
+			document.getElementById("gamemode-1")?.classList.remove("selected");
+			document.getElementById("gamemode-2")?.classList.remove("selected");
+			document.getElementById("song-list")?.setAttribute("style", "pointer-events: auto; opacity:1")
+		}		
 	}
 }

@@ -55,6 +55,20 @@ export class GameService {
     );
   }
 
+  createRandomGame(name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: ISong[], isPrivate: boolean, madeBy: string, amount: number): Observable<Game> {
+    const url = "/api/games/random?amount=" + amount;
+		console.log("post: " + url);
+
+    let newGame = new Game("", name, amountOfPlays, createdOn, description, genres, songs, isPrivate, madeBy);
+    
+		return this.http.post<Game>(url, newGame).pipe(
+        map((response: Game) => response),
+        tap((game: Game) => {
+            return game;
+        })
+    );
+  }
+
   updateGame(id: string, name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: ISong[], isPrivate: boolean, madeBy: string): Observable<Game> {
     const url = "/api/games/" + id;
 		console.log("put: " + url);

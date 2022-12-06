@@ -49,6 +49,17 @@
                             </div>
                         </div>
 
+                        <div class="col-12 mt-3">
+                            <h4 class="mb-3">Game Mode</h4>
+                            <img class="actions-icon-bigger me-2" id="gamemode-1" src="../../../../assets/images/star.png" alt="" (click)="setGameMode($event, 1)">
+                            <img class="actions-icon-bigger me-2" id="gamemode-2" src="../../../../assets/images/dice.png" alt="" (click)="setGameMode($event, 2)">
+                            <img class="actions-icon-bigger" id="gamemode-3" src="../../../../assets/images/choice.png" alt="" (click)="setGameMode($event, 3)">
+                            <div *ngIf="gameMode === 1 || gameMode === 2" class="col-12 input-wrap mt-2" style="max-width: 50%;">
+                                <label>Song Amount</label><br />
+                                <input type="text" class="form-input" name="songAmount" [(ngModel)]="songAmount"/>
+                            </div>
+                        </div>
+
                         <div class="col-12">
                             <div class="select-wrap mt-4">
                                 <label for="genres">Private</label>
@@ -57,7 +68,7 @@
                         </div>
                     </div>
 
-                    <div class="col-6 artist-songs song-list">
+                    <div class="col-6 artist-songs song-list" id="song-list">
                         <h2>Songs</h2>
         
                         <table class="table">
@@ -76,7 +87,6 @@
                                     <td>
                                         <div class="d-flex justify-content-start align-items-center">
                                             <div class="song-list-cover">
-                                                <img *ngIf="song.coverImage == undefined" src="../../../../assets/images/song{{song._id}}.webp" alt="" id="{{song._id}}-cover">
                                                 <img *ngIf="song.coverImage !== undefined" src="" alt="" id="{{song._id}}-cover">
                                             </div>
                                             <div class="song-list-info mt-1 ms-2">

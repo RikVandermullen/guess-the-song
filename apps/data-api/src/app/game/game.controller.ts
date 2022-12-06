@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { GameService } from './game.service';
 import { Game } from '../../../../../libs/data/src/lib/game.model';
 import { ISong } from 'libs/data/src/lib/song.interface';
@@ -28,6 +28,11 @@ export class GameController {
     @Post()
     async addGame(@Body() game: Game) : Promise<Game> {
         return this.gameService.addGame(game.name!, game.amountOfPlays!, game.createdOn!, game.description!, game.genres!, game.songs!, game.isPrivate!, game.madeBy!);
+    }
+
+    @Post("random?")
+    async addGameWithRandomSongs(@Body() game: Game, @Query('amount') amount: string) : Promise<Game> {
+        return this.gameService.addGameWithRandomSongs(game.name!, game.amountOfPlays!, game.createdOn!, game.description!, game.genres!, game.songs!, game.isPrivate!, game.madeBy!, parseInt(amount));
     }
 
     @Delete(':id')
