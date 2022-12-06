@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Genre, Song } from '../../song/song.model';
+import { UserService } from '../../user/user.service';
 import { Game } from '../game.model';
 import { GameService } from '../game.service';
 
