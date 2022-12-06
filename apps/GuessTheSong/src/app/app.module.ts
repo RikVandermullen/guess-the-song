@@ -30,6 +30,7 @@ import { SongEditComponent } from './core/song/song-edit/song-edit.component';
 import { LoginComponent } from './core/auth/login/login.component';
 import { RegisterComponent } from './core/auth/register/register.component';
 import { httpInterceptorProviders } from './core/auth/auth.interceptor';
+import { LeaderboardComponent } from './feature/leaderboard/leaderboard.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { httpInterceptorProviders } from './core/auth/auth.interceptor';
     SongEditComponent,
     LoginComponent,
     RegisterComponent,
+    LeaderboardComponent,
   ],
   imports: [
     BrowserModule,

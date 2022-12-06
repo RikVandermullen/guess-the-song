@@ -1,0 +1,45 @@
+<div class="container mt-5" style="min-height: 100vh;">
+    <div class="row mt-5">
+        <div class="d-flex justify-content-center align-items-center">
+            <img src="../../../assets/images/trophy.png" class="trophy-icon me-2" alt="">
+            <img src="../../../assets/images/trophy.png" class="trophy-icon me-4" alt="">
+            <h1 class="text-center">Leaderboard</h1>
+            <img src="../../../assets/images/trophy.png" class="trophy-icon ms-4" alt="">
+            <img src="../../../assets/images/trophy.png" class="trophy-icon ms-2" alt="">
+        </div>
+        <hr>
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="row leaderboard">
+                <div class="col-12">
+                    <table class="table mt-2" style="min-width: 350px;">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Rank</th>
+                                <th scope="col" style="min-width: 100px;">Username</th>
+                                <th scope="col" style="min-width: 100px;">Score</th>
+                                <th scope="col" style="min-width: 120px;">Scored On</th>
+                                <th scope="col" style="min-width: 100px;">Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let score of scores; let i = index;">
+                                <th scope="row"></th>
+                                <td style="color: #F58F29">{{i + 1}}</td>
+                                <td>{{score.user!.name!}}</td>
+                                <td>{{score.finalScore!}}</td>
+                                <td>{{score.dateScored! | date : 'dd-MM-yyyy'}}</td>
+                                <td>{{score.amountOfTimePlayed! * 1000 | date:'mm:ss':'UTC'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center">
+            <button type="button" class="button-pink mt-4 me-3" routerLink="/games/{{gameId}}/play">Try Again</button>
+            <button type="button" class="button-yellow mt-4" routerLink="/games">Other Games</button>
+        </div>
+    </div>
+</div>

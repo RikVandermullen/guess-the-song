@@ -73,6 +73,10 @@ export class GameScoreComponent implements OnInit {
 	routeToGames() {
 		this.router.navigateByUrl('/games');
 	}
+
+	routeToLeaderboard() {
+		this.router.navigateByUrl(`games/${this.gameId}/leaderboard`);
+	}
 	  
 	ngOnDestroy() {
 		if (this.subscription) {

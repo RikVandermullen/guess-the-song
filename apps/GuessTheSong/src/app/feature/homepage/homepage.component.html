@@ -61,35 +61,21 @@
                         <thead>
                             <tr>
                                 <th scope="col"></th>
-                                <th scope="col">Rank</th>
-                                <th scope="col">Username</th>
-                                <th scope="col">Games Played</th>
-                                <th scope="col">Total Score</th>
+                                <th scope="col" style="min-width: 100px;">Rank</th>
+                                <th scope="col" style="min-width: 220px;">Username</th>
+                                <th scope="col" style="min-width: 170px;">Total Score</th>
+                                <th scope="col" style="min-width: 170px;">Total Games</th>
+                                <th scope="col" style="min-width: 170px;">Total Time</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr *ngFor="let score of scores; let i = index;">
                                 <th scope="row"></th>
-                                <td>1</td>
-                                <td>Rik</td>
-                                <td>500</td>
-                                <td>10000</td>
-                            </tr>
-
-                            <tr>
-                                <th scope="row"></th>
-                                <td>2</td>
-                                <td>Rik2</td>
-                                <td>200</td>
-                                <td>5000</td>
-                            </tr>
-
-                            <tr>
-                                <th scope="row"></th>
-                                <td>3</td>
-                                <td>Rik3</td>
-                                <td>100</td>
-                                <td>2500</td>
+                                <td style="color: #F58F29">{{i + 1}}</td>
+                                <td>{{score.user!.name!}}</td>
+                                <td>{{score.finalScore!}}</td>
+                                <td>{{score.totalGames!}}</td>
+                                <td>{{score.totalTime! * 1000 | date:'H:mm:ss':'UTC'}}</td>
                             </tr>
                         </tbody>
                     </table>

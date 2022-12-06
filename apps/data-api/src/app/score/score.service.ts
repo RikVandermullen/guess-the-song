@@ -37,4 +37,16 @@ export class ScoreService {
     async getLeaderboardPlace(gameId: string, score: number) : Promise<number> {        
         return this.scoreModel.find({gameId: gameId, finalScore: {$gt: score}}).count();
     }
+
+    async getTopLeaderboard() : Promise<IScore[]> {        
+        const scores = this.scoreModel.aggregate([{"$group" : 
+                                                    {_id:"$user._id", 
+                                                    finalScore: { $sum: "$finalScore" }, 
+                                                    totalGames: { $count: {}}, 
+                                                    totalTime: { $sum: "$amountOfTimePlayed"} } }, 
+                                                        { $sort : { finalScore : -1 } }, 
+                                                        { $limit : 15 }, 
+                                                        { $lookup: { from: 'users', localField: '_id', foreignField: '_id', as: 'user' } }, { $unwind: "$user" }]);
+        return scores;
+    }
 }

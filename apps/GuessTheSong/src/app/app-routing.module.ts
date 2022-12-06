@@ -17,6 +17,7 @@ import { GameScoreComponent } from './core/game/game-score/game-score.component'
 import { LoginComponent } from './core/auth/login/login.component';
 import { RegisterComponent } from './core/auth/register/register.component';
 import { AuthGuard } from './core/auth/auth.guard';
+import { LeaderboardComponent } from './feature/leaderboard/leaderboard.component';
 
 const routes: Routes = [
   {path: "", pathMatch: "full", component: HomepageComponent},
@@ -39,6 +40,7 @@ const routes: Routes = [
   {path: "games/:id/edit", pathMatch: "full", component: GameEditComponent},
   {path: "games/:id/play", pathMatch: "full", component: GamePlayComponent},
   {path: "games/:id/score", pathMatch: "full", component: GameScoreComponent},
+  {path: "games/:id/leaderboard", pathMatch: "full", component: LeaderboardComponent},
 ];
 
 @NgModule({

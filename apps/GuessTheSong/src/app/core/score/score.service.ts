@@ -69,4 +69,16 @@ export class ScoreService {
       })
     );
   }
+
+  getTopLeaderboard(): Observable<Score[]> {
+    const url = "/api/scores/leaderboard";
+    console.log("get: " + url);
+
+    return this.http.get<Score[]>(url).pipe(
+      map((response: Score[]) => response),
+      tap((scores: Score[]) => {
+        return scores;
+      })
+    );
+  }
 }
