@@ -13,6 +13,7 @@
         "main": "apps/GuessTheSong/src/main.ts",
         "polyfills": "apps/GuessTheSong/src/polyfills.ts",
         "tsConfig": "apps/GuessTheSong/tsconfig.app.json",
+        "proxyConfig" : "apps/GuessTheSong/proxy.conf.json",
         "assets": [
           "apps/GuessTheSong/src/favicon.ico",
           "apps/GuessTheSong/src/assets",

@@ -1,6 +1,6 @@
 {
     "/api": {
-      "target": "https://cswf-production.up.railway.app/",
+      "target": "https://cswf-production.up.railway.app",
       "secure": false,
       "changeOrigin": true 
     }
