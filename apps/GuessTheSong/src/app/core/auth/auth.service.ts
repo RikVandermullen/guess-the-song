@@ -34,7 +34,7 @@ export class AuthService {
 
   login(formData: UserCredentials): Observable<Token | undefined> {
     return this.http
-      .post<UserCredentials>(environment.apiUrl + "api/auth/login", formData,
+      .post<UserCredentials>(environment.apiUrl + "/api/auth/login", formData,
         {
           headers: this.headers,
         }
@@ -62,7 +62,7 @@ export class AuthService {
   register(userData: UserRegistration): Observable<string | undefined> {
     return this.http
       .post<string>(environment.apiUrl +
-        "api/auth/register", userData,
+        "/api/auth/register", userData,
         {
           headers: this.headers,
         }
