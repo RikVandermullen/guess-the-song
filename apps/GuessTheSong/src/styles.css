@@ -87,13 +87,13 @@ p {
 
 .button-purple {
     border-radius: 12px;
-    background-color: var(--dark-purple);
+    background-color: var(--light-purple);
     min-height: 56px;
     min-width: 195px;
     border: none;
     color: white;
     font-size: 20px;
-    box-shadow: #954DAC 0px 5px;
+    box-shadow: #793c8d 0px 5px;
     transition: 0.3s ease-out;
 }
 
@@ -302,6 +302,23 @@ select:not(.multiple) option {
     transition: 0.3s ease-in;
 }
 
+.actions-icon-bigger {
+    max-width: 75px;
+    transition: 0.3s ease-out;
+}
+
+.actions-icon-bigger:is(.selected) {
+    padding: 5px;
+    border: 2px solid var(--yellow);
+    border-radius: 15px;
+}
+
+.actions-icon-bigger:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.3s ease-in;
+}
+
 .song-list td {
     height: 100%;
     line-height: 100%;
@@ -322,5 +339,11 @@ select:not(.multiple) option {
 
 .info-icon {
     max-width: 16px;
+    margin-bottom: 10px;
+}
+
+.line-yellow {
+    border-bottom: 2px solid var(--yellow);
+    width: 75%;
     margin-bottom: 10px;
 }

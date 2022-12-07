@@ -9,8 +9,8 @@
                     <p>Birthday: {{artist.birthDate | date : 'dd-MM-yyyy' }}</p>
                     <p>{{artist.description}}</p>
 
-                    <button type="button" class="button-pink mt-2 me-3" routerLink="../edit" routerLinkActive="true">Edit</button>
-                    <button type="button" class="button-yellow mt-2" (click)="deleteArtist(artist)">Delete</button>
+                    <button *ngIf="isLoggedInUserAdmin" type="button" class="button-pink mt-2 me-3" routerLink="../{{artist._id}}/edit" routerLinkActive="true">Edit</button>
+                    <button *ngIf="isLoggedInUserAdmin" type="button" class="button-yellow mt-2" (click)="deleteArtist(artist)">Delete</button>
                 </div>
             </div>
         </div>
@@ -34,12 +34,11 @@
                             <td>
                                 <div class="d-flex justify-content-start align-items-center">
                                     <div class="song-list-cover">
-                                        <img *ngIf="song.coverImage == undefined" src="../../../../assets/images/song{{song.id}}.webp" alt="" id="{{song.id}}-cover">
-                                        <img *ngIf="song.coverImage !== undefined" src="" alt="" id="{{song.id}}-cover">
+                                        <img *ngIf="song.coverImage !== undefined" src="" alt="" id="{{song._id}}-cover">
                                     </div>
                                     <div class="song-list-info mt-3 ms-2">
                                         <h3>{{song.title}}</h3>
-                                        <p>{{song.artist}}</p>
+                                        <p></p>
                                     </div>
                                 </div>
                             </td>

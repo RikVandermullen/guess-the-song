@@ -9,8 +9,9 @@ export class Game {
     genres: Genre[] = [];
     songs: Song[] = [];
     isPrivate: boolean | undefined;
+    madeBy: string | undefined;
 
-    constructor(_id: string, name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: Song[], isPrivate: boolean) {
+    constructor(_id: string, name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: Song[], isPrivate: boolean, madeBy: string) {
         this._id = _id;
         this.name = name;
         this.amountOfPlays = amountOfPlays;
@@ -19,5 +20,6 @@ export class Game {
         this.genres = genres;
         this.songs = songs;
         this.isPrivate = isPrivate;
+        this.madeBy = madeBy;
     }
 }

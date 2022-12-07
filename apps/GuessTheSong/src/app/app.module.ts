@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +27,10 @@ import { GameDetailComponent } from './core/game/game-detail/game-detail.compone
 import { GamePlayComponent } from './core/game/game-play/game-play.component';
 import { GameScoreComponent } from './core/game/game-score/game-score.component';
 import { SongEditComponent } from './core/song/song-edit/song-edit.component';
+import { LoginComponent } from './core/auth/login/login.component';
+import { RegisterComponent } from './core/auth/register/register.component';
+import { httpInterceptorProviders } from './core/auth/auth.interceptor';
+import { LeaderboardComponent } from './feature/leaderboard/leaderboard.component';
 
 @NgModule({
   declarations: [
@@ -51,9 +56,18 @@ import { SongEditComponent } from './core/song/song-edit/song-edit.component';
     GamePlayComponent,
     GameScoreComponent,
     SongEditComponent,
+    LoginComponent,
+    RegisterComponent,
+    LeaderboardComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgbModule,
+    FormsModule,
+    HttpClientModule,
+  ],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

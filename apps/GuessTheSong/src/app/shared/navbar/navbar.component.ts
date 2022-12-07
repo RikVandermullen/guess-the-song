@@ -7,9 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   collapsed = true;
+  loggedIn: boolean = false;
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {   
+    if (localStorage.getItem('currentuser') !== null) {
+      this.loggedIn = true;
+    } else {
+      this.loggedIn = false;
+    }
+  }
+
+  ngOnChanges(): void {
+    if (localStorage.getItem('currentuser') !== null) {
+      this.loggedIn = true;
+    } else {
+      this.loggedIn = false;
+    }
   }
 
 }

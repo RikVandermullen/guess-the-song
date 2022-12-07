@@ -39,7 +39,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12 input-wrap">
+                    <!-- <div class="col-12 input-wrap">
                         <label>Artist</label><br />
                         <input type="text" class="form-input" name="artist" [(ngModel)]="song!.artist" #artist="ngModel" minlength="3" required [ngClass]="{'is-invalid': artist.invalid && artist.touched}"/>
                         <div *ngIf="artist.invalid && artist.touched" class="invalid-feedback">
@@ -49,6 +49,14 @@
                             <div *ngIf="artist.errors!['minlength']">
                                 Artist must be 3 chars long.
                             </div>
+                        </div>
+                    </div> -->
+                    <div class="col-12">
+                        <div class="select-wrap mt-3">
+                            <label for="artist">Artist</label>
+                            <select class="mt-1" style="width: 100%;" name="song.artist" [(ngModel)]="song.artist" #song.artist="ngModel" required>
+                                <option *ngFor="let artist of artists;" [ngValue]="artist"> {{artist.name}}</option>
+                            </select>
                         </div>
                     </div>
 
@@ -99,7 +107,7 @@
                 <div class="col-12 preview-song-info mt-3">
                     <div class="preview-song-text">
                         <p>Title: {{song.title}}</p>
-                        <p>Artist: {{song.artist}}</p>
+                        <p>Artist: {{song.artist!.name!}}</p>
                         <p>Album: {{song.album}}</p>
                         <p>Date Published: {{song.publishedOn |  date : 'dd-MM-yyyy' }}</p>
                         <p>Genres: {{song.genres}}</p>

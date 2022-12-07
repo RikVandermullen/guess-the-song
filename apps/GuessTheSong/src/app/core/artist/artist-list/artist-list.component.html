@@ -3,17 +3,16 @@
         <div class="col-10">
             <h1>Artists</h1>
         </div>
-        <div class="col-2">
+        <div *ngIf="isLoggedInUserAdmin" class="col-2">
             <button type="button" class="button-yellow mt-2" routerLink="/artists/new" routerLinkActive="true">New Artist</button>
         </div>
     </div>
     <hr>
     <div class="row gy-4">
         <div *ngFor="let artist of artists" class="col-4">
-            <a routerLink="{{artist.id}}/details" routerLinkActive="true">
+            <a routerLink="{{artist._id}}" routerLinkActive="true">
                 <div class="artist-preview">
-                    <img *ngIf="artist.image == undefined" src="../../../../assets/images/artist{{artist.id}}.jpg" alt="" id="{{artist.id}}-artist">
-                    <img *ngIf="artist.image !== undefined" src="" alt="" id="{{artist.id}}-cover">
+                    <img *ngIf="artist.image !== undefined" src="" alt="" id="{{artist._id}}-cover">
                     <h3>{{artist.name}}</h3>
                 </div>
             </a>

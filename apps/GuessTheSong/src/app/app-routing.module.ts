@@ -14,33 +14,71 @@ import { GameListComponent } from './core/game/game-list/game-list.component';
 import { GameEditComponent } from './core/game/game-edit/game-edit.component';
 import { GamePlayComponent } from './core/game/game-play/game-play.component';
 import { GameScoreComponent } from './core/game/game-score/game-score.component';
+import { LoginComponent } from './core/auth/login/login.component';
+import { RegisterComponent } from './core/auth/register/register.component';
+import { AuthGuard } from './core/auth/auth.guard';
+import { LeaderboardComponent } from './feature/leaderboard/leaderboard.component';
 
 const routes: Routes = [
-  {path: "", pathMatch: "full", component: HomepageComponent},
-  {path: "about", pathMatch: "full", component: AboutpageComponent},
-  {path: "songs/new", pathMatch: "full", component: SongEditComponent},
-  {path: "songs", pathMatch: "full", component: SongListComponent},
-  {path: "songs/:id", pathMatch: "full", component: SongDetailComponent},
-  {path: "songs/:id/edit", pathMatch: "full", component: SongEditComponent},
-  {path: "profile/:id", pathMatch: "full", component: ProfilepageComponent, children: [
-    {path: "", component: UserDetailsComponent}
-  ]},
-  {path: "artists", pathMatch: "full", component: ArtistListComponent},
-  {path: "artists/new", pathMatch: "full", component: ArtistEditComponent},
-  {path: "artists/:id/details", pathMatch: "full", component: ArtistDetailComponent},
-  {path: "artists/:id/edit", pathMatch: "full", component: ArtistEditComponent},
-  {path: "games", pathMatch: "full", component: GameListComponent},
-  {path: "games/new", pathMatch: "full", component: GameEditComponent},
-  {path: "games/:id/edit", pathMatch: "full", component: GameEditComponent},
-  {path: "games/:id/play", pathMatch: "full", component: GamePlayComponent},
-  {path: "games/:id/scores/:userId", pathMatch: "full", component: GameScoreComponent},
+	{path: "", pathMatch: "full", component: HomepageComponent},
+	{path: "login", pathMatch: "full", component: LoginComponent},
+	{path: "register", pathMatch: "full", component: RegisterComponent},
+	{path: "about", pathMatch: "full", component: AboutpageComponent},
+	{path: "songs/new", pathMatch: "full", component: SongEditComponent, 
+		canActivate: [AuthGuard],
+		data: {roles: ['ADMIN']}
+	},
+	{path: "songs", pathMatch: "full", component: SongListComponent},
+	{path: "songs/:id", pathMatch: "full", component: SongDetailComponent},
+	{path: "songs/:id/edit", pathMatch: "full", component: SongEditComponent, 
+		canActivate: [AuthGuard], 
+		data: {roles: 'ADMIN'}
+	},
+	{path: "profile", pathMatch: "full", component: ProfilepageComponent, 
+		canActivate: [AuthGuard],
+		data: {roles: 'PLAYER'},
+		children: [
+		{
+			path: "", component: UserDetailsComponent, 
+			canActivate: [AuthGuard],
+			data: {roles: 'PLAYER'}
+		}
+	]},
+	{path: "artists", pathMatch: "full", component: ArtistListComponent},
+	{path: "artists/new", pathMatch: "full", component: ArtistEditComponent,
+		canActivate: [AuthGuard],
+		data: {roles: ['ADMIN']}
+	},
+	{path: "artists/:id", pathMatch: "full", component: ArtistDetailComponent},
+	{path: "artists/:id/edit", pathMatch: "full", component: ArtistEditComponent,
+		canActivate: [AuthGuard],
+		data: {roles: ['ADMIN']}
+	},
+	{path: "games", pathMatch: "full", component: GameListComponent},
+	{path: "games/new", pathMatch: "full", component: GameEditComponent,
+		canActivate: [AuthGuard],
+		data: {roles: ['PLAYER']}
+	},
+	{path: "games/:id/edit", pathMatch: "full", component: GameEditComponent,
+		canActivate: [AuthGuard],
+		data: {roles: ['PLAYER']}
+	},
+	{path: "games/:id/play", pathMatch: "full", component: GamePlayComponent,
+		canActivate: [AuthGuard],
+		data: {roles: ['PLAYER']}
+	},
+	{path: "games/:id/score", pathMatch: "full", component: GameScoreComponent,
+		canActivate: [AuthGuard],
+		data: {roles: ['PLAYER']}
+	},
+	{path: "games/:id/leaderboard", pathMatch: "full", component: LeaderboardComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{
-    scrollPositionRestoration: 'enabled',
-    anchorScrolling: 'enabled',
-  })],
-  exports: [RouterModule]
-})
+	imports: [RouterModule.forRoot(routes,{
+		scrollPositionRestoration: 'enabled',
+		anchorScrolling: 'enabled',
+	})],
+	exports: [RouterModule]
+	})
 export class AppRoutingModule { }
