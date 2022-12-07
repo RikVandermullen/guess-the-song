@@ -5,6 +5,7 @@ import { ISong } from '../../../../../../libs/data/src/lib/song.interface'
 import { IArtist } from '../../../../../../libs/data/src/lib/artist.interface'
 import { map, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ArtistService {
   constructor(private http: HttpClient) { }
 
   getAllArtists(): Observable<IArtist[]> {
-		const url = "/api/artists";
+		const url = environment.apiUrl + "/api/artists";
 	
 		return this.http.get<IArtist[]>(url).pipe(
         map((response: IArtist[]) => response),
@@ -25,7 +26,7 @@ export class ArtistService {
 	}
 
   getArtistById(id: string): Observable<IArtist> {
-    const url = "/api/artists/" + id;
+    const url = environment.apiUrl + "/api/artists/" + id;
   
     return this.http.get<IArtist>(url).pipe(
       map((response: IArtist) => response),
@@ -36,7 +37,7 @@ export class ArtistService {
   }
 
   getArtistSongs(id: string): Observable<ISong[]> {
-    const url = "/api/artists/" + id + "/songs";
+    const url = environment.apiUrl + "/api/artists/" + id + "/songs";
 
     return this.http.get<ISong[]>(url).pipe(
       map((response: ISong[]) => response),
@@ -47,7 +48,7 @@ export class ArtistService {
   }
 
   createArtist(artist: Artist, base64image: string): Observable<Artist> {
-    const url = "/api/artists";
+    const url = environment.apiUrl + "/api/artists";
 
     let iSongs: ISong[] = [];
     artist.songs.forEach(song => {
@@ -67,7 +68,7 @@ export class ArtistService {
   updateArtist(artist: Artist, base64image: string): Observable<Artist> {
 		console.log(artist);
 		
-		const url = "/api/artists/" + artist._id;
+		const url = environment.apiUrl + "/api/artists/" + artist._id;
 
     let iSongs: ISong[] = [];
     artist.songs.forEach(song => {
@@ -85,7 +86,7 @@ export class ArtistService {
 	}
 
   deleteArtist(artist: Artist): void {
-    const url = "/api/artists/" + artist._id!;
+    const url = environment.apiUrl + "/api/artists/" + artist._id!;
 
 		this.http.delete<Artist>(url).subscribe();   
   }

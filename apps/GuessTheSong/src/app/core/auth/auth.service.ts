@@ -5,6 +5,7 @@ import { BehaviorSubject, catchError, map, Observable, of, switchMap } from 'rxj
 import { User } from '../user/user.model';
 import { UserCredentials, Token } from '../../../../../../libs/data/src/lib/auth.interface'
 import { UserRegistration } from '../../../../../../libs/data/src/lib/user-auth.model'
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class AuthService {
 
   login(formData: UserCredentials): Observable<Token | undefined> {
     return this.http
-      .post<UserCredentials>("api/auth/login", formData,
+      .post<UserCredentials>(environment.apiUrl + "api/auth/login", formData,
         {
           headers: this.headers,
         }
@@ -60,7 +61,7 @@ export class AuthService {
 
   register(userData: UserRegistration): Observable<string | undefined> {
     return this.http
-      .post<string>(
+      .post<string>(environment.apiUrl +
         "api/auth/register", userData,
         {
           headers: this.headers,

@@ -4,6 +4,7 @@ import { map, Observable, tap } from 'rxjs';
 import { Genre, Song } from '../song/song.model';
 import { Game } from '../../../../../../libs/data/src/lib/game.model';
 import { ISong } from '../../../../../../libs/data/src/lib/song.interface';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class GameService {
   constructor(private http: HttpClient) { }
 
   getAllGames(): Observable<Game[]> {
-    const url = "/api/games";
+    const url = environment.apiUrl + "/api/games";
 	
 		return this.http.get<Game[]>(url).pipe(
         map((response: Game[]) => response),
@@ -24,7 +25,7 @@ export class GameService {
   }
 
   getGameById(id: string) : Observable<Game> {
-    const url = "/api/games/" + id;
+    const url = environment.apiUrl + "/api/games/" + id;
   
     return this.http.get<Game>(url).pipe(
       map((response: Game) => response),
@@ -35,7 +36,7 @@ export class GameService {
   }
 
   createGame(name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: ISong[], isPrivate: boolean, madeBy: string): Observable<Game> {
-    const url = "/api/games";
+    const url = environment.apiUrl + "/api/games";
 
     let iSongs: ISong[] = [];
     songs.forEach(song => {
@@ -53,7 +54,7 @@ export class GameService {
   }
 
   createRandomGame(name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: ISong[], isPrivate: boolean, madeBy: string, amount: number): Observable<Game> {
-    const url = "/api/games/random?amount=" + amount;
+    const url = environment.apiUrl + "/api/games/random?amount=" + amount;
 
     let newGame = new Game("", name, amountOfPlays, createdOn, description, genres, songs, isPrivate, madeBy);
     
@@ -66,7 +67,7 @@ export class GameService {
   }
 
   updateGame(id: string, name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: ISong[], isPrivate: boolean, madeBy: string): Observable<Game> {
-    const url = "/api/games/" + id;
+    const url = environment.apiUrl + "/api/games/" + id;
 
     let iSongs: ISong[] = [];
     songs.forEach(song => {
@@ -84,14 +85,14 @@ export class GameService {
   }
 
   deletegame(game: Game): void {
-    const url = "/api/games/" + game._id!;
+    const url = environment.apiUrl + "/api/games/" + game._id!;
 
 		this.http.delete<Game>(url).subscribe();   
    
   }
 
   addPlayToGame(gameId: string, amountOfPlays: number): void {
-    const url = "/api/games/" + gameId! + "/plays";
+    const url = environment.apiUrl + "/api/games/" + gameId! + "/plays";
     let body = JSON.parse(`{"result": "${amountOfPlays}"}`);
     
     this.http.put<Game>(url, body).subscribe();

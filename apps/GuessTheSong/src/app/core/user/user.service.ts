@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable, tap } from 'rxjs';
 import { User } from './user.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class UserService {
 	constructor(private http: HttpClient) { }
 
 	getAllUsers(): Observable<User[]> {
-		const url = "/api/users";
+		const url = environment.apiUrl + "/api/users";
 	
 		return this.http.get<User[]>(url).pipe(
             map((response: User[]) => response),
@@ -22,7 +23,7 @@ export class UserService {
 	}
 
 	getUserById(id: string): Observable<User> {
-		const url = "/api/users/" + id;
+		const url = environment.apiUrl + "/api/users/" + id;
 
 		return this.http.get<User>(url).pipe(
             map((response: User) => response),
@@ -33,7 +34,7 @@ export class UserService {
 	}
 
 	updateUser(user: User): Observable<User> {		
-		const url = "/api/users/" + user._id;
+		const url = environment.apiUrl + "/api/users/" + user._id;
 
 		return this.http.put<User>(url, user).pipe(
             map((response: User) => response),
@@ -44,7 +45,7 @@ export class UserService {
 	}
 
 	deleteUser(id: string): void {
-		const url = "/api/users/" + id;
+		const url = environment.apiUrl + "/api/users/" + id;
 
 		this.http.delete<User>(url).subscribe();
 	}
