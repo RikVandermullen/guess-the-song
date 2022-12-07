@@ -1,11 +1,7 @@
 {
-    "/api": {
-      "target":  {
-        "host": "cswf-production.up.railway.app",
-        "protocol": "https:",
-        "port": 3333
-      },
-      "secure": false,
-      "changeOrigin": true
-    }
+  "/api": {
+    "target": "http://localhost:3333",
+    "secure": false,
+    "changeOrigin": true 
+  }
 }
