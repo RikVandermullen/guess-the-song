@@ -4,6 +4,7 @@
     "GuessTheSong": "apps/GuessTheSong",
     "data": "libs/data",
     "data-api": "apps/data-api",
-    "guess-the-song-e2e": "apps/GuessTheSong-e2e"
+    "guess-the-song-e2e": "apps/GuessTheSong-e2e",
+    "neo4j": "apps/neo4j"
   }
 }

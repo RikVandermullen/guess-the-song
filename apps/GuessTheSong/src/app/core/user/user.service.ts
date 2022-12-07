@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable, tap } from 'rxjs';
 import { User } from './user.model';
+import { UserSongs } from '../../../../../../libs/data/src/lib/user-songs.model';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -48,5 +49,17 @@ export class UserService {
 		const url = environment.apiUrl + "/api/users/" + id;
 
 		this.http.delete<User>(url).subscribe();
+	}
+
+	addUserWithSongsToNeo4j(userSongs: UserSongs): void {
+		const url = environment.neoApiUrl + `/neo4j-api/user-songs`;
+
+		this.http.post<User>(url, userSongs).subscribe();
+	}
+
+	addUserToNeo4j(userId: string): void {
+		const url = environment.neoApiUrl + `/neo4j-api/user/` + userId;
+
+		this.http.get<User>(url).subscribe();
 	}
 }

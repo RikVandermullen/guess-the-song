@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IArtist } from '../../../../../../../libs/data/src/lib/artist.interface';
+import { UserSongs } from '../../../../../../../libs/data/src/lib/user-songs.model';
 import { Score } from '../../score/score.model';
 import { ScoreService } from '../../score/score.service';
 import { Song } from '../../song/song.model';
@@ -176,6 +177,8 @@ export class GamePlayComponent implements OnInit {
 			this.subscription = this.scoreService.createScore(this.score).subscribe();
 		} 
 		this.gameService.addPlayToGame(this.gameId!, this.game.amountOfPlays!);
+		let userSongs = new UserSongs(this.user._id!, this.game.songs.map(song => song._id!));
+		this.userService.addUserWithSongsToNeo4j(userSongs);
 	}
 
 	showScore() {

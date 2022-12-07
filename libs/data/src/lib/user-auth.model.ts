@@ -4,13 +4,15 @@ export class UserRegistration {
     name: string;
     phoneNumber: string;
     birthDate: Date;
+    roles: string[];
 
-    constructor(name: string, emailAddress: string, password: string, birthDate: Date, phoneNumber: string) {
+    constructor(name: string, emailAddress: string, password: string, birthDate: Date, phoneNumber: string, roles: string[]) {
         this.emailAddress = emailAddress;
         this.password = password;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
+        this.roles = roles;
     }
 }
 

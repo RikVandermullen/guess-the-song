@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { SongService } from './song.service';
 import { ISong } from '../../../../../libs/data/src/lib/song.interface'
+import mongoose, { ObjectId } from 'mongoose';
 
 @Controller('songs')
 export class SongController {
@@ -16,6 +17,11 @@ export class SongController {
     @Get(':id')
     async getSongById(@Param('id') id: string): Promise<ISong[]> {
         return this.songService.getSongById(id);
+    }
+
+    @Post()
+    async getSongByIdArray(@Body() ids: string[]): Promise<ISong[]> {                      
+        return this.songService.getSongsByIdArray(ids);
     }
 
     @Post()

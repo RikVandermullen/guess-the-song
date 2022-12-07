@@ -89,7 +89,11 @@ export class GameEditComponent implements OnInit {
 			if (this.gameMode === 2) {
 				this.subscription = this.gameService.createRandomGame(this.game.name!, this.game.amountOfPlays!, this.game.createdOn!, this.game.description!, this.game.genres!, [], this.game.isPrivate!, this.game.madeBy!, this.songAmount).subscribe();
 			} else if (this.gameMode === 3) {
-				this.subscription = this.gameService.createGame(this.game.name!, this.game.amountOfPlays!, this.game.createdOn!, this.game.description!, this.game.genres!, this.base64ImageSongs!, this.game.isPrivate!, this.game.madeBy!).subscribe();
+				this.subscription = this.gameService.createGame(this.game.name!, this.game.amountOfPlays!, this.game.createdOn!, this.game.description!, this.game.genres!, this.base64ImageSongs!, this.game.isPrivate!, this.game.madeBy!, this.songAmount).subscribe();
+			} else if (this.gameMode === 1) {
+				console.log(this.game.name);
+				
+				this.subscription = this.gameService.createRecommendedGame(this.game.name!, this.game.amountOfPlays!, this.game.createdOn!, this.game.description!, this.game.genres!, this.base64ImageSongs!, this.game.isPrivate!, this.game.madeBy!, this.songAmount).subscribe();
 			}
 		}
 		this.router.navigateByUrl(`/games`);

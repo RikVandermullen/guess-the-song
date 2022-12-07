@@ -35,7 +35,7 @@
             </div>
 
             <div class="col-3">
-                <div class="d-flex justify-content-end align-items-start">
+                <div *ngIf="userId" class="d-flex justify-content-end align-items-start">
                     <button type="submit" class="button-pink mt-3" routerLink="new" routerLinkActive="true">New Game</button>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                                 <div class="col-6">
                                     <div class="d-flex justify-content-end align-items-end" style="min-height: 100%;">
                                         <button *ngIf="userId === game.madeBy" type="submit" class="button-purple mb-2 me-3" routerLink="{{game._id}}/edit" routerLinkActive="true">Edit</button>
-                                        <button type="submit" class="button-pink mb-2 me-3" routerLink="{{game._id}}/play" routerLinkActive="true">Play</button>
+                                        <button *ngIf="userId" type="submit" class="button-pink mb-2 me-3" routerLink="{{game._id}}/play" routerLinkActive="true">Play</button>
                                         <button type="submit" class="button-yellow mb-2" routerLink="{{game._id}}/leaderboard" routerLinkActive="true">Leaderboard</button>
                                     </div>
                                 </div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import mongoose, { Model } from 'mongoose';
+import mongoose, { Model, ObjectId } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Song as SongModel, SongDocument } from './song.schema';
@@ -22,6 +22,14 @@ export class SongService {
     async getSongById(songId: string): Promise<ISong[]> {
         return this.songModel.aggregate([
             { $match: { _id: new mongoose.Types.ObjectId(songId) } }, { $lookup: { from: 'artists', localField: 'artist', foreignField: '_id', as: 'artist' } }, { $unwind: { path: '$artist', preserveNullAndEmptyArrays: true } }
+        ])
+    }
+
+    async getSongsByIdArray(songIds: string[]): Promise<ISong[]> {
+        const songObjectIds = songIds.map(id => new mongoose.Types.ObjectId(id));
+
+        return this.songModel.aggregate([
+            { $match: { _id: { $in: songObjectIds } } }, { $lookup: { from: 'artists', localField: 'artist', foreignField: '_id', as: 'artist' } }, { $unwind: { path: '$artist', preserveNullAndEmptyArrays: true } }
         ])
     }
 
