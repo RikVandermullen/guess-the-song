@@ -14,7 +14,7 @@ export class GameService {
   constructor(private http: HttpClient) { }
 
   getAllGames(): Observable<Game[]> {
-    const url = environment.apiUrl + "/api/games";
+    const url = "https://cswf-production.up.railway.app/api/games";
 	
 		return this.http.get<Game[]>(url).pipe(
         map((response: Game[]) => response),
