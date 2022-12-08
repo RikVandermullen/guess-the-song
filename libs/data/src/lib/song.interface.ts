@@ -1,5 +1,3 @@
-import { IArtist } from "./artist.interface";
-
 export enum Genre {
     Pop = 'Pop',
     Rock = 'Rock',

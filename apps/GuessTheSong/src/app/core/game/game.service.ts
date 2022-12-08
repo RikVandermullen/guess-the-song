@@ -2,17 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
 import { Genre, Song } from '../song/song.model';
-// import { Game } from '../../../../../../libs/data/src/lib/game.model';
 import { Game } from './game.model';
-import { ISong } from '../../../../../../libs/data/src/lib/song.interface';
 import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
   
-  	constructor(private http: HttpClient) { }
+  	constructor(private http: HttpClient, private router: Router) { }
 
 	getAllGames(isPrivate: boolean): Observable<Game[]> {
 		let url = environment.apiUrl + "/api/games?private=false";
@@ -55,6 +54,7 @@ export class GameService {
 		return this.http.post<Game>(url, game).pipe(
 			map((response: Game) => response),
 			tap((game: Game) => {
+				this.router.navigate([`/games/me`]);
 				return game;
 			})
 		);
@@ -66,6 +66,7 @@ export class GameService {
 		return this.http.post<Game>(url, game).pipe(
 			map((response: Game) => response),
 			tap((game: Game) => {
+				this.router.navigate([`/games/me`]);
 				return game;
 			})
 		);
@@ -80,9 +81,9 @@ export class GameService {
 			this.http.post<Song[]>(environment.apiUrl + "/api/songs/array", ids).subscribe((songs: Song[]) => {
 				const url = environment.apiUrl + "/api/games";
 
-				game.songs! = songs;		
+				game.songs! = songs;	
+				this.router.navigate([`/games/me`]);	
 				return this.http.post<Game>(url, game).subscribe()
-				
 			});
 		})
 		
@@ -95,6 +96,7 @@ export class GameService {
 		return this.http.put<Game>(url, game).pipe(
 			map((response: Game) => response),
 			tap((game: Game) => {
+				this.router.navigate([`/games/me`]);
 				return game;
 			})
 		);
@@ -102,7 +104,8 @@ export class GameService {
 
 	deletegame(gameId: string): void {
 		const url = environment.apiUrl + "/api/games/" + gameId!;
-		this.http.delete<Game>(url).subscribe();   
+		this.http.delete<Game>(url).subscribe();
+		this.router.navigate([`/games/me`]); 
 	}
 
 	addPlayToGame(gameId: string, amountOfPlays: number): void {

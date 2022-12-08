@@ -71,7 +71,10 @@ export class SongEditComponent implements OnInit {
 		} else {		
 			this.subscription = this.songService.createSong(this.song!, this.base64Image).subscribe();
 		}
-		//this.router.navigate([`/songs`]);
+	}
+
+	deleteSong(id: string) {
+		this.songService.deleteSong(id);
 	}
 
 	uploadFile(event: Event) {

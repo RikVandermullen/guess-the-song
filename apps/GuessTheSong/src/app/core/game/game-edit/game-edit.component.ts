@@ -82,12 +82,10 @@ export class GameEditComponent implements OnInit {
 				this.subscription = this.gameService.createRecommendedGame(this.game!, this.songAmount).subscribe();
 			}
 		}
-		this.router.navigateByUrl(`/games/me`);
 	}
 
 	deleteGame() {
 		this.gameService.deletegame(this.gameId!);
-		this.router.navigateByUrl(`/games/me`);
 	}
 
   	songIsInGame(id: string) {

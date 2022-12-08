@@ -67,7 +67,6 @@ export class ArtistDetailComponent implements OnInit {
 
 	ngOnDestroy(): void {
         if (this.subscription) {
-            console.log("unsubscribing");
             this.subscription.unsubscribe();
         }
     }

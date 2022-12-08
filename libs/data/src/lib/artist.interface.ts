@@ -1,4 +1,5 @@
-import { ISong } from "./song.interface";
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { Song } from "../../../../apps/GuessTheSong/src/app/core/song/song.model";
 
 export class IArtist {
     _id: string;
@@ -6,9 +7,9 @@ export class IArtist {
     birthDate: Date;
     description: string;
     image: string;
-    songs: ISong[];
+    songs: Song[];
 
-    constructor(_id: string, name: string, birthDate: Date, description: string, image: string, songs: ISong[]) {
+    constructor(_id: string, name: string, birthDate: Date, description: string, image: string, songs: Song[]) {
         this._id = _id;
         this.name = name;
         this.birthDate = birthDate;

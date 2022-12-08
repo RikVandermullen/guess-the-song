@@ -67,13 +67,12 @@ export class ArtistEditComponent implements OnInit {
 	}
 
 	onSubmit() {	
-			if (this.artistExists) {
-				this.subscription = this.artistService.updateArtist(this.artist, this.base64Image).subscribe();			
-			} else {
-				this.artistService.createArtist(this.artist, this.base64Image).subscribe();
-			}
-			this.router.navigate([`/artists`]);
+		if (this.artistExists) {
+			this.subscription = this.artistService.updateArtist(this.artist, this.base64Image).subscribe();			
+		} else {
+			this.artistService.createArtist(this.artist, this.base64Image).subscribe();
 		}
+	}
 
 	uploadFile(event: Event) {
 		const element = event.currentTarget as HTMLInputElement;
@@ -118,7 +117,6 @@ export class ArtistEditComponent implements OnInit {
 
 	ngOnDestroy(): void {
         if (this.subscription) {
-            console.log("unsubscribing");
             this.subscription.unsubscribe();
         }
     }
