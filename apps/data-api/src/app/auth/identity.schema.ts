@@ -5,7 +5,6 @@ export type IdentityDocument = Identity & Document;
 
 @Schema()
 export class Identity {
-    id: string
 
     @Prop({
         required: true,

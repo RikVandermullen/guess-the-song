@@ -15,7 +15,7 @@ export class ArtistEditComponent implements OnInit {
 	artistExists: boolean = false;
 	artistId: string | null | undefined;
 	artistSongs: string[] | undefined;
-	artist: Artist = new Artist("undefined", "undefined", new Date(), "undefined", new File([""], "placeholder.jpg", {type: "image/jpg"}), []);
+	artist: Artist = new Artist("", "", new Date(), "", new File([""], "placeholder.jpg", {type: "image/jpg"}), []);
 	songs: Song[] | undefined;
 	base64Image: string = "";
 	subscription: Subscription | undefined;
