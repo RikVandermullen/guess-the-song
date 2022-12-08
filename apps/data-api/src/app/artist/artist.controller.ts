@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { ArtistService } from './artist.service';
 import { IArtist } from '../../../../../libs/data/src/lib/artist.interface'
 import { ISong } from 'libs/data/src/lib/song.interface';
+import { AdminGuard } from '../auth/admin.guard';
 
 @Controller('artists')
 export class ArtistController {
@@ -25,17 +26,20 @@ export class ArtistController {
     }
 
     @Post()
+    @UseGuards(AdminGuard)
     async addArtist(@Body() artist: IArtist) : Promise<IArtist> {
         let songs = artist.songs.map(song => song._id);            
         return this.artistService.addArtist(artist.name, artist.birthDate, artist.description, artist.image, songs);
     }
 
     @Delete(':id')
+    @UseGuards(AdminGuard)
     async deleteArtist(@Param('id') id: string): Promise<boolean> {
         return this.artistService.deleteArtist(id);
     }
 
     @Put(':id')
+    @UseGuards(AdminGuard)
     async updateArtist(@Param('id') id: string, @Body() artist: IArtist) : Promise<IArtist> {
         let songs = artist.songs.map(song => song._id);     
         return this.artistService.updateArtist(id, artist.name, artist.birthDate, artist.description, artist.image, songs);

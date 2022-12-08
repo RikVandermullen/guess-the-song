@@ -2,6 +2,8 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nes
 import { SongService } from './song.service';
 import { ISong } from '../../../../../libs/data/src/lib/song.interface'
 import mongoose, { ObjectId } from 'mongoose';
+import { AuthGuard } from '../auth/auth.guard';
+import { AdminGuard } from '../auth/admin.guard';
 
 @Controller('songs')
 export class SongController {
@@ -25,16 +27,19 @@ export class SongController {
     }
 
     @Post()
+    @UseGuards(AdminGuard)
     async addSong(@Body() song: ISong) : Promise<ISong[]> {       
         return this.songService.addSong(song.title, song.publishedOn, song.songLink, song.artist, song.album, song.coverImage, song.genres);
     }
 
     @Delete(':id')
+    @UseGuards(AdminGuard)
     async deleteSong(@Param('id') id: string): Promise<boolean> {
         return this.songService.deleteSong(id);
     }
 
     @Put(':id')
+    @UseGuards(AdminGuard)
     async updateSong(@Param('id') id: string, @Body() song: ISong) : Promise<ISong[]> {
         return this.songService.updateSong(id, song.title, song.publishedOn, song.songLink, song.artist, song.album, song.coverImage, song.genres);
     }

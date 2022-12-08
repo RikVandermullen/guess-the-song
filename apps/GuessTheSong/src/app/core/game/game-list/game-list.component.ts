@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Genre, Song } from '../../song/song.model';
 import { UserService } from '../../user/user.service';
@@ -14,11 +15,12 @@ export class GameListComponent implements OnInit {
 	games: Game[] | undefined;
 	subscription: Subscription | undefined;
 	userId: string | null | undefined;
+	isPrivate: boolean = false;
 
 	Genre = Genre;
 	genreKeys : string[] = [];
 
-	constructor(private gameService: GameService, private userService: UserService) {
+	constructor(private route: ActivatedRoute, private router: Router, private gameService: GameService, private userService: UserService) {
 		this.genreKeys = Object.keys(this.Genre);
 	}
 
@@ -26,20 +28,42 @@ export class GameListComponent implements OnInit {
 		const currentUser = JSON.parse(localStorage.getItem('currentuser')!);
 		this.userId = currentUser?.user._id;
 
-		let foundGames: Game[] = [];
-		this.subscription = this.gameService.getAllGames().subscribe((games) => {
-			games.forEach((game) => {
-				let foundSongs: Song[] = [];
-				game.songs.forEach((song) => {			
-					let image = this.dataURLtoFile(song.coverImage!, `${song._id}.jpg`);				
-					let newSong: Song = new Song(song._id, song.title, song.publishedOn, song.songLink, song.artist, song.album, image, song.genres)
-					foundSongs.push(newSong);
-				});
-				let foundGame: Game = new Game(game._id!, game.name!, game.amountOfPlays!, game.createdOn!, game.description!, game.genres!, foundSongs, game.isPrivate!, game.madeBy!);
-				foundGames.push(foundGame);
-			});
-			this.games = foundGames;
+		this.route.paramMap.subscribe((params) => {
+			if (params.get("me")) {
+				this.isPrivate = true;
+			}			  	  
 		});
+
+		let foundGames: Game[] = [];
+		if (this.isPrivate) {
+			this.subscription = this.gameService.getAllGamesByUserId(this.userId!).subscribe((games) => {
+				games.forEach((game) => {
+					let foundSongs: Song[] = [];
+					game.songs.forEach((song) => {			
+						let image = this.dataURLtoFile(song.coverImage!, `${song._id}.jpg`);				
+						let newSong: Song = new Song(song._id, song.title, song.publishedOn, song.songLink, song.artist, song.album, image, song.genres)
+						foundSongs.push(newSong);
+					});
+					let foundGame: Game = new Game(game._id!, game.name!, game.amountOfPlays!, game.createdOn!, game.description!, game.genres!, foundSongs, game.isPrivate!, game.madeBy!);
+					foundGames.push(foundGame);
+				});
+				this.games = foundGames;
+			});
+		} else {
+			this.subscription = this.gameService.getAllGames(false).subscribe((games) => {
+				games.forEach((game) => {
+					let foundSongs: Song[] = [];
+					game.songs.forEach((song) => {			
+						let image = this.dataURLtoFile(song.coverImage!, `${song._id}.jpg`);				
+						let newSong: Song = new Song(song._id, song.title, song.publishedOn, song.songLink, song.artist, song.album, image, song.genres)
+						foundSongs.push(newSong);
+					});
+					let foundGame: Game = new Game(game._id!, game.name!, game.amountOfPlays!, game.createdOn!, game.description!, game.genres!, foundSongs, game.isPrivate!, game.madeBy!);
+					foundGames.push(foundGame);
+				});
+				this.games = foundGames;
+			});
+		}
 	}
 
 	getLength(game: Game): number {

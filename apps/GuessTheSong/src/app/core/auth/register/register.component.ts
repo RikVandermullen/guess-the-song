@@ -10,16 +10,15 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-user: UserRegistration = new UserRegistration("", "", "", new Date(), "", ["PLAYER"]);
+  	user: UserRegistration = new UserRegistration("", "", "", new Date(), "", ["PLAYER"]);
   
-  constructor(private authService: AuthService, private userService: UserService) {}
+  	constructor(private authService: AuthService, private userService: UserService) {}
 
-  ngOnInit(): void {}
+  	ngOnInit(): void {}
 
-  onSubmit(): void {	   
+	onSubmit(): void {	   
 		this.authService.register(this.user!).subscribe((response:any) => {
-        this.userService.addUserToNeo4j(response.id);
-    });
-    
+			this.userService.addUserToNeo4j(response.id);
+		});
 	}
 }

@@ -15,12 +15,19 @@ export class GameService {
 
     }
 
-    async getAllGames(): Promise<Game[]> {
+    async getAllGames(isPrivate?: boolean): Promise<Game[]> {
+        if (isPrivate) {
+            return this.gameModel.find({isPrivate: isPrivate})
+        }
         return this.gameModel.find();
     }
 
     async getGameById(gameId: string): Promise<Game | null> {
         return this.gameModel.findById(gameId);
+    }
+
+    async getAllGamesByUserId(userId: string): Promise<Game[]> {
+        return this.gameModel.find({madeBy: userId});
     }
 
     async getGameSongs(gameId: string) : Promise<ISong[]> {

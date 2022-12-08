@@ -53,7 +53,7 @@ export class AuthService {
         const user = await this.userModel.findOne({emailAddress: emailAddress});
         
         return new Promise((resolve, reject) => {
-            sign({emailAddress, id: user!.id}, "Secret", (err: any, token: any) => {
+            sign({user}, "Secret", (err: any, token: any) => {
                 if (err) reject(err);
                 else resolve(token);
             });

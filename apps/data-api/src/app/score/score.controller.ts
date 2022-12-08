@@ -1,6 +1,8 @@
-import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { ScoreService } from './score.service';
 import {IScore } from '../../../../../libs/data/src/lib/score.interface';
+import { AdminGuard } from '../auth/admin.guard';
+import { PlayerGuard } from '../auth/player.guard';
 
 @Controller('scores')
 export class ScoreController {
@@ -29,11 +31,13 @@ export class ScoreController {
     }
 
     @Get(":userId/stats")
+    @UseGuards(PlayerGuard)
     async getUserStats(@Param('userId') userId: string) : Promise<IScore[]> {
         return this.scoreService.getUserStats(userId);
     }
 
     @Post()
+    @UseGuards(PlayerGuard)
     async addScore(@Body() score: IScore) : Promise<IScore> {
         return this.scoreService.addScore(score.gameId, score.user, score.dateScored, score.amountOfRightAnswers, score.amountOfTimePlayed, score.finalScore);
     }

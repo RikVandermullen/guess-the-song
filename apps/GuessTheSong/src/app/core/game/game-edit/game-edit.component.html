@@ -119,9 +119,10 @@
                 </div>
 
                 <button type="submit" class="button-pink mt-2 me-3" [disabled]="!gameEditForm.valid || amountOfPlays! > 0">Save</button>
-                <button type="button" class="button-yellow mt-2" routerLink="/games" routerLinkActive="true">Cancel</button>
+                <button type="button" class="button-purple mt-2" (click)="deleteGame()" [disabled]="amountOfPlays! > 0">Delete</button>
+                <button type="button" class="button-yellow mt-2 me-3" routerLink="/games" routerLinkActive="true">Cancel</button>
             </form>
-            <p class="text-danger mt-1" *ngIf="amountOfPlays! > 0">Game has been played and is not editable!</p>
+            <p class="text-danger mt-1" *ngIf="amountOfPlays! > 0">Game has been played and is not editable or deletable!</p>
         </div>
     </div>
 </div>

@@ -21,7 +21,7 @@ export class ArtistDetailComponent implements OnInit {
 
   ngOnInit(): void {
 	const currentUser = JSON.parse(localStorage.getItem('currentuser')!);
-	this.isLoggedInUserAdmin = currentUser?.user.roles.includes("ADMIN");
+	this.isLoggedInUserAdmin = currentUser?.user.roles.includes("ADMIN");	
 
     this.route.paramMap.subscribe((params) => {
 		this.artistId = params.get("id");			  	  

@@ -72,11 +72,11 @@ export class ArtistEditComponent implements OnInit {
 		});
 	}
 
-	onSubmit(): void {	
+	async onSubmit() {	
 			if (this.artistExists) {
-				this.subscription = this.artistService.updateArtist(this.artist, this.base64Image).subscribe();			
+				this.subscription = await this.artistService.updateArtist(this.artist, this.base64Image).subscribe();			
 			} else {
-				this.artistService.createArtist(this.artist, this.base64Image).subscribe();
+				await this.artistService.createArtist(this.artist, this.base64Image).subscribe();
 			}
 			this.router.navigate([`/artists`]);
 		}

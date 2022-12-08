@@ -13,10 +13,23 @@ export class GameService {
   
   	constructor(private http: HttpClient) { }
 
-	getAllGames(): Observable<Game[]> {
-		const url = environment.apiUrl + "/api/games";
-		
-			return this.http.get<Game[]>(url).pipe(
+	getAllGames(isPrivate: boolean): Observable<Game[]> {
+		let url = environment.apiUrl + "/api/games?private=false";
+
+		if (isPrivate) url += "?private=true";
+
+		return this.http.get<Game[]>(url).pipe(
+			map((response: Game[]) => response),
+			tap((games: Game[]) => {
+				return games;
+			})
+		);
+	}
+
+	getAllGamesByUserId(userId: string): Observable<Game[]> {
+		const url = environment.apiUrl + "/api/games/user/" + userId;
+
+		return this.http.get<Game[]>(url).pipe(
 			map((response: Game[]) => response),
 			tap((games: Game[]) => {
 				return games;
@@ -103,11 +116,9 @@ export class GameService {
 		);
 	}
 
-	deletegame(game: Game): void {
-		const url = environment.apiUrl + "/api/games/" + game._id!;
-
-			this.http.delete<Game>(url).subscribe();   
-	
+	deletegame(gameId: string): void {
+		const url = environment.apiUrl + "/api/games/" + gameId!;
+		this.http.delete<Game>(url).subscribe();   
 	}
 
 	addPlayToGame(gameId: string, amountOfPlays: number): void {

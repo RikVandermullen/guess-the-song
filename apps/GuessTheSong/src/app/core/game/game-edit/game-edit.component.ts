@@ -99,6 +99,11 @@ export class GameEditComponent implements OnInit {
 		this.router.navigateByUrl(`/games`);
 	}
 
+	deleteGame() {
+		this.gameService.deletegame(this.gameId!);
+		this.router.navigateByUrl(`/games/me`);
+	}
+
   	songIsInGame(id: string) {
 		const songs = this.game.songs.filter((song: Song) => song._id === id);
 		if (songs.length > 0) return true;

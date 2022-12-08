@@ -33,6 +33,8 @@ export class AuthService {
   }
 
   login(formData: UserCredentials): Observable<Token | undefined> {
+	console.log(formData);
+	
     return this.http
       .post<UserCredentials>(environment.apiUrl + "/api/auth/login", formData,
         {
