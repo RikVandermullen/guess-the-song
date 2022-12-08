@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Genre } from '../song/song.model';
+import { Genre, Song } from '../song/song.model';
 import { Artist } from './artist.model';
 import { ISong } from '../../../../../../libs/data/src/lib/song.interface'
 import { IArtist } from '../../../../../../libs/data/src/lib/artist.interface'
@@ -36,12 +36,12 @@ export class ArtistService {
     );
   }
 
-  getArtistSongs(id: string): Observable<ISong[]> {
+  getArtistSongs(id: string): Observable<Song[]> {
     const url = environment.apiUrl + "/api/artists/" + id + "/songs";
 
-    return this.http.get<ISong[]>(url).pipe(
-      map((response: ISong[]) => response),
-      tap((songs: ISong[]) => {
+    return this.http.get<Song[]>(url).pipe(
+      map((response: Song[]) => response),
+      tap((songs: Song[]) => {
           return songs;
       })
     );
@@ -52,7 +52,7 @@ export class ArtistService {
 
     let iSongs: ISong[] = [];
     artist.songs.forEach(song => {
-      iSongs.push(new ISong(song._id!, song.title!, song.publishedOn!, song.songLink!, song.artist!, song.album!, "", song.genres!));
+      iSongs.push(new ISong(song._id!, song.title!, song.publishedOn!, song.songLink!, song.artist!._id!, song.album!, "", song.genres!));
     });
 
     const iArtist = new IArtist("", artist.name!, artist.birthDate!, artist.description!, base64image, iSongs);
@@ -72,7 +72,7 @@ export class ArtistService {
 
     let iSongs: ISong[] = [];
     artist.songs.forEach(song => {
-      iSongs.push(new ISong(song._id!, song.title!, song.publishedOn!, song.songLink!, song.artist!, song.album!, "", song.genres!));
+      iSongs.push(new ISong(song._id!, song.title!, song.publishedOn!, song.songLink!, song.artist!._id!, song.album!, "", song.genres!));
     });
 
     const iArtist = new IArtist(artist._id!, artist.name!, artist.birthDate!, artist.description!, base64image, iSongs!);

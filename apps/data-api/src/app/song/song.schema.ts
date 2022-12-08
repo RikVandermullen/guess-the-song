@@ -19,7 +19,7 @@ export class Song {
     songLink?: string;
 
     @Prop({required: true})
-    artist?: Artist;
+    artist?: ObjectId;
 
     @Prop({required: true})
     album?: string;

@@ -5,7 +5,7 @@ import { AuthGuard } from "./auth.guard";
 export class PlayerGuard extends AuthGuard {
 
     constructor() {
-        super(['PLAYER']);
+        super(['PLAYER', 'ADMIN']);
     }
 
 }

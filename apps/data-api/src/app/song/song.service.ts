@@ -33,7 +33,7 @@ export class SongService {
         ])
     }
 
-    async addSong(title: string, publishedOn: Date, songLink: string, artist: IArtist, album: string, coverImage: string, genres: Genre[]) : Promise<ISong[]> {
+    async addSong(title: string, publishedOn: Date, songLink: string, artist: string, album: string, coverImage: string, genres: Genre[]) : Promise<ISong[]> {
         const song = new this.songModel({ title, publishedOn, songLink, artist, album, coverImage, genres });
         
         await song.save();
@@ -46,7 +46,7 @@ export class SongService {
         return true;
     }
 
-    async updateSong(id: string, title: string, publishedOn: Date, songLink: string, artist: IArtist, album: string, coverImage: string, genres: Genre[]) : Promise<ISong[]> {
+    async updateSong(id: string, title: string, publishedOn: Date, songLink: string, artist: string, album: string, coverImage: string, genres: Genre[]) : Promise<ISong[]> {
        
         const result = await this.songModel.updateOne({_id: id}, {$set: {title: title, publishedOn: publishedOn, songLink: songLink, artist: artist, album: album, coverImage: coverImage, genres: genres}});
         

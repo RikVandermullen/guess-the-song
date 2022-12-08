@@ -4,6 +4,7 @@ import { ISong } from '../../../../../libs/data/src/lib/song.interface'
 import mongoose, { ObjectId } from 'mongoose';
 import { AuthGuard } from '../auth/auth.guard';
 import { AdminGuard } from '../auth/admin.guard';
+import { PlayerGuard } from '../auth/player.guard';
 
 @Controller('songs')
 export class SongController {
@@ -22,14 +23,17 @@ export class SongController {
     }
 
     @Post()
-    async getSongByIdArray(@Body() ids: string[]): Promise<ISong[]> {                      
-        return this.songService.getSongsByIdArray(ids);
+    @UseGuards(AdminGuard)
+    async addSong(@Body() song: ISong) : Promise<ISong[]> {              
+        return this.songService.addSong(song.title, song.publishedOn, song.songLink, song.artist, song.album, song.coverImage, song.genres);
     }
 
-    @Post()
-    @UseGuards(AdminGuard)
-    async addSong(@Body() song: ISong) : Promise<ISong[]> {       
-        return this.songService.addSong(song.title, song.publishedOn, song.songLink, song.artist, song.album, song.coverImage, song.genres);
+    @Post('/array')
+    @UseGuards(PlayerGuard)
+    async getSongByIdArray(@Body() ids: string[]): Promise<ISong[]> { 
+        console.log(ids);
+                             
+        return this.songService.getSongsByIdArray(ids);
     }
 
     @Delete(':id')

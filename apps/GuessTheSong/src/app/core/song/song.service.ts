@@ -12,23 +12,23 @@ export class SongService {
 
   constructor(private http: HttpClient) { }
 
-  getAllSongs(): Observable<ISong[]> {
+  getAllSongs(): Observable<Song[]> {
 		const url = environment.apiUrl + "/api/songs";
 		
-		return this.http.get<ISong[]>(url).pipe(
-        map((response: ISong[]) => response),
-        tap((songs: ISong[]) => {
+		return this.http.get<Song[]>(url).pipe(
+        map((response: Song[]) => response),
+        tap((songs: Song[]) => {
             return songs;
         })
     );
 	}
 
-  getSongById(id: string): Observable<ISong> {
+  getSongById(id: string): Observable<Song> {
 		const url = environment.apiUrl + "/api/songs/" + id;
 	
-		return this.http.get<ISong[]>(url).pipe(
-        map((response: ISong[]) => response[0]),
-        tap((song: ISong) => {            
+		return this.http.get<Song[]>(url).pipe(
+        map((response: Song[]) => response[0]),
+        tap((song: Song) => {            
             return song;
         })
     );
@@ -37,9 +37,9 @@ export class SongService {
   createSong(song: Song, base64image: string): Observable<Song> {
     const url = environment.apiUrl + "/api/songs";
 
-    const iSong = new ISong("", song.title!, song.publishedOn!, song.songLink!, song.artist!, song.album!, base64image, song.genres!);
+    const newSong = new Song("", song.title!, song.publishedOn!, song.songLink!, song.artist!, song.album!, base64image, song.genres!);
     
-		return this.http.post<Song>(url, iSong).pipe(
+		return this.http.post<Song>(url, newSong).pipe(
         map((response: Song) => response),
         tap((song: Song) => {
             return song;
@@ -52,7 +52,7 @@ export class SongService {
 		
 		const url = environment.apiUrl + "/api/songs/" + song._id;
 
-    const iSong = new ISong("", song.title!, song.publishedOn!, song.songLink!, song.artist!, song.album!, base64image, song.genres!);
+    const iSong = new ISong("", song.title!, song.publishedOn!, song.songLink!, song.artist!._id!, song.album!, base64image, song.genres!);
 
 		return this.http.put<Song>(url, iSong).pipe(
         map((response: Song) => response),

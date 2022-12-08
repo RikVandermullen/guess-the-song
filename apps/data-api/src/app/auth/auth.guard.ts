@@ -15,7 +15,14 @@ export class AuthGuard implements CanActivate {
 
         if (request.headers.authorization) {
             const token = verify(request.headers.authorization.split(' ')[1], "Secret");
-            const roles = JSON.parse(JSON.stringify(token)).user.roles;           
+            const roles = JSON.parse(JSON.stringify(token)).user.roles;
+            const id = JSON.parse(JSON.stringify(token)).user._id;
+
+            const madeBy = JSON.parse(JSON.stringify(request.body)).madeBy;
+            
+            if (madeBy !== undefined && madeBy !== id) {
+                throw new HttpException("User is not authorized", 401);
+            }
 
             let userHasRole = false;
             if (this.roles.length > 0) {

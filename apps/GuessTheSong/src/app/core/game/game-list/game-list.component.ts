@@ -34,34 +34,13 @@ export class GameListComponent implements OnInit {
 			}			  	  
 		});
 
-		let foundGames: Game[] = [];
 		if (this.isPrivate) {
 			this.subscription = this.gameService.getAllGamesByUserId(this.userId!).subscribe((games) => {
-				games.forEach((game) => {
-					let foundSongs: Song[] = [];
-					game.songs.forEach((song) => {			
-						let image = this.dataURLtoFile(song.coverImage!, `${song._id}.jpg`);				
-						let newSong: Song = new Song(song._id, song.title, song.publishedOn, song.songLink, song.artist, song.album, image, song.genres)
-						foundSongs.push(newSong);
-					});
-					let foundGame: Game = new Game(game._id!, game.name!, game.amountOfPlays!, game.createdOn!, game.description!, game.genres!, foundSongs, game.isPrivate!, game.madeBy!);
-					foundGames.push(foundGame);
-				});
-				this.games = foundGames;
+				this.games = games;
 			});
 		} else {
 			this.subscription = this.gameService.getAllGames(false).subscribe((games) => {
-				games.forEach((game) => {
-					let foundSongs: Song[] = [];
-					game.songs.forEach((song) => {			
-						let image = this.dataURLtoFile(song.coverImage!, `${song._id}.jpg`);				
-						let newSong: Song = new Song(song._id, song.title, song.publishedOn, song.songLink, song.artist, song.album, image, song.genres)
-						foundSongs.push(newSong);
-					});
-					let foundGame: Game = new Game(game._id!, game.name!, game.amountOfPlays!, game.createdOn!, game.description!, game.genres!, foundSongs, game.isPrivate!, game.madeBy!);
-					foundGames.push(foundGame);
-				});
-				this.games = foundGames;
+				this.games = games;
 			});
 		}
 	}
@@ -76,5 +55,13 @@ export class GameListComponent implements OnInit {
 			u8arr[n] = bstr.charCodeAt(n);
 		}
 		return new File([u8arr], filename, {type:mime});
+	}
+
+	playGame(gameId: string) {
+		this.router.navigateByUrl(`/games/${gameId}/play`);
+	}
+
+	showLeaderBoard(gameId: string) {
+		this.router.navigateByUrl(`/games/${gameId}/leaderboard`);
 	}
 }

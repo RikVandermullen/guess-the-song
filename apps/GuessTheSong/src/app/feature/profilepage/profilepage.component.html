@@ -10,7 +10,7 @@
             <div class="line-yellow"></div>
             <p>Score: {{stats!.totalScore!}}</p>
             <p>Games Played: {{stats!.totalGames!}}</p>
-            <p>Time Played: {{stats!.totalTime!}}</p>
+            <p>Time Played: {{stats!.totalTime! * 1000 | date:'H:mm:ss':'UTC'}}</p>
         </div>
 
         <div class="col-6 mt-2">

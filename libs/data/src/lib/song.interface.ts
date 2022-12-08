@@ -22,12 +22,12 @@ export class ISong {
     title: string;
     publishedOn: Date;
     songLink: string;
-    artist: IArtist;
+    artist: string;
     album: string;
     coverImage: string;
     genres: Genre[];
 
-    constructor(_id: string, title: string, publishedOn: Date, songLink: string, artist: IArtist, album: string, coverImage: string, genres: Genre[]) {
+    constructor(_id: string, title: string, publishedOn: Date, songLink: string, artist: string, album: string, coverImage: string, genres: Genre[]) {
         this._id = _id;
         this.title = title;
         this.publishedOn = publishedOn;

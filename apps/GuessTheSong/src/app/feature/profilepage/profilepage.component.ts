@@ -14,7 +14,7 @@ import { UserService } from '../../core/user/user.service';
 })
 export class ProfilepageComponent implements OnInit {
   userId: string | null | undefined;
-  stats: any | null;
+  stats: any = {totalScore: 0, totalGames: 0, totalTime: 0, averageScorePerGame:0, averageTimePerGame:0};
   subscription: Subscription | undefined;
 
 	constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private scoreService: ScoreService) {}

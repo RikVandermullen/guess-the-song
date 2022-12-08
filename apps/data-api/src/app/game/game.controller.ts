@@ -42,7 +42,7 @@ export class GameController {
     @Post("random?")
     @UseGuards(PlayerGuard)
     async addGameWithRandomSongs(@Body() game: Game, @Query('amount') amount: string) : Promise<Game> {
-        return this.gameService.addGameWithRandomSongs(game.name!, game.amountOfPlays!, game.createdOn!, game.description!, game.genres!, game.songs!, game.isPrivate!, game.madeBy!, parseInt(amount));
+        return this.gameService.addGameWithRandomSongs(game.name!, game.amountOfPlays!, game.createdOn!, game.description!, game.genres!, <ISong[]>game.songs!, game.isPrivate!, game.madeBy!, parseInt(amount));
     }
 
     @Delete(':id')
@@ -59,7 +59,7 @@ export class GameController {
 
     @Put(':id/plays')
     @UseGuards(PlayerGuard)
-    async updatePlays(@Param('id') id: string, @Body() amountOfPlays: any) : Promise<boolean> {
+    async updatePlays(@Param('id') id: string, @Body() amountOfPlays: any) : Promise<boolean> {       
         return this.gameService.updatePlays(id, parseInt(amountOfPlays['result']));
     }
 
