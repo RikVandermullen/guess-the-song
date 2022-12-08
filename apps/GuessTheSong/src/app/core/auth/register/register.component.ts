@@ -11,7 +11,7 @@ import { AuthService } from '../auth.service';
 })
 export class RegisterComponent implements OnInit {
   	user: UserRegistration = new UserRegistration("", "", "", new Date(), "", ["PLAYER"]);
-  
+  	
   	constructor(private authService: AuthService, private userService: UserService) {}
 
   	ngOnInit(): void {}
