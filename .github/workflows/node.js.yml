@@ -16,8 +16,8 @@ jobs:
       - run: npm ci
 
       - run: npx nx format:check
-      - run: npx nx affected --GuessTheSong=test --parallel=3 --ci --code-coverage
-      - run: npx nx affected --data-api=test --parallel=3 --ci --code-coverage
-      - run: npx nx affected --GuessTheSong=build --parallel=3
-      - run: npx nx affected --data-api=build --parallel=3
-      - run: npx nx affected --neo4j=build --parallel=3
+      - run: npx nx test --GuessTheSong --parallel=3 --ci --code-coverage
+      - run: npx nx test --data-api --parallel=3 --ci --code-coverage
+      - run: npx nx build --GuessTheSong --parallel=3
+      - run: npx nx build --data-api --parallel=3
+      - run: npx nx build --neo4j --parallel=3
