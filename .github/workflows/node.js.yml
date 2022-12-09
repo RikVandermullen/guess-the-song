@@ -15,7 +15,6 @@ jobs:
       - uses: nrwl/nx-set-shas@v3
       - run: npm ci
       
-      - run: npx nx workspace-lint
       - run: npx nx format:check
       - run: npx nx --GuessTheSong=test --parallel=3 --ci --code-coverage
       - run: npx nx --data-api=test --parallel=3 --ci --code-coverage
