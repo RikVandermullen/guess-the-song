@@ -14,10 +14,11 @@ jobs:
           fetch-depth: 0
       - uses: nrwl/nx-set-shas@v3
       - run: npm ci
-
+      
+      - run: npx nx workspace-lint
       - run: npx nx format:check
-      - run: npx nx test --GuessTheSong --parallel=3 --ci --code-coverage
-      - run: npx nx test --data-api --parallel=3 --ci --code-coverage
-      - run: npx nx build --GuessTheSong --parallel=3
-      - run: npx nx build --data-api --parallel=3
-      - run: npx nx build --neo4j --parallel=3
+      - run: npx nx --GuessTheSong=test --parallel=3 --ci --code-coverage
+      - run: npx nx --data-api=test --parallel=3 --ci --code-coverage
+      - run: npx nx --GuessTheSong=build --parallel=3
+      - run: npx nx --data-api=build --parallel=3
+      - run: npx nx --neo4j=build --parallel=3
