@@ -70,15 +70,17 @@
                                 <th scope="col">Game</th>
                                 <th scope="col">Score</th>
                                 <th scope="col">Artist</th>
+                                <th scope="col">Identity</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Email: <span style="color: #F58F29">string</span></td>
+                                <td>EmailAddress: <span style="color: #F58F29">string</span></td>
                                 <td>Name: <span style="color: #F58F29">string</span></td>
                                 <td>Name: <span style="color: #F58F29">string</span></td>
                                 <td>AmountOfRightAnswers: <span style="color: #F58F29">number</span></td>
                                 <td>Name: <span style="color: #F58F29">string</span></td>
+                                <td>EmailAddress: <span style="color: #F58F29">string</span></td>
                             </tr>
 
                             <tr>
@@ -86,37 +88,58 @@
                                 <td>SongLink: <span style="color: #F58F29">string</span></td>
                                 <td>AmountOfPlays: <span style="color: #F58F29">number</span></td>
                                 <td>AmountOfTime: <span style="color: #F58F29">double</span></td>
-                                <td>Image: <span style="color: #F58F29">image</span></td>
+                                <td>Image: <span style="color: #F58F29">File</span></td>
+                                <td>Hash: <span style="color: #F58F29">string</span></td>
                             </tr>
 
                             <tr>
                                 <td>Password: <span style="color: #F58F29">string</span></td>
-                                <td>PublishedOn: <span style="color: #F58F29">date</span></td>
-                                <td>CreatedOn: <span style="color: #F58F29">date</span></td>
-                                <td>DateScored: <span style="color: #F58F29">date</span></td>
+                                <td>PublishedOn: <span style="color: #F58F29">Date</span></td>
+                                <td>CreatedOn: <span style="color: #F58F29">Date</span></td>
+                                <td>DateScored: <span style="color: #F58F29">Date</span></td>
                                 <td>Description: <span style="color: #F58F29">string</span></td>
+                                <td></td>
                             </tr>
 
                             <tr>
                                 <td>BirthDate: <span style="color: #F58F29">date</span></td>
-                                <td>CoverImage: <span style="color: #F58F29">image</span></td>
-                                <td>Genres: <span style="color: #F58F29">string[]</span></td>
+                                <td>CoverImage: <span style="color: #F58F29">string</span></td>
+                                <td>Genres: <span style="color: #F58F29">Genre[]</span></td>
                                 <td>FinalScore: <span style="color: #F58F29">double</span></td>
-                                <td>BirthDate: <span style="color: #F58F29">date</span></td>
+                                <td>BirthDate: <span style="color: #F58F29">Date</span></td>
+                                <td></td>
                             </tr>
 
                             <tr>
                                 <td>PhoneNumber: <span style="color: #F58F29">string</span></td>
-                                <td>Genres: <span style="color: #F58F29">string[]</span></td>
+                                <td>Genres: <span style="color: #F58F29">Genre[]</span></td>
                                 <td>Description: <span style="color: #F58F29">string</span></td>
-                                <td></td>
+                                <td>GameId: <span style="color: #F58F29">string</span></td>
+                                <td>Songs: <span style="color: #F58F29">Song[]</span></td>
                                 <td></td>
                             </tr>
 
                             <tr>
-                                <td></td>
+                                <td>Roles: <span style="color: #F58F29">string[]</span></td>
                                 <td>Album: <span style="color: #F58F29">string</span></td>
                                 <td>Private: <span style="color: #F58F29">boolean</span></td>
+                                <td>User: <span style="color: #F58F29">User</span></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Artist: <span style="color: #F58F29">Artist</span></td>
+                                <td>MadeBy: <span style="color: #F58F29">string</span></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>Songs: <span style="color: #F58F29">Song[]</span></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -144,47 +167,62 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
+                                <td><span style="color: #F58F29">1</span></td>
                                 <td><span>As an User which is not logged in, I can see the games, artists and songs but not do any other actions with them.</span></td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>2</td>
+                                <td><span style="color: #F58F29">2</span></td>
                                 <td><span>I can create an account for this website by registrating and filling in all the necessary information.</span></td>
                                 <td>A valid Email and Date of Birth must be given.</td>
                             </tr>
                             <tr>
-                                <td>3</td>
+                                <td><span style="color: #F58F29">3</span></td>
                                 <td><span>As an User which is logged in, I can play games and get scores.</span></td>
                                 <td>After the game is finished a leaderboard will be displayed.</td>
                             </tr>
                             <tr>
-                                <td>4</td>
-                                <td><span>As an User which is logged in, I can view my profile page where I can see and edit my information. I can also find statistics about my games. I also have to ability to delete my account.</span></td>
+                                <td><span style="color: #F58F29">4</span></td>
+                                <td><span>As an User which is logged in, I can view my profile page where I can see and edit my information. I can also find statistics about my games and I have to ability to delete my account.</span></td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>5</td>
-                                <td><span>As an User which is logged in, I can add songs by filling in all the necessary information. I can view in real time how to song will be
-                                    displayed on the website. I can only edit or delete songs which I added.
+                                <td><span style="color: #F58F29">5</span></td>
+                                <td><span>As an User which is logged in as an Admin, I can add songs by filling in all the necessary information. I can view in real time how to song will be
+                                    displayed on the website.
                                 </span></td>
-                                <td></td>
+                                <td>Users which are Players can only see Song details</td>
                             </tr>
                             <tr>
-                                <td>6</td>
-                                <td><span>As an User which is logged in, I can add artists by filling in all the necessary information. I can view in real time how to artist will be
-                                    displayed on the website. I can only edit or delete artists which I added.
+                                <td><span style="color: #F58F29">6</span></td>
+                                <td><span>As an User which is logged in as an Admin, I can add artists by filling in all the necessary information. I can view in real time how to artist will be
+                                    displayed on the website.
                                 </span></td>
-                                <td></td>
+                                <td>Users which are Players can only see Artist details</td>
                             </tr>
                             <tr>
-                                <td>7</td>
-                                <td><span>As an User which is logged in, I can create games by filling in all the necessary information. I can also choose to make the game private or public. I can only edit or delete games which I added.</span></td>
+                                <td><span style="color: #F58F29">7</span></td>
+                                <td><span>As an User which is logged in as a Player or Admin, I can create games by filling in all the necessary information. I can also choose to make the game private or public. I can only edit or delete games which I added and not have been played.</span></td>
                                 <td>Public games can be played by other players, private can't.</td>
                             </tr>
                             <tr>
-                                <td>8</td>
+                                <td><span style="color: #F58F29">8</span></td>
+                                <td><span>A Game can be created with 3 different game modes: Select your own songs, Random songs and Recommended songs</span></td>
+                                <td>Random songs will be added based on the chosen Genre. Recommended songs will added based on other players which have guessed the same songs</td>
+                            </tr>
+                            <tr>
+                                <td><span style="color: #F58F29">9</span></td>
+                                <td><span>Scores will be automatically generated by a formula based on correct answers and leftover time.</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><span style="color: #F58F29">10</span></td>
                                 <td><span>A leaderboard is displayed on the home page with users which have the highest scores.</span></td>
+                                <td>The leaderboard will update once a new user needs to be displayed.</td>
+                            </tr>
+                            <tr>
+                                <td><span style="color: #F58F29">11</span></td>
+                                <td><span>A leaderboard is displayed after the game ends with users which have the highest scores.</span></td>
                                 <td>The leaderboard will update once a new user needs to be displayed.</td>
                             </tr>
                         </tbody>
