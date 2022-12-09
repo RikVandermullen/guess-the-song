@@ -30,7 +30,7 @@ const expectedSongData: Song = {
 	artist: new IArtist("", "", new Date(), "", "",[]),
 	genres: [Genre.Classical],
 	album: "Album",
-	coverImage: new File([""], "placeholder.jpg", {type: "image/jpg"}),
+	coverImage: "",
 }
 
 const expectedArtistDataArray: Artist[] = [

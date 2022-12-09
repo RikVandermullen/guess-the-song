@@ -32,7 +32,6 @@ export class SongEditComponent implements OnInit {
 		this.route.paramMap.subscribe((params) => {
 			this.songId = params.get("id");			  	  
 			if (this.songId) {
-				console.log("Existing song");
 				this.subscription = this.songService.getSongById(this.songId).subscribe((response) => {					
 					this.song = response;
 					this.base64Image = response.coverImage!;
@@ -40,7 +39,6 @@ export class SongEditComponent implements OnInit {
 				});
 				this.songExists = true;
 			} else {
-				console.log("New Song");
 				this.songExists = false;
 				this.song = {
 					_id: '',
@@ -119,7 +117,6 @@ export class SongEditComponent implements OnInit {
 
 	ngOnDestroy(): void {
         if (this.subscription) {
-            console.log("unsubscribing");
             this.subscription.unsubscribe();
         }
     }

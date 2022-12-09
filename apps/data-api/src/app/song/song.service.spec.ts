@@ -6,9 +6,9 @@ import { Song } from '../../../../GuessTheSong/src/app/core/song/song.model'
 import { IArtist } from 'libs/data/src/lib/artist.interface';
 import { getModelToken } from '@nestjs/mongoose';
 
-describe('SongController', () => {
+describe('SongSerivce', () => {
     let songController: SongController;
-    let songService: SongService
+    let songService: SongService;
 
     beforeEach(async () => {
         const moduleRef: TestingModule = await Test.createTestingModule({
@@ -20,7 +20,7 @@ describe('SongController', () => {
         songController = moduleRef.get<SongController>(SongController);
     });
 
-    describe('findAll', () => {
+    describe('SongService Tests', () => {
         it('getAllSongs should return an array of songs', async () => {
             const result: Song[] = [new Song("", "", new Date(),"", new IArtist("", "", new Date(), "", "", []), "", "", [])]
             songService.getAllSongs = jest.fn().mockImplementation(() => Promise.resolve(result))
@@ -46,14 +46,14 @@ describe('SongController', () => {
             const result: Song = new Song("", "", new Date(),"", new IArtist("", "", new Date(), "", "", []), "", "", [])
             songService.addSong = jest.fn().mockImplementation(() => Promise.resolve(result))
             
-            expect(await songService.addSong(result.title!, result.publishedOn!, result.songLink!, result.artist?._id!, result.album!, result.coverImage!, result.genres)).toBe(result);
+            expect(await songService.addSong(result.title!, result.publishedOn!, result.songLink!, result.artist!._id, result.album!, result.coverImage!, result.genres)).toBe(result);
         });
 
         it('UpdateSong should update and return 1 song', async () => {
             const result: Song = new Song("", "", new Date(),"", new IArtist("", "", new Date(), "", "", []), "", "", [])
             songService.updateSong = jest.fn().mockImplementation(() => Promise.resolve(result))
             
-            expect(await songService.updateSong(result._id!, result.title!, result.publishedOn!, result.songLink!, result.artist?._id!, result.album!, result.coverImage!, result.genres)).toBe(result);
+            expect(await songService.updateSong(result._id!, result.title!, result.publishedOn!, result.songLink!, result.artist!._id!, result.album!, result.coverImage!, result.genres)).toBe(result);
         });
 
         it('DeleteSong should return true', async () => {

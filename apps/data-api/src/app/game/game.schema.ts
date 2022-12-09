@@ -8,28 +8,28 @@ export type GameDocument = Game & Document;
 export class Game {
     id?: string;
 
-    @Prop({required: true})
+    @Prop({required: true, type: String})
     name?: string
 
-    @Prop({required: true})
+    @Prop({required: true, type: Number})
     amountOfPlays?: number
 
-    @Prop({required: true})
+    @Prop({required: true, type: Date})
     createdOn?: Date
 
-    @Prop({required: true})
+    @Prop({required: true, type: String})
     description?: string
 
-    @Prop({required: true})
+    @Prop({required: true, type: Array})
     genres?: Genre[]
 
-    @Prop({required: true})
+    @Prop({required: true, type: Array})
     songs?: ISong[];
 
-    @Prop({required: true})
+    @Prop({required: true, type: Boolean})
     isPrivate?: boolean;
 
-    @Prop({required: true})
+    @Prop({required: true, type: String})
     madeBy?: string;
 }
 

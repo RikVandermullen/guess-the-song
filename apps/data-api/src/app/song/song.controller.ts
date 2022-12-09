@@ -25,14 +25,12 @@ export class SongController {
     @Post()
     @UseGuards(AdminGuard)
     async addSong(@Body() song: ISong) : Promise<ISong[]> {              
-        return this.songService.addSong(song.title, song.publishedOn, song.songLink, song.artist, song.album, song.coverImage, song.genres);
+        return this.songService.addSong(song.title, song.publishedOn, song.songLink, song.artist._id, song.album, song.coverImage, song.genres);
     }
 
     @Post('/array')
     @UseGuards(PlayerGuard)
-    async getSongByIdArray(@Body() ids: string[]): Promise<ISong[]> { 
-        console.log(ids);
-                             
+    async getSongByIdArray(@Body() ids: string[]): Promise<ISong[]> {                              
         return this.songService.getSongsByIdArray(ids);
     }
 
@@ -45,7 +43,7 @@ export class SongController {
     @Put(':id')
     @UseGuards(AdminGuard)
     async updateSong(@Param('id') id: string, @Body() song: ISong) : Promise<ISong[]> {
-        return this.songService.updateSong(id, song.title, song.publishedOn, song.songLink, song.artist, song.album, song.coverImage, song.genres);
+        return this.songService.updateSong(id, song.title, song.publishedOn, song.songLink, song.artist._id, song.album, song.coverImage, song.genres);
     }
 
 }

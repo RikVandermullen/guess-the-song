@@ -18,7 +18,7 @@ export class Song {
     @Prop({required: true, type: String})
     songLink?: string;
 
-    @Prop({required: true})
+    @Prop({required: true, type: mongoose.Types.ObjectId})
     artist?: ObjectId;
 
     @Prop({required: true, type: String})

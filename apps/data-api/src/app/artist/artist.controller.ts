@@ -3,6 +3,7 @@ import { ArtistService } from './artist.service';
 import { IArtist } from '../../../../../libs/data/src/lib/artist.interface'
 import { ISong } from 'libs/data/src/lib/song.interface';
 import { AdminGuard } from '../auth/admin.guard';
+import { Song } from 'apps/GuessTheSong/src/app/core/song/song.model';
 
 @Controller('artists')
 export class ArtistController {
@@ -21,15 +22,15 @@ export class ArtistController {
     }
 
     @Get(':id/songs')
-    async getArtistSongsById(@Param('id') id: string): Promise<ISong[] | null> {
+    async getArtistSongsById(@Param('id') id: string): Promise<Song[] | null> {
         return this.artistService.getArtistSongs(id);
     }
 
     @Post()
     @UseGuards(AdminGuard)
     async addArtist(@Body() artist: IArtist) : Promise<IArtist> {
-        let songs = artist.songs.map(song => song._id);            
-        return this.artistService.addArtist(artist.name, artist.birthDate, artist.description, artist.image, songs);
+        let songs = artist.songs!.map(song => song._id);            
+        return this.artistService.addArtist(artist.name, artist.birthDate, artist.description, artist.image, <string[]>songs);
     }
 
     @Delete(':id')
@@ -42,7 +43,7 @@ export class ArtistController {
     @UseGuards(AdminGuard)
     async updateArtist(@Param('id') id: string, @Body() artist: IArtist) : Promise<IArtist> {
         let songs = artist.songs.map(song => song._id);     
-        return this.artistService.updateArtist(id, artist.name, artist.birthDate, artist.description, artist.image, songs);
+        return this.artistService.updateArtist(id, artist.name, artist.birthDate, artist.description, artist.image, <string[]>songs);
     }
 
 }
