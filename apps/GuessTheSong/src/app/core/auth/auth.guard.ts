@@ -35,10 +35,10 @@ export class AuthGuard implements CanActivate {
         
         if (route.data['roles']) {
             userRoles.forEach((role) => {            
-            if (!allowed && route.data['roles'].includes(role)) {
-                allowed = true;
-            }
-        });
+                if (!allowed && route.data['roles'].includes(role)) {
+                    allowed = true;
+                }
+            });
         }
 
         return allowed;

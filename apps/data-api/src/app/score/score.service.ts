@@ -29,7 +29,8 @@ export class ScoreService {
     }
 
     async addScore(gameId: string, user: User, dateScored: Date, amountOfRightAnswers: number, amountOfTimePlayed: number, finalScore: number) : Promise<IScore> {
-        const score = new this.scoreModel({gameId, user, dateScored, amountOfRightAnswers, amountOfTimePlayed, finalScore});
+        const newGameId = new mongoose.Types.ObjectId(gameId);
+        const score = new this.scoreModel({gameId: newGameId, user, dateScored, amountOfRightAnswers, amountOfTimePlayed, finalScore});
         await score.save();
         return score.toObject();
     }

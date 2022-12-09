@@ -15,11 +15,10 @@ export class ArtistEditComponent implements OnInit {
 	artistExists: boolean = false;
 	artistId: string | null | undefined;
 	artistSongs: string[] | undefined;
-	artist: Artist = new Artist("undefined", "undefined", new Date(), "undefined", new File([""], "placeholder.jpg", {type: "image/jpg"}), []);
+	artist: Artist = new Artist("", "", new Date(), "", new File([""], "placeholder.jpg", {type: "image/jpg"}), []);
 	songs: Song[] | undefined;
 	base64Image: string = "";
 	subscription: Subscription | undefined;
-  	songSubscription: Subscription | undefined;
 
 	constructor(private route: ActivatedRoute, private router: Router, private artistService: ArtistService, private songService: SongService) {
 		
@@ -33,16 +32,14 @@ export class ArtistEditComponent implements OnInit {
 					this.subscription = this.artistService.getArtistById(this.artistId).subscribe((artist) => {
 						let image = this.dataURLtoFile(artist.image!, `${artist._id}.jpg`);
 						let foundSongs: Song[] = [];
-						this.songSubscription = this.artistService.getArtistSongs(this.artistId!).subscribe((songs) => {
+						this.subscription = this.artistService.getArtistSongs(this.artistId!).subscribe((songs) => {
 							songs.forEach((song) => {
-								let image = this.dataURLtoFile(song.coverImage!, `${song._id}.jpg`);
-								let newSong: Song = new Song(song._id, song.title, song.publishedOn, song.songLink, song.artist, song.album, image, song.genres)
-								this.setSongUrlSongs(newSong);    
-								foundSongs.push(newSong);
-								this.artistSongs?.push(song._id);
+								foundSongs.push(song);
+								this.artistSongs?.push(song._id!);
 							});
+							this.artist.songs = foundSongs;													
 						});
-						let foundArtist: Artist = new Artist(artist._id, artist.name, artist.birthDate, artist.description, image, foundSongs);
+						let foundArtist: Artist = new Artist(artist._id, artist.name, artist.birthDate, artist.description, image, foundSongs);						
 						this.artist = foundArtist;
 						this.base64Image = artist.image!;
 					});
@@ -60,26 +57,22 @@ export class ArtistEditComponent implements OnInit {
 					}
 				}
 		});
-		this.songSubscription = this.songService.getAllSongs().subscribe((songs) => {
+		this.subscription = this.songService.getAllSongs().subscribe((songs) => {
 			let foundSongs: Song[] = [];
 			songs.forEach((song) => {
-				let image = this.dataURLtoFile(song.coverImage!, `${song._id}.jpg`);
-				let newSong: Song = new Song(song._id, song.title, song.publishedOn, song.songLink, song.artist, song.album, image, song.genres)
-				this.setSongUrlSongs(newSong);    
-				foundSongs.push(newSong);
+				foundSongs.push(song);
 			});
 			this.songs = foundSongs;
 		});
 	}
 
-	onSubmit(): void {	
-			if (this.artistExists) {
-				this.subscription = this.artistService.updateArtist(this.artist, this.base64Image).subscribe();			
-			} else {
-				this.artistService.createArtist(this.artist, this.base64Image).subscribe();
-			}
-			this.router.navigate([`/artists`]);
+	onSubmit() {	
+		if (this.artistExists) {
+			this.subscription = this.artistService.updateArtist(this.artist, this.base64Image).subscribe();			
+		} else {
+			this.artistService.createArtist(this.artist, this.base64Image).subscribe();
 		}
+	}
 
 	uploadFile(event: Event) {
 		const element = event.currentTarget as HTMLInputElement;
@@ -122,23 +115,9 @@ export class ArtistEditComponent implements OnInit {
 		return new File([u8arr], filename, {type:mime});
 	}
 
-	setSongUrlSongs(song: Song) {
-		var reader = new FileReader();
-		reader.readAsDataURL(song.coverImage!);
-		reader.onload = (event) => {
-			document.getElementById(`${song._id}-cover`)!.setAttribute("src", event!.target!.result!.toString());
-		}
-	}
-
 	ngOnDestroy(): void {
         if (this.subscription) {
-            console.log("unsubscribing");
             this.subscription.unsubscribe();
         }
-
-		if (this.songSubscription) {
-			console.log("unsubscribing");
-			this.songSubscription.unsubscribe();
-		}
     }
 }

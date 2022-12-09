@@ -7,19 +7,19 @@ export type ArtistDocument = Artist & Document;
 export class Artist {
     id?: string;
 
-    @Prop({required: true})
+    @Prop({required: true, type: String})
     name?: string
 
-    @Prop({required: true})
+    @Prop({required: true, type: Date})
     birthDate?: Date
 
-    @Prop({required: true})
+    @Prop({required: true, type: String})
     description?: string
 
-    @Prop({required: true})
+    @Prop({required: true, type: String})
     image?: string
 
-    @Prop({required: true})
+    @Prop({required: true, type: [String]})
     songs?: string[];
 }
 

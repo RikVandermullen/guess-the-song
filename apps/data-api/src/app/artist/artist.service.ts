@@ -7,6 +7,7 @@ import { Artist as ArtistModel, ArtistDocument } from './artist.schema';
 import { Song as SongModel, SongDocument } from '../song/song.schema';
 import { IArtist } from '../../../../../libs/data/src/lib/artist.interface'
 import { ISong } from 'libs/data/src/lib/song.interface';
+import { Song } from 'apps/GuessTheSong/src/app/core/song/song.model';
 
 @Injectable()
 export class ArtistService {
@@ -22,9 +23,9 @@ export class ArtistService {
         return this.artistModel.findById(artistId);
     }
 
-    async getArtistSongs(artistId: string) : Promise<ISong[]> {
+    async getArtistSongs(artistId: string) : Promise<Song[]> {
         const artist = await this.getArtistById(artistId);
-        const foundSongs: ISong[] = await this.songModel.find({_id: {$in: artist!.songs}});
+        const foundSongs: Song[] = await this.songModel.find({_id: {$in: artist!.songs}});
         return foundSongs;
     }
 
@@ -32,7 +33,7 @@ export class ArtistService {
         const artist = new this.artistModel({name, birthDate, description, image, songs});
         await artist.save();
 
-        const foundSongs: ISong[] = await this.songModel.find({_id: {$in: artist.songs}});
+        const foundSongs: Song[] = await this.songModel.find({_id: {$in: artist.songs}});
         const artistToReturn = new IArtist(artist._id, artist.name!, artist.birthDate!, artist.description!, artist.image!, foundSongs);
         return artistToReturn;
     }
@@ -50,7 +51,7 @@ export class ArtistService {
             throw new Error('not accepted');
         } else {
             const artist = await this.getArtistById(id);
-            const foundSongs: ISong[] = await this.songModel.find({_id: {$in: artist!.songs}});
+            const foundSongs: Song[] = await this.songModel.find({_id: {$in: artist!.songs}});
             const artistToReturn = new IArtist(artist!._id, artist!.name!, artist!.birthDate!, artist!.description!, artist!.image!, foundSongs);
             return artistToReturn;
         }

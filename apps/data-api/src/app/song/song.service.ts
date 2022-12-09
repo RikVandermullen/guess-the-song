@@ -33,8 +33,9 @@ export class SongService {
         ])
     }
 
-    async addSong(title: string, publishedOn: Date, songLink: string, artist: IArtist, album: string, coverImage: string, genres: Genre[]) : Promise<ISong[]> {
-        const song = new this.songModel({ title, publishedOn, songLink, artist, album, coverImage, genres });
+    async addSong(title: string, publishedOn: Date, songLink: string, artist: string, album: string, coverImage: string, genres: Genre[]) : Promise<ISong[]> {
+        const artistId =  new mongoose.Types.ObjectId(artist);
+        const song = new this.songModel({ title, publishedOn, songLink, artistId, album, coverImage, genres });
         
         await song.save();
         
@@ -46,9 +47,9 @@ export class SongService {
         return true;
     }
 
-    async updateSong(id: string, title: string, publishedOn: Date, songLink: string, artist: IArtist, album: string, coverImage: string, genres: Genre[]) : Promise<ISong[]> {
-       
-        const result = await this.songModel.updateOne({_id: id}, {$set: {title: title, publishedOn: publishedOn, songLink: songLink, artist: artist, album: album, coverImage: coverImage, genres: genres}});
+    async updateSong(id: string, title: string, publishedOn: Date, songLink: string, artist: string, album: string, coverImage: string, genres: Genre[]) : Promise<ISong[]> {
+        const artistId =  new mongoose.Types.ObjectId(artist);
+        const result = await this.songModel.updateOne({_id: id}, {$set: {title: title, publishedOn: publishedOn, songLink: songLink, artist: artistId, album: album, coverImage: coverImage, genres: genres}});
         
         if (result.modifiedCount == 0) {
             throw new Error('not accepted');

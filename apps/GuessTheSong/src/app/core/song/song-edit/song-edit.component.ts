@@ -15,7 +15,7 @@ import { SongService } from '../song.service';
 export class SongEditComponent implements OnInit {
 	songExists: boolean = false;
 	songId: string | null | undefined;
-	song: Song = new Song("", "", new Date(), "", new IArtist("", "", new Date(), "", "",[]), "", new File([""], "placeholder.jpg", {type: "image/jpg"}), []);
+	song: Song = new Song("", "", new Date(), "", new IArtist("", "", new Date(), "", "",[]), "", '', []);
 	subscription: Subscription | undefined;
 	base64Image: string = "";
 	artists: IArtist[] = [];
@@ -32,25 +32,20 @@ export class SongEditComponent implements OnInit {
 		this.route.paramMap.subscribe((params) => {
 			this.songId = params.get("id");			  	  
 			if (this.songId) {
-				console.log("Existing song");
 				this.subscription = this.songService.getSongById(this.songId).subscribe((response) => {					
-					let image = this.dataURLtoFile(response.coverImage!, `${response._id}.jpg`);
-					let newSong: Song = new Song(response._id, response.title, response.publishedOn, response.songLink, response.artist, response.album, image, response.genres)
-					this.setSongUrl(newSong);
-					this.song = newSong;
+					this.song = response;
 					this.base64Image = response.coverImage!;
-					this.artist = response.artist;
+					this.artist = response.artist!;
 				});
 				this.songExists = true;
 			} else {
-				console.log("New Song");
 				this.songExists = false;
 				this.song = {
 					_id: '',
 					title: '',
 					artist: new IArtist("", "", new Date(), "", "",[]),
 					publishedOn: new Date,
-					coverImage: new File([""], "placeholder.jpg", {type: "image/jpg"}),
+					coverImage: '',
 					songLink: '',
 					album: '',
 					genres: []
@@ -74,24 +69,18 @@ export class SongEditComponent implements OnInit {
 		} else {		
 			this.subscription = this.songService.createSong(this.song!, this.base64Image).subscribe();
 		}
-		this.router.navigate([`/songs`]);
+	}
+
+	deleteSong(id: string) {
+		this.songService.deleteSong(id);
 	}
 
 	uploadFile(event: Event) {
 		const element = event.currentTarget as HTMLInputElement;
 		let fileList: FileList | null = element.files;
 		if (fileList) {
-			this.song.coverImage = fileList[0];
 			this.imageToBase64(fileList[0]);
 			document.getElementById("cover-preview")!.setAttribute("src", URL.createObjectURL(fileList![0]));
-		}
-	}
-
-	setSongUrl(song: Song) {
-		var reader = new FileReader();
-		reader.readAsDataURL(song.coverImage!);
-		reader.onload = (event) => {
-			document.getElementById('cover-preview')!.setAttribute("src", event!.target!.result!.toString());
 		}
 	}
 
@@ -128,7 +117,6 @@ export class SongEditComponent implements OnInit {
 
 	ngOnDestroy(): void {
         if (this.subscription) {
-            console.log("unsubscribing");
             this.subscription.unsubscribe();
         }
     }

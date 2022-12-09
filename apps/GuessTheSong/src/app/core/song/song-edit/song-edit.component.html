@@ -93,6 +93,7 @@
                     </div> 
                 </div>
                 <button type="submit" class="button-pink mt-2 me-3" [disabled]="!songEditForm.valid">Save</button>
+                <button *ngIf="songExists" type="button" class="button-purple mt-2 me-3" (click)="deleteSong(song._id!)">Delete</button>
                 <button type="button" class="button-yellow mt-2" routerLink="/songs" routerLinkActive="true">Cancel</button>
             </form>
         </div>
@@ -102,7 +103,7 @@
             <h3>Preview</h3>
             <div class="row preview-song ms-0">
                 <div class="col-12 d-flex justify-content-center align-items-center">
-                    <img class="mt-5" src="" id="cover-preview"/>
+                    <img class="mt-5" src="{{song.coverImage!}}" id="cover-preview"/>
                 </div>
                 <div class="col-12 preview-song-info mt-3">
                     <div class="preview-song-text">

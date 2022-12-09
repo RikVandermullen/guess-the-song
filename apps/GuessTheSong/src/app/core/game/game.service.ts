@@ -2,21 +2,34 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
 import { Genre, Song } from '../song/song.model';
-import { Game } from '../../../../../../libs/data/src/lib/game.model';
-import { ISong } from '../../../../../../libs/data/src/lib/song.interface';
+import { Game } from './game.model';
 import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
   
-  	constructor(private http: HttpClient) { }
+  	constructor(private http: HttpClient, private router: Router) { }
 
-	getAllGames(): Observable<Game[]> {
-		const url = environment.apiUrl + "/api/games";
-		
-			return this.http.get<Game[]>(url).pipe(
+	getAllGames(isPrivate: boolean): Observable<Game[]> {
+		let url = environment.apiUrl + "/api/games?private=false";
+
+		if (isPrivate) url += "?private=true";
+
+		return this.http.get<Game[]>(url).pipe(
+			map((response: Game[]) => response),
+			tap((games: Game[]) => {
+				return games;
+			})
+		);
+	}
+
+	getAllGamesByUserId(userId: string): Observable<Game[]> {
+		const url = environment.apiUrl + "/api/games/user/" + userId;
+
+		return this.http.get<Game[]>(url).pipe(
 			map((response: Game[]) => response),
 			tap((games: Game[]) => {
 				return games;
@@ -35,85 +48,70 @@ export class GameService {
 		);
 	}
 
-	createGame(name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: ISong[], isPrivate: boolean, madeBy: string, limit: number): Observable<Game> {  		
+	createGame(game: Game, limit: number): Observable<Game> {  		
 		const url = environment.apiUrl + "/api/games";
-
-		let iSongs: ISong[] = [];
-		songs.forEach(song => {
-			iSongs.push(new ISong(song._id!, song.title!, song.publishedOn!, song.songLink!, song.artist!, song.album!, song.coverImage, song.genres!));
-		});
-
-		let newGame = new Game("", name, amountOfPlays, createdOn, description, genres, iSongs, isPrivate, madeBy);
 		
-			return this.http.post<Game>(url, newGame).pipe(
+		return this.http.post<Game>(url, game).pipe(
 			map((response: Game) => response),
 			tap((game: Game) => {
+				this.router.navigate([`/games/me`]);
 				return game;
 			})
 		);
 	}
 
-	createRandomGame(name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: ISong[], isPrivate: boolean, madeBy: string, amount: number): Observable<Game> {
+	createRandomGame(game: Game, amount: number): Observable<Game> {
 		const url = environment.apiUrl + "/api/games/random?amount=" + amount;
-
-		let newGame = new Game("", name, amountOfPlays, createdOn, description, genres, songs, isPrivate, madeBy);
 		
-			return this.http.post<Game>(url, newGame).pipe(
+		return this.http.post<Game>(url, game).pipe(
 			map((response: Game) => response),
 			tap((game: Game) => {
+				this.router.navigate([`/games/me`]);
 				return game;
 			})
 		);
 	}
 
-	createRecommendedGame(name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: ISong[], isPrivate: boolean, madeBy: string, limit: number): Observable<Game> {
-		const neo4jUrl = environment.neoApiUrl + `/neo4j-api/recommendations/${madeBy}?limit=${limit}`;
+	createRecommendedGame(game: Game, limit: number): Observable<Game> {
+		const neo4jUrl = environment.neoApiUrl + `/neo4j-api/recommendations/${game.madeBy!}?limit=${limit}`;
 		
 		this.http.get<string[]>(neo4jUrl).subscribe((ids: string[]) => {
 			console.log(ids);
 			
-			this.http.post<ISong[]>(environment.apiUrl + "/api/songs", ids).subscribe((songs: ISong[]) => {
+			this.http.post<Song[]>(environment.apiUrl + "/api/songs/array", ids).subscribe((songs: Song[]) => {
 				const url = environment.apiUrl + "/api/games";
 
-				let newGame = new Game("", name, amountOfPlays, createdOn, description, genres, songs, isPrivate, madeBy);
-		
-				return this.http.post<Game>(url, newGame).subscribe()
-				
+				game.songs! = songs;	
+				this.router.navigate([`/games/me`]);	
+				return this.http.post<Game>(url, game).subscribe()
 			});
 		})
 		
 		return new Observable<Game>();
 	}
 
-	updateGame(id: string, name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: ISong[], isPrivate: boolean, madeBy: string): Observable<Game> {
-		const url = environment.apiUrl + "/api/games/" + id;
+	updateGame(game: Game): Observable<Game> {
+		const url = environment.apiUrl + "/api/games/" + game._id!;
 
-		let iSongs: ISong[] = [];
-		songs.forEach(song => {
-		iSongs.push(new ISong(song._id!, song.title!, song.publishedOn!, song.songLink!, song.artist!, song.album!, song.coverImage, song.genres!));
-		});
-
-		let updateGame = new Game(id, name, amountOfPlays, createdOn, description, genres, iSongs, isPrivate, madeBy);
-		
-			return this.http.put<Game>(url, updateGame).pipe(
+		return this.http.put<Game>(url, game).pipe(
 			map((response: Game) => response),
 			tap((game: Game) => {
+				this.router.navigate([`/games/me`]);
 				return game;
 			})
 		);
 	}
 
-	deletegame(game: Game): void {
-		const url = environment.apiUrl + "/api/games/" + game._id!;
-
-			this.http.delete<Game>(url).subscribe();   
-	
+	deletegame(gameId: string): void {
+		const url = environment.apiUrl + "/api/games/" + gameId!;
+		this.http.delete<Game>(url).subscribe();
+		this.router.navigate([`/games/me`]); 
 	}
 
 	addPlayToGame(gameId: string, amountOfPlays: number): void {
 		const url = environment.apiUrl + "/api/games/" + gameId! + "/plays";
 		let body = JSON.parse(`{"result": "${amountOfPlays}"}`);
 		
-		this.http.put<Game>(url, body).subscribe();
+		this.http.put<string>(url, body).subscribe();
 	}
 }

@@ -68,8 +68,8 @@
         }
       },
       "defaultConfiguration": "development",
-      "options" : {
-        "proxyConfig" : "apps/GuessTheSong/proxy.conf.json"
+      "options": {
+        "proxyConfig": "apps/GuessTheSong/proxy.conf.json"
       }
     },
     "extract-i18n": {

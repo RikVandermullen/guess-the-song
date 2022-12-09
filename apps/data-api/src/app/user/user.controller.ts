@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from '../../../../../libs/data/src/lib/user.interface'
+import { AdminGuard } from '../auth/admin.guard';
 
 @Controller('users')
 export class UserController {
@@ -19,16 +20,19 @@ export class UserController {
     }
 
     @Post()
+    @UseGuards(AdminGuard)
     async addUser(@Body() user: User) : Promise<User> {
         return this.userService.addUser(user.name, user.emailAddress, user.password, user.birthDate, user.phoneNumber, user.roles);
     }
 
     @Delete(':id')
+    @UseGuards(AdminGuard)
     async deleteUser(@Param('id') id: string): Promise<boolean> {
         return this.userService.deleteUser(id);
     }
 
     @Put(':id')
+    @UseGuards(AdminGuard)
     async updateUser(@Param('id') id: string, @Body() user: User) : Promise<User> {
         return this.userService.updateUser(id, user.name, user.emailAddress, user.password, user.birthDate, user.phoneNumber, user.roles);
     }

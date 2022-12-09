@@ -13,7 +13,6 @@ import { SongService } from '../song.service';
 export class SongListComponent implements OnInit {
 	songs: Song[] | undefined;
 	subscription: Subscription | undefined;
-	loggedIn: boolean = true;
 	isLoggedInUserAdmin: boolean = false;
 
 	Genre = Genre;
@@ -28,30 +27,8 @@ export class SongListComponent implements OnInit {
 		this.isLoggedInUserAdmin = currentUser?.user.roles.includes("ADMIN");
 
 		this.subscription = this.songService.getAllSongs().subscribe((songs) => {     
-			let songsToEdit: Song[] = [];
-			songs.forEach((song) => {				
-				let image = this.dataURLtoFile(song.coverImage!, `${song._id}.jpg`);
-				let newSong: Song = new Song(song._id, song.title, song.publishedOn, song.songLink, song.artist, song.album, image, song.genres)     
-				songsToEdit.push(newSong);
-				this.setSongUrl(newSong);
-			});
-			this.songs = songsToEdit;
-			if (this.authService.currentUser$.value === undefined) {
-				this.loggedIn = false;
-			}		
+			this.songs = songs;	
 		});   
-	}
-
-	setSongUrl(song: Song) {
-		var reader = new FileReader();
-		reader.readAsDataURL(song.coverImage!);
-		reader.onload = (event) => {
-			document.getElementById(`${song._id}-cover`)!.setAttribute("src", event!.target!.result!.toString());
-		}
-	}
-
-	deleteSong(id: string) {
-		this.songService.deleteSong(id);
 	}
 
 	dataURLtoFile(dataurl: string, filename: string) {

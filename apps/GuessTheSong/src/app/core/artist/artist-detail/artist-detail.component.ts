@@ -19,46 +19,36 @@ export class ArtistDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private artistService: ArtistService) {}
 
-  ngOnInit(): void {
-	const currentUser = JSON.parse(localStorage.getItem('currentuser')!);
-	this.isLoggedInUserAdmin = currentUser?.user.roles.includes("ADMIN");
+	ngOnInit(): void {
+		const currentUser = JSON.parse(localStorage.getItem('currentuser')!);
+		this.isLoggedInUserAdmin = currentUser?.user.roles.includes("ADMIN");	
 
-    this.route.paramMap.subscribe((params) => {
-		this.artistId = params.get("id");			  	  
-		if (this.artistId) {
-			console.log("Existing song");
-			this.subscription = this.artistService.getArtistById(this.artistId).subscribe((artist) => {
-				let image = this.dataURLtoFile(artist.image!, `${artist._id}.jpg`);
-				let foundSongs: Song[] = [];
-				this.songSubscription = this.artistService.getArtistSongs(this.artistId!).subscribe((songs) => {
-					songs.forEach((song) => {
-						let image = this.dataURLtoFile(song.coverImage!, `${song._id}.jpg`);
-						let newSong: Song = new Song(song._id, song.title, song.publishedOn, song.songLink, song.artist, song.album, image, song.genres)
-						this.setSongUrlSongs(newSong);    
-						foundSongs.push(newSong);
+		this.route.paramMap.subscribe((params) => {
+			this.artistId = params.get("id");			  	  
+			if (this.artistId) {
+				console.log("Existing song");
+				this.subscription = this.artistService.getArtistById(this.artistId).subscribe((artist) => {
+					let image = this.dataURLtoFile(artist.image!, `${artist._id}.jpg`);
+					let foundSongs: Song[] = [];
+					this.songSubscription = this.artistService.getArtistSongs(this.artistId!).subscribe((songs) => {
+						songs.forEach((song) => {
+							foundSongs.push(song);
+						});
 					});
-				});
-				let foundArtist: Artist = new Artist(artist._id, artist.name, artist.birthDate, artist.description, image, foundSongs);
-				this.setSongUrl(foundArtist.image!);
-				this.artist = foundArtist;
-			});       
-      	}
-    });
-  }
+					this.artist.songs = foundSongs;
+					let foundArtist: Artist = new Artist(artist._id, artist.name, artist.birthDate, artist.description, image, foundSongs);
+					this.setArtistImageUrl(foundArtist.image!);
+					this.artist = foundArtist;
+				});       
+			}
+		});
+	}
 
-	setSongUrl(file: File) {
+	setArtistImageUrl(file: File) {
 		var reader = new FileReader();
 		reader.readAsDataURL(file!);
 		reader.onload = (event) => {
 			document.getElementById('artist-image')!.setAttribute("src", event!.target!.result!.toString());
-		}
-	}
-
-	setSongUrlSongs(song: Song) {
-		var reader = new FileReader();
-		reader.readAsDataURL(song.coverImage!);
-		reader.onload = (event) => {
-			document.getElementById(`${song._id}-cover`)!.setAttribute("src", event!.target!.result!.toString());
 		}
 	}
 
@@ -77,13 +67,7 @@ export class ArtistDetailComponent implements OnInit {
 
 	ngOnDestroy(): void {
         if (this.subscription) {
-            console.log("unsubscribing");
             this.subscription.unsubscribe();
         }
-
-		if (this.songSubscription) {
-			console.log("unsubscribing");
-			this.songSubscription.unsubscribe();
-		}
     }
 }

@@ -15,12 +15,19 @@ export class GameService {
 
     }
 
-    async getAllGames(): Promise<Game[]> {
+    async getAllGames(isPrivate?: boolean): Promise<Game[]> {
+        if (isPrivate) {
+            return this.gameModel.find({isPrivate: isPrivate})
+        }
         return this.gameModel.find();
     }
 
     async getGameById(gameId: string): Promise<Game | null> {
         return this.gameModel.findById(gameId);
+    }
+
+    async getAllGamesByUserId(userId: string): Promise<Game[]> {
+        return this.gameModel.find({madeBy: userId});
     }
 
     async getGameSongs(gameId: string) : Promise<ISong[]> {
@@ -38,7 +45,7 @@ export class GameService {
     async addGameWithRandomSongs(name: string, amountOfPlays: number, createdOn: Date, description: string, genres: Genre[], songs: ISong[], isPrivate: boolean, madeBy: string, amount: number) : Promise<Game> {
         const game = new this.gameModel({name, amountOfPlays, createdOn, description, genres, songs, isPrivate, madeBy});
         await game.save();
-        return this.songModel.aggregate([{ $match: { genres: {$in : genres} } } , { $sample: { size: amount } }]).then((result: ISong[]) => {
+        return this.songModel.aggregate([{ $match: { genres: {$in : genres} } } , { $sample: { size: amount } }]).then((result: ISong[]) => {            
             return this.updateGame(game.id, name, amountOfPlays, createdOn, description, genres, result, isPrivate, madeBy);            
         });        
     }

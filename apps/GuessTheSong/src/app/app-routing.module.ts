@@ -59,6 +59,10 @@ const routes: Routes = [
 		canActivate: [AuthGuard],
 		data: {roles: ['PLAYER']}
 	},
+	{path: "games/:me", pathMatch: "full", component: GameListComponent,
+		canActivate: [AuthGuard],
+		data: {roles: ['PLAYER']}
+	},
 	{path: "games/:id/edit", pathMatch: "full", component: GameEditComponent,
 		canActivate: [AuthGuard],
 		data: {roles: ['PLAYER']}

@@ -21,7 +21,7 @@ export class GamePlayComponent implements OnInit {
 	game: Game = new Game("undefined", "undefined", 0, new Date(), "undefined", [], [], false, "");
 	timeLeft: number = 30;
 	correctGuess: boolean = false;
-	currentSong: Song = new Song("undefined", "undefined", new Date(), "undefined", new IArtist("", "", new Date(), "", "",[]), "undefined", new File([""], "undefined"), []);
+	currentSong: Song = new Song("undefined", "undefined", new Date(), "undefined", new IArtist("", "", new Date(), "", "",[]), "undefined", "", []);
 	interval = this.updateProgressBar();
 	subscription: Subscription | undefined;
 
@@ -45,17 +45,9 @@ export class GamePlayComponent implements OnInit {
 		this.gameId = params.get("id");			  	  
 		if (this.gameId) {
 			console.log("Existing game");
-			let foundSongs: Song[] = [];
 			this.subscription = this.gameService.getGameById(this.gameId).subscribe((game) => {
-				game.songs.forEach((song) => {			
-					let image = this.dataURLtoFile(song.coverImage!, `${song._id}.jpg`);				
-					let newSong: Song = new Song(song._id, song.title, song.publishedOn, song.songLink, song.artist, song.album, image, song.genres)
-					foundSongs.push(newSong);
-				});
-				let foundGame: Game = new Game(game._id!, game.name!, game.amountOfPlays! + 1, game.createdOn!, game.description!, game.genres!, foundSongs, game.isPrivate!, game.madeBy!);
-				this.game = foundGame;
-				this.currentSong = this.game.songs[0];
-				this.setSongUrl(this.currentSong, "cover");			
+				this.game = game;
+				this.currentSong = game.songs[0];
 			});
 			this.currentSong = this.game.songs[0];
 		} else {
@@ -111,7 +103,6 @@ export class GamePlayComponent implements OnInit {
 
 	guessSong() {
 		clearInterval(this.timer);
-		this.setSongUrl(this.currentSong, "answer");
 		const title = <HTMLInputElement>document.getElementById("song-input")!;
 		document.getElementById("overlay")!.style.display = "block";
 		if (title!.value.toLowerCase() == this.currentSong.title!.toLowerCase()) {
@@ -141,16 +132,7 @@ export class GamePlayComponent implements OnInit {
 		document.getElementById("timer-seconds")!.textContent = this.timeLeft.toString() + "s";
 		document.getElementById("overlay")!.style.display = "none";
 		document.getElementById("song-input")!.focus();
-		this.setSongUrl(this.currentSong, "cover")
 		this.interval = this.updateProgressBar();
-	}
-
-  	setSongUrl(song: Song, target: string) {
-		var reader = new FileReader();
-		reader.readAsDataURL(song.coverImage!);
-		reader.onload = (event) => {
-			document.getElementById(`${target}-preview`)!.setAttribute("src", event!.target!.result!.toString());
-		}
 	}
 
   	dataURLtoFile(dataurl: string, filename: string) {
@@ -176,7 +158,7 @@ export class GamePlayComponent implements OnInit {
 		if (!previousScore) {
 			this.subscription = this.scoreService.createScore(this.score).subscribe();
 		} 
-		this.gameService.addPlayToGame(this.gameId!, this.game.amountOfPlays!);
+		this.gameService.addPlayToGame(this.gameId!, this.game.amountOfPlays! + 1);
 		let userSongs = new UserSongs(this.user._id!, this.game.songs.map(song => song._id!));
 		this.userService.addUserWithSongsToNeo4j(userSongs);
 	}

@@ -1,4 +1,4 @@
-import { Body, Controller, HttpException, HttpStatus, Post } from "@nestjs/common";
+import { Body, Controller, HttpException, HttpStatus, Post, UseGuards } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { Token, UserCredentials, UserRegistration } from '../../../../../libs/data/src/lib/auth.interface';
 import { ResourceId } from '../../../../../libs/data/src/lib/id.type';

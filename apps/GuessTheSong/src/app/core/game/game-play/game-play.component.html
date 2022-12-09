@@ -15,7 +15,7 @@
                 <div class="d-flex justify-content-center align-items-center">
                     <div class="answer-song ms-0">
                         <div class="col-12 d-flex justify-content-center align-items-center">
-                            <img class="mt-5" src="" id="answer-preview"/>
+                            <img class="mt-5" src="{{currentSong.coverImage!}}" id="answer-preview"/>
                         </div>
                         <div *ngIf="currentSong" class="col-12 preview-song-info mt-3 mb-3">
                             <div class="preview-song-text">
@@ -61,7 +61,7 @@
             <div class="d-flex justify-content-center align-items-center">
                 <div class="row preview-song">
                     <div class="col-12 d-flex justify-content-center align-items-start">
-                        <img class="mt-5" src="" id="cover-preview"/>
+                        <img class="mt-5" src="{{currentSong.coverImage}}" id="cover-preview"/>
                     </div>
                     <div class="col-12 d-flex justify-content-center align-items-start">
                         <p id="song-title" class="song-title">{{titleToUnderScores(currentSong.title!)}}</p>

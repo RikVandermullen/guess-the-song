@@ -4,67 +4,68 @@ import { map, Observable, ReplaySubject, tap } from 'rxjs';
 import { Genre, Song } from './song.model';
 import { ISong } from '../../../../../../libs/data/src/lib/song.interface'
 import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SongService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
-  getAllSongs(): Observable<ISong[]> {
+  getAllSongs(): Observable<Song[]> {
 		const url = environment.apiUrl + "/api/songs";
 		
-		return this.http.get<ISong[]>(url).pipe(
-        map((response: ISong[]) => response),
-        tap((songs: ISong[]) => {
+		return this.http.get<Song[]>(url).pipe(
+        map((response: Song[]) => response),
+        tap((songs: Song[]) => {
             return songs;
         })
     );
 	}
 
-  getSongById(id: string): Observable<ISong> {
+  getSongById(id: string): Observable<Song> {
 		const url = environment.apiUrl + "/api/songs/" + id;
 	
-		return this.http.get<ISong[]>(url).pipe(
-        map((response: ISong[]) => response[0]),
-        tap((song: ISong) => {            
-            return song;
-        })
-    );
+		return this.http.get<Song[]>(url).pipe(
+			map((response: Song[]) => response[0]),
+			tap((song: Song) => {            
+				return song;
+			})
+		);
 	}
 
   createSong(song: Song, base64image: string): Observable<Song> {
     const url = environment.apiUrl + "/api/songs";
 
-    const iSong = new ISong("", song.title!, song.publishedOn!, song.songLink!, song.artist!, song.album!, base64image, song.genres!);
+    const newSong = new Song("", song.title!, song.publishedOn!, song.songLink!, song.artist!, song.album!, base64image, song.genres!);
     
-		return this.http.post<Song>(url, iSong).pipe(
+		return this.http.post<Song>(url, newSong).pipe(
         map((response: Song) => response),
         tap((song: Song) => {
+            this.router.navigate([`/songs`]);
             return song;
         })
     );
   }
 
-  updateSong(song: Song, base64image: string): Observable<Song> {
-		console.log(song);
-		
+  	updateSong(song: Song, base64image: string): Observable<Song> {	
 		const url = environment.apiUrl + "/api/songs/" + song._id;
 
-    const iSong = new ISong("", song.title!, song.publishedOn!, song.songLink!, song.artist!, song.album!, base64image, song.genres!);
+    	const songToUpdate = new Song("", song.title!, song.publishedOn!, song.songLink!, song.artist!, song.album!, base64image, song.genres!);
 
-		return this.http.put<Song>(url, iSong).pipe(
-        map((response: Song) => response),
-        tap((song: Song) => {
-            return song;
-        })
-    );
+		return this.http.put<Song>(url, songToUpdate).pipe(
+			map((response: Song) => response),
+			tap((song: Song) => {
+				this.router.navigate([`/songs`]);
+				return song;
+			})
+		);
 	}
 
-  deleteSong(id: string): void {
-    const url = environment.apiUrl + "/api/songs/" + id;
+	deleteSong(id: string): void {
+		const url = environment.apiUrl + "/api/songs/" + id;
 
 		this.http.delete<Song>(url).subscribe();   
-  }
+	}
 }
