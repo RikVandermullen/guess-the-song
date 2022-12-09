@@ -66,6 +66,7 @@ export class SongService {
 	deleteSong(id: string): void {
 		const url = environment.apiUrl + "/api/songs/" + id;
 
-		this.http.delete<Song>(url).subscribe();   
+		this.http.delete<Song>(url).subscribe();
+		this.router.navigate([`/songs`]);   
 	}
 }

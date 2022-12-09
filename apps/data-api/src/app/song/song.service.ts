@@ -35,7 +35,7 @@ export class SongService {
 
     async addSong(title: string, publishedOn: Date, songLink: string, artist: string, album: string, coverImage: string, genres: Genre[]) : Promise<ISong[]> {
         const artistId =  new mongoose.Types.ObjectId(artist);
-        const song = new this.songModel({ title, publishedOn, songLink, artistId, album, coverImage, genres });
+        const song = new this.songModel({ title, publishedOn, songLink, artist: artistId, album, coverImage, genres });
         
         await song.save();
         

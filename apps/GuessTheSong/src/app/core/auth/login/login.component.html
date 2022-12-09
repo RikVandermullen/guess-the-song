@@ -4,7 +4,7 @@
             <div class="row mt-5 gy-5">
                 <div class="col-12 input-wrap">
                     <label>Email address</label><br />
-                    <input style="min-width: 100%;" type="email" class="form-input" name="emailAddress" [(ngModel)]="user!.emailAddress" #emailAddress="ngModel" minlength="3" required [ngClass]="{'is-invalid': emailAddress.invalid && emailAddress.touched}"/>
+                    <input style="min-width: 100%;" type="email" class="form-input" name="emailAddress" [(ngModel)]="user!.emailAddress" #emailAddress="ngModel" minlength="3" required [ngClass]="{'is-invalid': emailAddress.invalid && emailAddress.touched}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"/>
                     <div *ngIf="emailAddress.invalid && emailAddress.touched" class="invalid-feedback">
                         <div *ngIf="emailAddress.errors!['required']">
                             Email Address is required
@@ -12,6 +12,9 @@
                         <div *ngIf="emailAddress.errors!['minlength']">
                             Email Address must be 3 chars long.
                         </div>
+                        <div [hidden]="!emailAddress.errors!['pattern']">
+                            Invalid Email Address
+                        </div> 
                     </div>
                 </div>
         
@@ -20,9 +23,13 @@
                     <input style="min-width: 100%;" type="password" class="form-input" name="password" [(ngModel)]="user!.password" #password="ngModel" minlength="3" required [ngClass]="{'is-invalid': password.invalid && password.touched}"/>
                 </div>
         
-                <div class="col-12 d-flex justify-content-start align-items-start mb-5">
+                <div class="col-12 d-flex justify-content-start align-items-start mb-1">
                     <button type="submit" class="button-pink mt-2 me-3" [disabled]="!userLoginForm.valid">Login</button>
                     <button type="button" class="button-yellow mt-2" routerLink="../register" routerLinkActive="true">Register</button>
+                </div>
+
+                <div class="col-12 d-flex justify-content-start align-items-start mb-5">
+                    <p *ngIf="loginFailed" class="text-danger">Login has failed. Check if you put in the correct credentials!</p>
                 </div>
             </div>
         </div>

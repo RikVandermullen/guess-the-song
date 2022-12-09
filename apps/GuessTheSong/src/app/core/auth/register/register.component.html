@@ -16,7 +16,7 @@
     
             <div class="col-6 input-wrap">
                 <label>Email address</label><br />
-                <input type="email" class="form-input" name="emailAddress" [(ngModel)]="user!.emailAddress" #emailAddress="ngModel" minlength="3" required [ngClass]="{'is-invalid': emailAddress.invalid && emailAddress.touched}"/>
+                <input type="email" class="form-input" name="emailAddress" [(ngModel)]="user!.emailAddress" #emailAddress="ngModel" minlength="3" required [ngClass]="{'is-invalid': emailAddress.invalid && emailAddress.touched}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"/>
                 <div *ngIf="emailAddress.invalid && emailAddress.touched" class="invalid-feedback">
                     <div *ngIf="emailAddress.errors!['required']">
                         Email Address is required
@@ -24,6 +24,9 @@
                     <div *ngIf="emailAddress.errors!['minlength']">
                         Email Address must be 3 chars long.
                     </div>
+                    <div [hidden]="!emailAddress.errors!['pattern']">
+                        Invalid Email Address
+                    </div> 
                 </div>
             </div>
     
