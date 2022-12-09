@@ -15,8 +15,8 @@ jobs:
       - uses: nrwl/nx-set-shas@v3
       - run: npm ci
       
-      - run: npx nx test GuessTheSong
       - run: npx nx test data-api
-      - run: npx nx build GuessTheSong
+      - run: npx nx test GuessTheSong --no-watch --no-progress --browsers=ChromeHeadlessCI
       - run: npx nx build data-api
+      - run: npx nx build GuessTheSong
       - run: npx nx build neo4j
